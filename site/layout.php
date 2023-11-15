@@ -5,37 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChickCuisine</title>
 </head>
-<!-- css global -->
-<style>
-    :root {
-        --red: #c34439;
-        --black: #202020;
-        --lightblack: #4E4E4E;
-        --gray: #BDBDBD;
-        --lightgray: #faf9f8;
-        --yellow: #FFB11B;
-    }
-    * {
-        margin: 0px;
-        padding: 0px;
-        box-sizing: border-box;
-        color: var(--black);
-    }
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: var(--lightgray);
-    }
-    a {
-        text-decoration: none;
-    }
-    /* Đường gạch ngang */
-    .line {
-        border-bottom: 1px solid var(--gray);
-        width: 85%;
-        margin: 10px auto;
-    }
-    
-</style>
+    <!-- css global -->
+    <style>
+        :root {
+            --red: #c34439;
+            --black: #202020;
+            --lightblack: #4E4E4E;
+            --gray: #BDBDBD;
+            --lightgray: #faf9f8;
+            --yellow: #FFB11B;
+        }
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--lightgray);
+            color: var(--lightblack);
+        }
+        a {
+            text-decoration: none;
+        }
+        button {
+            cursor: pointer;
+            border: none;
+        }
+        .line {
+            border-bottom: 1px solid var(--gray);
+            width: 100%;
+            margin: 10px auto;
+        }
+        .whitediv {
+            background-color: white;
+            border: 1px solid var(--gray);
+            box-shadow: 0px 0px 5px var(--gray);
+            border-radius: 10px;
+        }
+
+    </style>
 <!-- css header footer --> 
 <style>
     header {
@@ -233,14 +242,14 @@
             <p>Tài khoản</p>
         </div>
     </header>
-    <main><?php require $VIEW_NAME;?></main>
+    <?php require $VIEW_NAME;?>
     <footer>
         <div class="gallery">
-            <img style="margin-top: -100px;" src="<?=$IMAGE_DIR?>/Image.png" alt="">
-            <img style="margin-top: -25px;" src="<?=$IMAGE_DIR?>/Image-1.png" alt="">
-            <img style="margin-top: -50px;" src="<?=$IMAGE_DIR?>/Image-2.png" alt="">
-            <img style="margin-top: -75px;" src="<?=$IMAGE_DIR?>/Image-3.png" alt="">
-            <img style="margin-top: -50px;" src="<?=$IMAGE_DIR?>/Image-4.png" alt="">
+            <img style="margin-top: -100px;" src="<?=$IMAGE_DIR?>/footer-image (1).png" alt="">
+            <img style="margin-top: -25px;" src="<?=$IMAGE_DIR?>/footer-image (2).png" alt="">
+            <img style="margin-top: -50px;" src="<?=$IMAGE_DIR?>/footer-image (3).png" alt="">
+            <img style="margin-top: -75px;" src="<?=$IMAGE_DIR?>/footer-image (4).png" alt="">
+            <img style="margin-top: -50px;" src="<?=$IMAGE_DIR?>/footer-image (5).png" alt="">
         </div>
         <div class="about">
             ChickCuisine tự hào cung cấp những món ăn ngon nhất từ khắp nơi trên thế giới đến ngay tận bàn ăn của bạn. Chúng tôi cam kết về chất lượng và sự hài lòng của khách hàng. Hãy theo dõi chúng tôi trên các trang mạng xã hội để cập nhật thông tin mới nhất và các ưu đãi đặc biệt!
