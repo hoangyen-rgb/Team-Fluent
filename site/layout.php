@@ -16,7 +16,7 @@
         --yellow: #FFB11B;
     }
     * {
-        margin: 0px;
+        margin: auto;
         padding: 0px;
         box-sizing: border-box;
         color: var(--black);
@@ -124,19 +124,19 @@
         padding: 10px 100px 50px;
     }
     footer .gallery {
-        width: 100%;
         position: absolute;
-        top: 0px;
-        left: 50%;
-        transform: translate(-50%, 0);
+        top: 0px; 
+        left:9.3%;
         z-index: 1;
         display: flex;
         justify-content: space-around;
     }
     footer .gallery img {
         border-radius: 10px;
-        width: 1fr;
         height: fit-content;
+        
+        margin-right:3%
+        
     }
     footer .about {
         color: var(--lightgray);
@@ -236,11 +236,16 @@
     <main><?php require $VIEW_NAME;?></main>
     <footer>
         <div class="gallery">
-            <img style="margin-top: -100px;" src="<?=$IMAGE_DIR?>/Image.png" alt="">
-            <img style="margin-top: -25px;" src="<?=$IMAGE_DIR?>/Image-1.png" alt="">
-            <img style="margin-top: -50px;" src="<?=$IMAGE_DIR?>/Image-2.png" alt="">
-            <img style="margin-top: -75px;" src="<?=$IMAGE_DIR?>/Image-3.png" alt="">
-            <img style="margin-top: -50px;" src="<?=$IMAGE_DIR?>/Image-4.png" alt="">
+            <!-- <img style="margin-top: -100px;" src="<?=$IMAGE_DIR?>/footer-image (1).png" alt="">
+            <img style="margin-top: -25px;" src="<?=$IMAGE_DIR?>/footer-image (2).png" alt="">
+            <img style="margin-top: -50px;" src="<?=$IMAGE_DIR?>/footer-image (3).png" alt="">
+            <img style="margin-top: -75px;" src="<?=$IMAGE_DIR?>/footer-image (4).png" alt="">
+            <img style="margin-top: -50px;" src="<?=$IMAGE_DIR?>/footer-image (5).png" alt=""> -->
+            <img  src="<?=$IMAGE_DIR?>/footer-image (1).png" alt="">
+            <img  src="<?=$IMAGE_DIR?>/footer-image (2).png" alt="">
+            <img  src="<?=$IMAGE_DIR?>/footer-image (3).png" alt="">
+            <img  src="<?=$IMAGE_DIR?>/footer-image (4).png" alt="">
+            <img  src="<?=$IMAGE_DIR?>/footer-image (5).png" alt="">
         </div>
         <div class="about">
             ChickCuisine tự hào cung cấp những món ăn ngon nhất từ khắp nơi trên thế giới đến ngay tận bàn ăn của bạn. Chúng tôi cam kết về chất lượng và sự hài lòng của khách hàng. Hãy theo dõi chúng tôi trên các trang mạng xã hội để cập nhật thông tin mới nhất và các ưu đãi đặc biệt!

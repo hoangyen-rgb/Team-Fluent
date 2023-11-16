@@ -370,7 +370,7 @@
         }
 </style>
 <div class="banner">
-    <img src="/chickcuisine/content/image/banner2.png" alt>
+    <img src="/chickcuisine/content/image/banner.png" alt>
     <div class="button">
         <p>Khám phá ngay !</p>
     </div>
