@@ -86,6 +86,17 @@
             word-wrap: wordwrap;
         }
         .container .product .product-price {
+            width: 100%;
+            text-align: center;
+        }
+        .container .product .product-price>* {
+            display: inline-block;
+        }
+        .container .product .product-price .original-price {
+            
+            text-decoration: line-through;
+        }
+        .container .product .product-price .discount-price {
             color: var(--red);
             font-size: 20px;
             font-weight: 600;
@@ -227,38 +238,35 @@
             </div>
             <div class="list-products">
                 <?php foreach($hot_products as $product) {extract($product);?>
-                    <div class="product whitediv">
+                    <a class="product whitediv" href="<?=$SITE_URL?>/monan?id=<?=$Id?>">
                         <img class="product-image" src="<?=$IMAGE_DIR?>/<?=$Image?>" alt="">
                         <?php if(strlen($Name) >= 15) {
-                            $Name = substr($Name, 0, 12)."...";
+                            $Name = mb_substr($Name, 0, 12, 'UTF-8')."...";
                         } ?>
                         <p class="product-name">
                             <?=$Name?>
                         </p>
                         <p class="product-rating">
-                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
-                            </svg>
-                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
-                            </svg>
-                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
-                            </svg>
-                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
-                            </svg>
-                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
-                            </svg>
+                            <?=str_repeat('
+                                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
+                                </svg>
+                                ', ceil($Rating))?>
                         </p>
                         <?php if(strlen($Description) >= 80) {
-                            $Description = substr($Description, 0, 77)."...";
+                            $Description = mb_substr($Description, 0, 77, 'UTF-8')."...";
                         } ?>
                             <p class="product-description">
                                 <?=$Description?>
                             </p>
-                        <h3 class="product-price"><?=$Price?> vnđ</h3>
+                            <div class="product-price">
+                            <?php if($Discount > 0) {?>
+                                <p class="original-price"><?=$Price?> vnđ</p>
+                                <p class="discount-price"><?=$Price * (100 - $Discount) / 100?> vnđ</p>
+                            <?php } else {?>
+                                <p class="discount-price"><?=$Price?> vnđ</p>
+                            <?php } ?>
+                        </div>
                         <div class="product-buttons">
                             <button class="buy-now">Mua ngay</button>
                             <button class="add-to-cart">
@@ -282,7 +290,7 @@
                             <p class="discount-percentage"><?=$Discount?>%</p>
                             <?php } ?>
                         </div>
-                    </div>
+                    </a>
                 <?php } ?>
             </div>
         </div>
@@ -301,39 +309,36 @@
                 <p>Đồng loạt giảm giá, lên tới 30%!</p>
             </div>
             <div class="list-products">
-            <?php foreach($discount_products as $product) {extract($product);?>
-                    <div class="product whitediv">
+                <?php foreach($discount_products as $product) {extract($product);?>
+                    <a class="product whitediv" href="<?=$SITE_URL?>/monan?id=<?=$Id?>">
                         <img class="product-image" src="<?=$IMAGE_DIR?>/<?=$Image?>" alt="">
                         <?php if(strlen($Name) >= 15) {
-                            $Name = substr($Name, 0, 12)."...";
+                            $Name = mb_substr($Name, 0, 12, 'UTF-8')."...";
                         } ?>
                         <p class="product-name">
                             <?=$Name?>
                         </p>
                         <p class="product-rating">
-                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
-                            </svg>
-                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
-                            </svg>
-                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
-                            </svg>
-                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
-                            </svg>
-                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
-                            </svg>
+                            <?=str_repeat('
+                                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
+                                </svg>
+                                ', ceil($Rating))?>
                         </p>
                         <?php if(strlen($Description) >= 80) {
-                            $Description = substr($Description, 0, 77)."...";
+                            $Description = mb_substr($Description, 0, 77, 'UTF-8')."...";
                         } ?>
                             <p class="product-description">
                                 <?=$Description?>
                             </p>
-                        <h3 class="product-price"><?=$Price?> vnđ</h3>
+                        <div class="product-price">
+                            <?php if($Discount > 0) {?>
+                                <p class="original-price"><?=$Price?> vnđ</p>
+                                <p class="discount-price"><?=$Price * (100 - $Discount) / 100?> vnđ</p>
+                            <?php } else {?>
+                                <p class="discount-price"><?=$Price?> vnđ</p>
+                            <?php } ?>
+                        </div>
                         <div class="product-buttons">
                             <button class="buy-now">Mua ngay</button>
                             <button class="add-to-cart">
@@ -357,7 +362,7 @@
                             <p class="discount-percentage"><?=$Discount?>%</p>
                             <?php } ?>
                         </div>
-                    </div>
+                    </a>
                 <?php } ?>
             </div>
         </div>
@@ -380,7 +385,7 @@
                     <div class="category">
                         <img class="category-image" src="<?=$IMAGE_DIR?>/<?=$Image?>" alt="">
                         <p class="category-name"><?=$Name?></p>
-                        <p class="category-product-count">(<?= get_total_products_by_product_id($Id) ?> món)</p>
+                        <p class="category-product-count">(<?=get_product_count_by_category_id($Id) ?> món)</p>
                         <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M8.70711 8.70711C9.09763 8.31658 9.09763 7.68342 8.70711 7.29289L2.34315 0.928932C1.95262 0.538408 1.31946 0.538408 0.928932 0.928932C0.538408 1.31946 0.538408 1.95262 0.928932 2.34315L6.58579 8L0.928932 13.6569C0.538408 14.0474 0.538408 14.6805 0.928932 15.0711C1.31946 15.4616 1.95262 15.4616 2.34315 15.0711L8.70711 8.70711ZM7 9H8V7H7V9Z" fill="white"/>
                         </svg>                        
