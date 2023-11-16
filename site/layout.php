@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChickCuisine</title>
 </head>
-<<<<<<< HEAD
     <!-- css global -->
     <style>
         :root {
@@ -47,39 +46,6 @@
         }
 
     </style>
-=======
-<!-- css global -->
-<style>
-    :root {
-        --red: #c34439;
-        --black: #202020;
-        --lightblack: #4E4E4E;
-        --gray: #BDBDBD;
-        --lightgray: #faf9f8;
-        --yellow: #FFB11B;
-    }
-    * {
-        margin: auto;
-        padding: 0px;
-        box-sizing: border-box;
-        color: var(--black);
-    }
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: var(--lightgray);
-    }
-    a {
-        text-decoration: none;
-    }
-    /* Đường gạch ngang */
-    .line {
-        border-bottom: 1px solid var(--gray);
-        width: 85%;
-        margin: 10px auto;
-    }
-    
-</style>
->>>>>>> 852cb5c37a5d9637d549861ccb6bba0bc10d0f9f
 <!-- css header footer --> 
 <style>
     header {

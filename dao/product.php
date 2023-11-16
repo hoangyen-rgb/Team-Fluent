@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
     require_once 'pdo.php';
 
     /**
@@ -163,24 +162,6 @@
 
 
 
-=======
-    // require_once 'pdo.php';
-
-    // function get_products($limit = null) {
-    //     $sql = "SELECT * FROM product".($limit == null ? "" : " LIMIT $limit");
-    //     return pdo_query($sql);
-    // }
-
-    // function get_featured_products($limit = null) {       
-    //     $sql = "SELECT * FROM product order by Views DESC".($limit == null ? "" : " LIMIT $limit");
-    //     return pdo_query($sql);
-    // }
-
-    // function get_discount_products($limit = null) {       
-    //     $sql = "SELECT * FROM product order by Discount DESC".($limit == null ? "" : " LIMIT $limit");
-    //     return pdo_query($sql);
-    // }
->>>>>>> 852cb5c37a5d9637d549861ccb6bba0bc10d0f9f
     
     // function get_product_by_id($id) {
     //     $sql = "SELECT * FROM product WHERE id = $id";
