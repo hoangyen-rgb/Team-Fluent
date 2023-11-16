@@ -180,6 +180,7 @@
             margin-left: 0px;
             transition: 0.3s;
         }
+<<<<<<< HEAD
         .category .category-name {
             grid-column: 2 / 3;
             grid-row: 1 / 2;
@@ -292,6 +293,36 @@
                         </div>
                     </a>
                 <?php } ?>
+=======
+</style>
+<div class="banner">
+    <img src="/chickcuisine/content/image/banner.png" alt>
+    <div class="button">
+        <p>Khám phá ngay !</p>
+    </div>
+</div>
+
+<div class="monanhot">
+    <div class="monanhot-tieude">
+        <h2>Món Ăn Bán Chạy Nhất</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolo magna aliqu</p>
+    </div>
+
+    <div class="monanhot-sanpham">
+        <div class="monanhot-sanpham-item">
+            <img class="/chickcuisine/content/image" src="/chickcuisine/content/image/garan.png" alt>
+            <h3>Gà rán</h3>
+            <img class="danhgia" src="/chickcuisine/content/image/danhgia.png" alt>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit
+                            sed do eiusmod tempor incididunt ut labore et dolore
+                            magna aliqu</p>
+            <h3 class="price">39.000 vnđ</h3>
+            <div class="monanhot-sanpham-item-button">
+                <button>Mua ngay</button>
+                <img class="cart" src="/chickcuisine/content/image/cart.png" alt="cart">
+                <img class="share" src="/chickcuisine/content/image/share.png" alt="share">
+>>>>>>> 852cb5c37a5d9637d549861ccb6bba0bc10d0f9f
             </div>
         </div>
         <div class="view-more">
