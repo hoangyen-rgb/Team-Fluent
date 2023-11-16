@@ -236,16 +236,11 @@
     <main><?php require $VIEW_NAME;?></main>
     <footer>
         <div class="gallery">
-            <!-- <img style="margin-top: -100px;" src="<?=$IMAGE_DIR?>/footer-image (1).png" alt="">
+            <img style="margin-top: -100px;" src="<?=$IMAGE_DIR?>/footer-image (1).png" alt="">
             <img style="margin-top: -25px;" src="<?=$IMAGE_DIR?>/footer-image (2).png" alt="">
             <img style="margin-top: -50px;" src="<?=$IMAGE_DIR?>/footer-image (3).png" alt="">
             <img style="margin-top: -75px;" src="<?=$IMAGE_DIR?>/footer-image (4).png" alt="">
-            <img style="margin-top: -50px;" src="<?=$IMAGE_DIR?>/footer-image (5).png" alt=""> -->
-            <img  src="<?=$IMAGE_DIR?>/footer-image (1).png" alt="">
-            <img  src="<?=$IMAGE_DIR?>/footer-image (2).png" alt="">
-            <img  src="<?=$IMAGE_DIR?>/footer-image (3).png" alt="">
-            <img  src="<?=$IMAGE_DIR?>/footer-image (4).png" alt="">
-            <img  src="<?=$IMAGE_DIR?>/footer-image (5).png" alt="">
+            <img style="margin-top: -50px;" src="<?=$IMAGE_DIR?>/footer-image (5).png" alt="">
         </div>
         <div class="about">
             ChickCuisine tự hào cung cấp những món ăn ngon nhất từ khắp nơi trên thế giới đến ngay tận bàn ăn của bạn. Chúng tôi cam kết về chất lượng và sự hài lòng của khách hàng. Hãy theo dõi chúng tôi trên các trang mạng xã hội để cập nhật thông tin mới nhất và các ưu đãi đặc biệt!
