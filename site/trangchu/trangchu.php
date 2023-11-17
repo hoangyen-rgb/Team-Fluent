@@ -220,6 +220,11 @@
         width: 1000px;
         margin: auto;
     }
+    hr{
+        width: 90%;
+        height: 1px;
+        background-color:#BDBDBD;
+    }
     
 </style>
 <!-- css monanhot -->
