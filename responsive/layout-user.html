@@ -123,6 +123,56 @@
         margin: 0px 5px;
         color: white;
     }
+    @media screen and (max-width: 720px){
+        header{
+            padding: 10px 25px 0px 25px !important;
+        }
+        header .menu {
+            display: block;
+        }
+
+        footer{
+            padding: 10px 25px  !important;
+        } 
+        footer .gallery{
+             height: 50%;
+             width: 100%; 
+             left: 1.5% !important;
+        }
+        footer .gallery img{
+            width: 100% !important;
+        }
+        footer .gallery img:nth-child(3),
+        footer .gallery img:nth-child(4){
+            display: none;
+        }
+        footer .about{
+            margin: 70% auto 100px !important;
+        }
+        footer .about >*{
+            display: none;
+            
+        }
+        .footer-menu {
+            position: absolute !important;
+            top: 0;
+        }
+        footer .footer-menu a{
+            display: none;
+
+        }
+        footer .iconmenu {
+            display: block !important;
+            margin-top: 5%;
+        }
+        footer .logo-footer img{
+            width: 89px !important;
+            /* height: 34px; */
+        }
+        footer .more-info ul li:nth-child(2),li:nth-child(3){
+            display: none !important; 
+        }
+    }
     footer {
         width: 100%;
         margin-top: 200px;
@@ -131,6 +181,7 @@
         background-size: cover;
         position: relative;
         padding: 10px 100px 50px;
+        
     }
     footer .gallery {
         position: absolute;
@@ -204,7 +255,7 @@
         display: inline-block;
         margin: 0px 20px;
     }
-   
+    
 
 </style>
 <!-- css trang -->
@@ -448,6 +499,7 @@
             <p>Tài khoản</p>
         </div>
     </header>
+    
     <footer>
         <div class="gallery">
             <img style="margin-top: -100px;" src="/content/image/footer-image (1).png" alt="">
@@ -457,11 +509,13 @@
             <img style="margin-top: -50px;" src="/content/image/footer-image (5).png" alt="">
         </div>
         <div class="about">
-            ChickCuisine tự hào cung cấp những món ăn ngon nhất từ khắp nơi trên thế giới đến ngay tận bàn ăn của bạn. Chúng tôi cam kết về chất lượng và sự hài lòng của khách hàng. Hãy theo dõi chúng tôi trên các trang mạng xã hội để cập nhật thông tin mới nhất và các ưu đãi đặc biệt!
+            <p style="color: whi;">ChickCuisine tự hào cung cấp những món ăn ngon nhất từ khắp nơi trên thế giới đến ngay tận bàn ăn của bạn. Chúng tôi cam kết về chất lượng và sự hài lòng của khách hàng. Hãy theo dõi chúng tôi trên các trang mạng xã hội để cập nhật thông tin mới nhất và các ưu đãi đặc biệt!</p>
         </div>
         <div class="menu-box">
             <img class="logo-footer" src="/content/image/logo-white.png" alt="">
+            
             <div class="footer-menu">
+                <div class="iconmenu" style="display: none;"><img src="/content/image/icon/more.png" alt=""></div>
                 <a href="">Trang chủ</a>
                 <a href="">Thực đơn</a>
                 <a href="">Giới thiệu</a>
