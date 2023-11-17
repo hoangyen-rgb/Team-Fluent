@@ -1,8 +1,8 @@
 <?php
-    // require_once 'pdo.php';
+    require_once 'pdo.php';
 
-    // function get_user_by_id($id) {
-    //     $sql = "SELECT * FROM users WHERE Id = $id";
-    //     return pdo_query($sql);
-    // }
+    function get_user_by_id($user_id) {
+        $sql = "SELECT * FROM user WHERE Id = $user_id";
+        return pdo_query_one($sql);
+    }
 ?>

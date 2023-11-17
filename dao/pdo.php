@@ -38,7 +38,7 @@ function pdo_query_value($sql){
          $stmt = $conn->prepare($sql);
          $stmt->execute($sql_args);
          $row = $stmt->fetch(PDO::FETCH_ASSOC);
-         return array_values($row)[0];
+         return $row ? array_values($row)[0] : null;
     }
     catch(PDOException $e){ 
         die("Lỗi trong hàm pdo_query_value: ". $e->getMessage() .$sql );
