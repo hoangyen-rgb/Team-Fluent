@@ -71,9 +71,10 @@
             text-align: center;
             color: var(--lightblack);
         }
-        .container .product .product-rating {
+        .product .product-rating {
             text-align: center;
             margin-bottom: 10px;
+            height: 22px;
         }
         .container .product .product-description {
             text-align: center;

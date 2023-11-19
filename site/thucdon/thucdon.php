@@ -72,7 +72,7 @@
             justify-content: center;
             align-items: center;
         }
-        .category > .item:hover{
+        .category > .selected{
             transition: 0.3s;
             background-color: #c34439;
             color: #faf9f8;
@@ -93,7 +93,7 @@
             display: inline-block;
             vertical-align: middle;
         }
-        .fillingbar > .fill, .arrange{
+        .fillingbar > .filter, .sort{
             width: 150px;
         }
     </style>
@@ -136,9 +136,8 @@
         }
         .list-products {
             width: 100%;
-            display: flex ;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            display: grid ;
+            grid-template-columns: repeat(3, 1fr);
             margin-top: -10px;
         }
         .product {
@@ -161,6 +160,7 @@
         .product .product-rating {
             text-align: center;
             margin-bottom: 10px;
+            height: 22px;
         }
         .product .product-description {
             text-align: center;
@@ -170,12 +170,22 @@
             margin-bottom: 10px;
         }
         .product .product-price {
-            color: var(--red);
-            font-size: 20px;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 10px;
-        }
+        width: 100%;
+        text-align: center;
+    }
+    .product .product-price>* {
+        display: inline-block;
+    }
+    .product .product-price .original-price {
+        text-decoration: line-through;
+    }
+    .product .product-price .discount-price {
+        color: var(--red);
+        font-size: 20px;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 10px;
+    }
         .product .product-buttons {
             display: grid;
             grid-template-columns:  auto 30px 30px;
@@ -243,7 +253,24 @@
             color: white;
         }
     </style>
+    <?php
+        function url($get, $value) {
+            $url = $_SERVER['REQUEST_URI'];
+            $queryString = $_SERVER['QUERY_STRING'];
+            if (str_contains($url, '?'.$get.'=') || str_contains($url, '&'.$get.'=')) {
+                //id=123&name=new-name
+                $queryString = preg_replace("/(".$get."=)[^&]+/", "$1$value", $queryString);
+
+            } else if (!str_contains($url, "?")) {
+                $queryString = "?".$get."=".$value;
+            } else {
+                $queryString += "&".$get."=".$value;
+            }
+            return 'https://'.$_SERVER['HTTP_HOST'].$url.$queryString;
+        }
+    ?>
     <main>
+
         <div class="banner">
             <img src="<?=$IMAGE_DIR?>/banner.png" alt>
                 <p>Khám phá ngay !</p>
@@ -253,24 +280,46 @@
             <p>Toàn bộ món ăn mà ChickCuisine có cung cấp cho bạn</p>
         </div>
         <div class="category whitediv">
-                <a class="item">
-                    Tất cả
-                </a>
+            <a class="item <?php 
+                if (!isset($_GET['category_id'])) {?>
+                    selected
+                    <?php } ?>" href="<?=$SITE_URL?>/thucdon">
+                Tất cả
+            </a>
                 <?php foreach($hot_categories as $category) {extract($category); ?>
-                    <a class="item">
+                    <a class="item <?php 
+                        if (isset($_GET['category_id']) && $_GET['category_id'] == $Id) {?>
+                            selected
+                        <?php } ?>" href="<?=$SITE_URL?>/thucdon?category_id=<?=$Id?>">
                         <?=$Name?>
                     </a>
                 <?php } ?>
         </div>
         <div class="fillingbar">
-                <div class="fill">
+                <div class="filter">
                     <p>Lọc</p>
                     <svg width="21" height="15" viewBox="0 0 21 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M13.875 12.75C14.4963 12.75 15 13.2537 15 13.875C15 14.4963 14.4963 15 13.875 15H7.125C6.50368 15 6 14.4963 6 13.875C6 13.2537 6.50368 12.75 7.125 12.75H13.875ZM16.875 6.375C17.4963 6.375 18 6.87868 18 7.5C18 8.12132 17.4963 8.625 16.875 8.625H4.125C3.50368 8.625 3 8.12132 3 7.5C3 6.87868 3.50368 6.375 4.125 6.375H16.875ZM19.875 0C20.4963 0 21 0.50368 21 1.125C21 1.74632 20.4963 2.25 19.875 2.25H1.125C0.50368 2.25 0 1.74632 0 1.125C0 0.50368 0.50368 0 1.125 0H19.875Z" fill="#4E4E4E"/>
                     </svg>
-                        
+                    <div class="filter-box">
+                        <div>
+                            <p>Giá tối thiểu</p>
+                            <input type="text">
+                        </div>
+                        <div>
+                            <p>Giá tối đa</p>
+                            <input type="text">
+                        </div>
+                        <div>
+                            <input type="checkbox" name="discount" id="discount">
+                            <label for="discount">Giảm giá</label>
+                        </div>
+                        <div>
+                            <a href=""></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="arrange">
+                <div class="sort">
                     <p>Sắp xếp</p>
                     <svg width="20" height="15" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M4.68505 1.12065e-05C4.92653 -0.00116571 5.16966 0.0903585 5.35391 0.274608L9.11428 4.03498C9.48039 4.40109 9.48039 4.99469 9.11428 5.3608C8.74817 5.72691 8.15457 5.72691 7.78846 5.3608L5.62254 3.19488V14.0625C5.62254 14.5802 5.20281 14.9999 4.68505 14.9999C4.16729 14.9999 3.74755 14.5802 3.74755 14.0625V3.20801L1.6004 5.35515C1.23429 5.72127 0.640703 5.72127 0.274592 5.35515C-0.0915308 4.98904 -0.0915308 4.39545 0.274592 4.02933L3.9567 0.347208C4.12859 0.135396 4.39101 1.12065e-05 4.68505 1.12065e-05ZM15.3124 2.16373e-05C15.8302 2.16373e-05 16.2499 0.419757 16.2499 0.937517V11.792L18.3971 9.64486C18.7632 9.27874 19.3567 9.27874 19.7229 9.64486C20.089 10.011 20.089 10.6045 19.7229 10.9706L16.0407 14.6527C15.8689 14.8646 15.6065 15 15.3124 15C15.071 15.0012 14.8279 14.9096 14.6436 14.7253L10.8831 10.965C10.5171 10.5989 10.5171 10.0054 10.8831 9.63924C11.2493 9.27312 11.8429 9.27312 12.209 9.63924L14.3749 11.8051V0.937517C14.3749 0.419757 14.7946 2.16373e-05 15.3124 2.16373e-05Z" fill="#4E4E4E"/>
@@ -284,9 +333,12 @@
             <div>
                 <div class="danhmuc">
                     <?php foreach($categories as $category) {extract($category); ?>
-                        <a class="itemdanhmuc">
-                            <?=$Name?>
-                        </a>
+                        <a class="itemdanhmuc <?php 
+                        if (isset($_GET['category_id']) && $_GET['category_id'] == $Id) {?>
+                            selected
+                        <?php } ?>" href="<?=$SITE_URL?>/thucdon?category_id=<?=$Id?>">
+                        <?=$Name?>
+                    </a>
                     <?php } ?>
                 </div>
             </div>

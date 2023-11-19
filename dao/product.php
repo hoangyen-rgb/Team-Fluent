@@ -6,11 +6,58 @@
      * 
      * @param int $product_id mã sản phẩm
      * 
-     * @return 1 sản phẩm
+     * @return mixed 1 sản phẩm
      */
     function get_product_by_id($product_id) {
         $sql = "SELECT product.*, AVG(comment.rating) as Rating FROM product LEFT JOIN comment ON product.Id = comment.ProductId WHERE product.Id = $product_id GROUP BY product.Id";
         return pdo_query_one($sql);
+    }
+
+    function get_product_by_filter($category_id = null, $min_price = null, $max_price = null, $is_discount = null, $limit = null, $page = null, $sort = null) {
+        $condition = "";
+        if ($category_id != null) {
+            $condition .= " AND product.CategoryID = $category_id";
+        }
+        if ($min_price != null) {
+            $condition .= " AND product.Price >= $min_price";
+        }
+        if ($max_price != null) {
+            $condition .= " AND product.Price >= $max_price";
+        }
+        if ($is_discount != null) {
+            $condition .= " AND product.Discount > 0";
+        }
+        $condition = substr($condition , 4);
+        $filter = " WHERE (".$condition.")";
+        $sql = "SELECT product.*, AVG(comment.rating) as Rating , SUM(orderdetail.Quantity) as OrderCount FROM product
+        LEFT JOIN comment ON product.id = comment.productid
+        LEFT JOIN orderdetail ON product.id = orderdetail.productid".
+        $filter
+        ." GROUP BY product.id";
+        if ($limit != null) {
+            $sql.= " LIMIT $limit";
+        }
+        if ($page != null) {
+            $offset = ($page-1)*$limit;
+            $sql.= " OFFSET $offset";
+        }
+        if ($sort != null) {
+            switch ($sort) {
+                case 1 : 
+                    $sql.= " ORDER BY Price DESC";
+                    break;
+                case 2 : 
+                    $sql.= " ORDER BY Discount DESC";
+                    break;
+                case 3 :
+                    $sql.= " ORDER BY Rating DESC";
+                    break;
+                case 4 :
+                    $sql.= " ORDER BY OrderCount DESC";
+                    break;
+            }
+        }
+        return pdo_query($sql);
     }
 
     /**
