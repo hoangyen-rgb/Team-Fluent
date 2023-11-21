@@ -4,11 +4,12 @@
     require '../../dao/cart.php';
     extract($_REQUEST);
     $cart = null;
+    if ($LOGGED_IN_USER_ID == null) {
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = array();
+    }
     if (isset($cart_product_id) && isset($cart_product_quantity)) {
-        if ($LOGGED_IN_USER_ID == null) {
-            if (!isset($_SESSION['cart'])) {
-                $_SESSION['cart'] = array();
-            }
+
             
             $product_to_cart = array(
                 'Id' => $cart_product_id,
