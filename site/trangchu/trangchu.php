@@ -1,21 +1,48 @@
     <!-- css trang -->
     <style>
-        main {
-            padding: 0px 100px;
+        @media screen and (max-width:720px) {
+            main{
+            padding: 0px 15px !important;
         }
-        .banner {
-            width: calc(100% + 200px);
-            margin-left: -100px;
-            height: fit-content;
-            position: relative;
-        }
-        .banner img {
+        .banner{
             width: 100%;
         }
         .banner p {
+            padding:5px 10px !important;
+            font-size: 15px;
+            bottom: 15% !important;
+        }
+        .category {
+            width: 450px !important;
+        }
+        .list-products .product{
+            width:49% !important;
+        }
+        .product-description{
+           height: 65px !important;
+        }
+        .buy-now{
+            font-size: 14px !important;
+        }
+        .product-name{
+            font-size:20px !important;
+        }
+
+    }
+        main {
+            padding: 0px 100px;
+        }
+        .banner{
+            position: relative;
+        }
+        .banner img{
+            width: 100%;
+            margin: auto;
+        }
+        .banner p {
             position: absolute;
-            right: 100px;
-            bottom: 100px;
+            right: 6.5%;
+            bottom: 20%;
             color: white;
             font-size: 20px;
             font-weight: 600;
@@ -155,7 +182,7 @@
             background-color: var(--red);
             border-radius: 10px;
             height: 100px;
-            width: 30%;
+            width: 395px;
             display: grid;
             grid-template-columns: 100px auto;
             transition: 0.3s;
@@ -227,11 +254,11 @@
             margin: 0px 5px;
         }
     </style>
-    <main>
-        <div class="banner">
-            <img src="<?=$IMAGE_DIR?>/banner.png" alt>
-                <p>Khám phá ngay !</p>
+    <div class="banner">
+            <img src="<?=$IMAGE_DIR?>/banner.png" alt="">
+            <p>Khám phá ngay !</p>
         </div>
+    <main>
         <div class="container">
             <div class="container-title">
                 <p>Món ăn nổi bậc</p>
@@ -255,7 +282,7 @@
                                 ', ceil($Rating))?>
                         </p>
                         <?php if(strlen($Description) >= 80) {
-                            $Description = mb_substr($Description, 0, 77, 'UTF-8')."...";
+                            $Description = mb_substr($Description, 0, 75, 'UTF-8')."...";
                         } ?>
                             <p class="product-description">
                                 <?=$Description?>
