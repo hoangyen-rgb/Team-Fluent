@@ -91,7 +91,7 @@
         display: inline-block;
         vertical-align: middle;
         color: white;
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 600;
         margin: 0px 5px;
     }
@@ -266,10 +266,11 @@
         text-align: center;
         color: var(--lightblack);
     }
-    .container .product .product-rating {
-        text-align: center;
-        margin-bottom: 10px;
-    }
+    .product .product-rating {
+            text-align: center;
+            margin-bottom: 10px;
+            height: 22px;
+        }
     .container .product .product-description {
         text-align: center;
         font-size: 14px;
@@ -373,18 +374,18 @@
         </div>
         <div class="product-buttons">
             <div class="buttons-quantity">
-                <button>+</button>
-                <p class="product-quantity">0</p>
-                <button>-</button>
+                <button onclick="changeQuantity(-1)" id="decrease-button">-</button>
+                <p class="product-quantity" id="product-quantity">1</p>
+                <button onclick="changeQuantity(1)">+</button>
             </div>
-            <div class="button-addtocart">
+            <button class="button-addtocart">
                 <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0.851191 0C0.381095 0 0 0.368234 0 0.822466C0 1.2767 0.381095 1.64493 0.851191 1.64493H1.26947C1.6495 1.64493 1.9835 1.88836 2.0879 2.24145L4.78713 11.3699C5.10033 12.4292 6.10232 13.1595 7.24244 13.1595H15.0201C16.0642 13.1595 17.0032 12.5452 17.391 11.6084L19.9008 5.54571C20.348 4.46522 19.5244 3.28986 18.3202 3.28986H4.16842L3.72478 1.78955C3.41157 0.7303 2.40958 0 1.26947 0H0.851191Z" fill="white"/>
                     <path d="M7.66075 19.7391C9.07105 19.7391 10.2143 18.6344 10.2143 17.2717C10.2143 15.9091 9.07105 14.8043 7.66075 14.8043C6.25045 14.8043 5.10718 15.9091 5.10718 17.2717C5.10718 18.6344 6.25045 19.7391 7.66075 19.7391Z" fill="white"/>
                     <path d="M14.4702 19.7391C15.8805 19.7391 17.0238 18.6344 17.0238 17.2717C17.0238 15.9091 15.8805 14.8043 14.4702 14.8043C13.0599 14.8043 11.9166 15.9091 11.9166 17.2717C11.9166 18.6344 13.0599 19.7391 14.4702 19.7391Z" fill="white"/>
                 </svg>                    
                 <p>Thêm vào giỏ hàng</p>
-            </div>
+            </button>
         </div>
     </div>
     
@@ -556,4 +557,44 @@
             <?php } ?>
         </div>
     </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+        var product_quantity = Number.parseInt(document.getElementById("product-quantity").innerText);
+        function changeQuantity(quantity) {
+            product_quantity += quantity;
+            if (product_quantity <= 1) {
+                product_quantity = 1;
+                document.getElementById("decrease-button").setAttribute("opacity", "0.5");
+            } else {
+                document.getElementById("decrease-button").setAttribute("opacity", "1");
+            }
+            document.getElementById("product-quantity").innerText = product_quantity;
+        }
+
+        $(".button-addtocart").click(function() {
+            var quantity = Number.parseInt(document.getElementById("product-quantity").innerText);
+            var price = Number.parseInt(document.getElementsByClassName("product-discount-price")[0].innerText.replace(/[^\d]/g, ""));
+            $.post("<?=$SITE_URL?>/giohang/index.php",
+                {
+                    cart_product_id: <?=$_GET['id']?>,
+                    cart_product_quantity: quantity
+
+                },
+                function(data, textStatus, jqXHR) {
+                }
+            );
+            showNotification(quantity);
+        });
+        function showNotification(quantity) {
+            var notification = document.getElementById('cart-count');
+            notification.innerHTML = "<p>" + quantity + "</p>";
+            notification.classList.add('show');
+            setTimeout(function() {
+                notification.classList.remove('show');
+            }, 3000);
+            var audio = new Audio('<?=$SOUND_DIR?>/ting.mp3');
+            audio.play();
+        }
+    </script>
 </main>

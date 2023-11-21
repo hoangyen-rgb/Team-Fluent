@@ -106,9 +106,49 @@
     header .cart {
         text-align: right;
         padding-right: 20px;
+        position: relative;
     }
-    header .cart img {
-        height: fit-content;
+    header .cart #cart-count {
+        width: 18px;
+        height: 18px;
+        position: absolute;
+        top: -5px;
+        right: 5px;
+        z-index: 1;
+        display: none;
+    }
+    header .cart #cart-count.show {
+        display: block;
+        animation: cart-noti 0.8s ease-in-out;
+    }
+    @keyframes cart-noti {
+    0% {
+        opacity: 0;
+        transform: rotate(-15deg) scale(1);
+    }
+    20% {
+        opacity: 1;
+        
+    }
+    60% {
+        transform: rotate(15deg) scale(1.3);
+    }
+    80% {
+        transform: rotate(-5deg) scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+    header .cart #cart-count p {
+        color: white;
+        background-color: var(--red);
+        border-radius: 10px;
+        font-size: 14px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 600;
     }
     header .account {
         text-align: center;
@@ -124,7 +164,7 @@
     }
     header .account>* {
         display: inline-block;
-        vertical-align: top;
+        vertical-align: middle;
         margin: 0px 5px;
         color: white;
     }
@@ -242,15 +282,18 @@
             <input type="text" placeholder="Tìm món">
         </div>
         <a href="<?=$SITE_URL?>/giohang" class="cart">
-            <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="30" height="30" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0.851191 0C0.381095 0 0 0.368234 0 0.822466C0 1.2767 0.381095 1.64493 0.851191 1.64493H1.26947C1.6495 1.64493 1.9835 1.88836 2.0879 2.24145L4.78713 11.3699C5.10033 12.4292 6.10232 13.1595 7.24244 13.1595H15.0201C16.0642 13.1595 17.0032 12.5452 17.391 11.6084L19.9008 5.54571C20.348 4.46522 19.5244 3.28986 18.3202 3.28986H4.16842L3.72478 1.78955C3.41157 0.7303 2.40958 0 1.26947 0H0.851191Z" fill="white"/>
                 <path d="M7.66075 19.7391C9.07105 19.7391 10.2143 18.6344 10.2143 17.2717C10.2143 15.9091 9.07105 14.8043 7.66075 14.8043C6.25045 14.8043 5.10718 15.9091 5.10718 17.2717C5.10718 18.6344 6.25045 19.7391 7.66075 19.7391Z" fill="white"/>
                 <path d="M14.4702 19.7391C15.8805 19.7391 17.0238 18.6344 17.0238 17.2717C17.0238 15.9091 15.8805 14.8043 14.4702 14.8043C13.0599 14.8043 11.9166 15.9091 11.9166 17.2717C11.9166 18.6344 13.0599 19.7391 14.4702 19.7391Z" fill="white"/>
-            </svg>                
+            </svg>
+            <div id="cart-count">
+                <p></p>
+            </div>      
         </a>
         <!-- check nếu đã đăng nhập, chuyển sang trang tài khoảng, chưa đăng nhập, chuyển sang đăng ký -->
         <div class="account">
-            <svg width="12" height="15" viewBox="0 0 12 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="16" height="20" viewBox="0 0 12 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9.75 7.5C10.9926 7.5 12 8.50735 12 9.75C12 11.4241 11.3115 12.7654 10.1818 13.6722C9.06987 14.5647 7.57962 15 6 15C4.42038 15 2.93013 14.5647 1.81823 13.6722C0.688455 12.7654 0 11.4241 0 9.75C0 8.58051 0.892315 7.61933 2.03328 7.5103L2.24997 7.5H9.75ZM6 0C7.65686 0 9 1.34314 9 3C9 4.65686 7.65686 6 6 6C4.34314 6 3 4.65686 3 3C3 1.34314 4.34314 0 6 0Z" fill="white"/>
             </svg>
                 
