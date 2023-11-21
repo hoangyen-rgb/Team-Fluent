@@ -75,7 +75,9 @@
   font-weight: 600;
   align-items: center;
 }
-
+.score-your  p{
+  margin-top: 5%;
+}
 .score-your p:nth-child(2) {
   align-self: flex-end;
   display: flex;
@@ -91,24 +93,22 @@
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
-  height: 1%;
-  display: flex;
+  display: grid;
+  grid-template-columns: 10% auto;
   align-items: center;
-  gap: 10px;
 }
 .title p:nth-child(2){
-  width: 92%;
   height: 1px;
   background: #BDBDBD;
+  
 }
 .voucher{
   display: flex;
-  width: 100%;
   flex-wrap: wrap;
   justify-content: space-between;
+  grid-row-gap: 20px;
 }
 .discount-frame{
-  
   position: relative;
   color: #4E4E4E;
   font-size: 16px;
@@ -165,19 +165,58 @@
   font-weight: 600;
   line-height: normal;
   text-align: right;
+  margin-top: 5%;
 }
 .xem-them img{
   width: 18px;
   height: 15px;
 }
-@media screen and (max-width:720px) {
+@media screen and (max-width: 720px) {
   main{
-    padding: 0 25px;
+    padding: 0 25px !important;
+  }
+  .menucon{
+    box-shadow: none;
+    border: none;
+  }
+  .menucon ul{
+    padding: 0;
+  }
+  .menucon ul li:nth-child(1){
+    width: 45%;
+  }
+  .menucon ul li:nth-child(2), li:nth-child(3){
+    display: none;
+  }
+  .title p:nth-child(1){
+    font-size: 20px;
+  }
+  .responsive-score{
+    position: relative;
+  }
+  .score-your{
+    position: absolute;
+    right: 0;
+    top: 20%;
+  }
+  .score-your p:nth-child(1){
+    display: none;
+  }
+  .voucher{
+  justify-content: none;
+  justify-content: center;
+  }
+  .title{
+    grid-template-columns: 20% auto;
+  }
+  .xem-them{
+  margin-top: 8%;
   }
 }
 </style>
 <main>
-  <div class="menucon">
+  <div class="responsive-score">
+    <div class="menucon">
     <ul>
         <li>
             <img src="image/icon/Vector.png" alt="">
@@ -192,12 +231,13 @@
             <a href="#">Sổ địa chỉ</a>
         </li>
     </ul>
-</div>
-<div class="score-your">
-    <p>Điểm của bạn:</p>
-    <p style="color: #C34439;">1000</p>
-    <img src="/content/image/icon/Group 20 1.png">
-</div>
+  </div>
+  <div class="score-your">
+      <p>Điểm của bạn:</p>
+      <p style="color: #C34439;">1000</p>
+      <p><img src="/content/image/icon/Group 20 1.png"></p>
+  </div>
+  </div>
 <div class="content">
     <div class="title">
         <p>Của Bạn</p>

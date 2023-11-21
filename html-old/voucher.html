@@ -1,44 +1,53 @@
 <style>
-  /* *{
-    background-color: #FAFAFA;
-  } */
-  .container {
-    margin: auto;
-    width: 1236px;
-    
+  ul{
+    padding: 0 5%;
   }
-  
-  .container ul {
-    width: 1125px;
-    height: 43px;
+  main{
+    padding: 0 100px;
+    font-family: Segoe UI;
+  }
+  main .menucon ul{
+    width: 100%;
     display: flex;
-    /* background-color: #BDBDBD; */
-    margin: auto;
-    padding: 0;
-    justify-items: center;
   }
-  .container ul > li:nth-child(2){
+
+  main ul > li:nth-child(2){
     margin: 0 24%;
-    width: 210px;
     
   }
-  .container ul > li img {
+  main ul > li img {
     filter: invert(70%);
     margin-right: 5%;
   }
-  .container ul > li {
+  main ul > li {
     display: flex;
-    align-items: center;
     list-style: none;
-    width: 130px;
-    padding: 1% 0%;
+    width: 100%;
     color: #4E4E4E;
-    font-family: Segoe UI;
     font-size: 20px;
-    font-style: normal;
     font-weight: 600;
-    line-height: normal;
-    padding: 1% 2%;
+    align-items: center;
+    justify-content: center;
+    padding: 1%;
+    
+  }
+  .menucon {
+    border-radius: 10px;
+    border: 1px solid #BDBDBD;
+    background: #FFF;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  main ul li:nth-child(2){
+    width: 120%;
+  }
+  main ul li a {
+    text-decoration: none;
+    color: #4E4E4E;
+    
+    
   }
   .menucon ul li.ghim {
     background: #C34439;
@@ -51,21 +60,6 @@
   
   .menucon ul li.ghim a {
     color: #FFF;
-  }
-  .menucon {
-    border-radius: 10px;
-    border: 1px solid #BDBDBD;
-    background: #FFF;
-    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    width: 1236px;
-    height: 84px;
-    flex-shrink: 0;
-    display: flex;
-  }
-  
-  .container ul li a {
-    text-decoration: none;
-    color: #4E4E4E;
   }
 
   .mrt-3 {
@@ -181,7 +175,27 @@
   width: 18px;
   height: 15px;
 }
-
+@media screen and (max-width: 720px) {
+  main{
+    padding: 0 25px !important;
+  }
+  .menucon{
+    box-shadow: none;
+    border: none;
+  }
+  .menucon ul{
+    padding: 0;
+  }
+  .menucon ul li:nth-child(1){
+    width: 45%;
+  }
+  .menucon ul li:nth-child(2), li:nth-child(3){
+    display: none;
+  }
+  .title p:nth-child(2){
+    width: 77%;
+  }
+}
 </style>
 <div class="container">
   <div class="menucon">
