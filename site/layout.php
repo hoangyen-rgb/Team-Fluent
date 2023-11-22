@@ -319,7 +319,10 @@
             display: none;
         }
         footer .about{
-            margin: 80% auto 100px !important;
+            margin: 70% auto 0px !important;
+        }
+        footer .menu-box{
+            margin-bottom:5%;
         }
         footer .about >*{
             display: none;
@@ -421,7 +424,7 @@
             <img style="margin-top: -50px;" src="<?=$IMAGE_DIR?>/footer-image (5).png" alt="">
         </div>
         <div class="about">
-            <p style="color: whi;">ChickCuisine tự hào cung cấp những món ăn ngon nhất từ khắp nơi trên thế giới đến ngay tận bàn ăn của bạn. Chúng tôi cam kết về chất lượng và sự hài lòng của khách hàng. Hãy theo dõi chúng tôi trên các trang mạng xã hội để cập nhật thông tin mới nhất và các ưu đãi đặc biệt!</p>
+            <p style="color: white;">ChickCuisine tự hào cung cấp những món ăn ngon nhất từ khắp nơi trên thế giới đến ngay tận bàn ăn của bạn. Chúng tôi cam kết về chất lượng và sự hài lòng của khách hàng. Hãy theo dõi chúng tôi trên các trang mạng xã hội để cập nhật thông tin mới nhất và các ưu đãi đặc biệt!</p>
         </div>
         <div class="menu-box">
             <img class="logo-footer" src="<?=$IMAGE_DIR?>/logo-white.png" alt="">
