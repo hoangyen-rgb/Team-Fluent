@@ -143,7 +143,7 @@
         if ($sort != null) {
             switch ($sort) {
                 case 1 : 
-                    $sql.= " ORDER BY Price DESC";
+                    $sql.= " ORDER BY Price ASC";
                     break;
                 case 2 : 
                     $sql.= " ORDER BY Discount DESC";
