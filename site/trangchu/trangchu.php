@@ -215,6 +215,7 @@
         }
         .view-more button {
             background-color: unset;
+            border:none;
         }
         .view-more button * {
             display: inline-block;
@@ -252,7 +253,7 @@
             font-size:20px !important;
         }
 
-    }
+        }
     </style>
     <div class="banner">
             <img src="<?=$IMAGE_DIR?>/banner.png" alt="">

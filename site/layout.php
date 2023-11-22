@@ -135,7 +135,7 @@
     footer {
         width: 100%;
         margin-top: 200px;
-        background-image: url('/content/image/background-footer.png');
+        background-image: url('<?=$IMAGE_DIR?>/background-footer.png');
 
         background-repeat: no-repeat;
         background-size: cover;
@@ -240,11 +240,12 @@
             position: absolute;
             width: 50%;
             top: 75px;
-            left:20%;
+            left:25%;
             display: none;
         }
         .search-box.ghim-search{
             display: block;
+            z-index: 3;
         }
         header .menu {
             margin: 0 !important;
@@ -253,10 +254,9 @@
             background-color: #202020;
             display: grid;
             grid-template-columns: auto;
-            width: 50%;
             z-index: 2;
             padding: 0 !important;
-            width: 55%;
+            width: 45%;
             left: -100%;
         }
         .menu.open{
@@ -265,7 +265,7 @@
         header .menu a svg {
             margin-left: 15%;
             width: 25px;
-            margin-right: 15%;
+            margin-right: 10%;
             display: block;
             
         }
@@ -278,7 +278,6 @@
             display: block;
         }
         header .menu a{
-            align-items: center ;
             display: flex!important;
             padding: 20px 0 !important;
             width: 100%;
@@ -354,238 +353,38 @@
     }
 
 </style>
-
-<style>
-    main {
-        padding: 0px 100px;
-    }
-    .banner {
-        width: calc(100% + 200px);
-        margin-left: -100px;
-        height: fit-content;
-        position: relative;
-    }
-    .banner img {
-        width: 100%;
-    }
-    .banner p {
-        position: absolute;
-        right: 100px;
-        bottom: 100px;
-        color: white;
-        font-size: 20px;
-        font-weight: 600;
-        background-color: var(--red);
-        padding: 10px 20px;
-        border-radius: 10px;
-        cursor: pointer;
-        border: 1px solid rgba(0, 0, 0, 0);
-    }
-    .banner p:hover {
-        border: 1px solid white;
-        background-color: rgba(0, 0, 0, 0.4);
-        transition: 0.3s;
-    }
-    .container {
-        width: 100%;
-        margin: 10px 0px;
-    }
-    .container-title {
-        width: 100%;
-        text-align: center;
-        margin: 80px 0px 50px;
-    }
-    .container-title p:first-child {
-        color: var(--red);
-        font-size: 32px;
-        font-weight: 600;
-        margin-bottom: 10px;
-    }
-    .container-title p:last-child {
-        font-size: 20px;
-        font-weight: 400;
-    }
-    .container .list-products {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-    .container .product {
-        position: relative;
-        width: 260px;
-        padding: 10px;
-        margin: 15px 0px;
-    }
-    .container .product .product-image {
-        width: 100%;
-        height: 150px;
-        margin-bottom: 10px;
-    }
-    .container .product .product-name {
-        font-size: 24px;
-        font-weight: 600;
-        text-align: center;
-        color: var(--lightblack);
-    }
-    .container .product .product-rating {
-        text-align: center;
-        margin-bottom: 10px;
-    }
-    .container .product .product-description {
-        text-align: center;
-    font-size: 14px;
-        font-weight: 400;
-        color: var(--lightblack);
-        margin-bottom: 10px;
-    }
-    .container .product .product-price {
-        width: 100%;
-        text-align: center;
-    }
-    .container .product .product-price>* {
-        display: inline-block;
-    }
-    .container .product .product-price .original-price {
-        text-decoration: line-through;
-    }
-    .container .product .product-price .discount-price {
-        color: var(--red);
-        font-size: 20px;
-        font-weight: 600;
-        text-align: center;
-        margin-bottom: 10px;
-    }
-    .container .product .product-buttons {
-        display: grid;
-        grid-template-columns:  auto 30px 30px;
-        gap: 10px;
-    }
-    .container .product .product-buttons button {
-        height: 30px;
-        color: white;
-        font-size: 15px;
-        font-weight: 600;
-        background-color: var(--red);
-        border: none;
-        border-radius: 5px;
-    }
-    .container .product .product-buttons button:first-child {
-        width: 100%;
-    }
-    .container .product .product-buttons button:last-child {
-        background-color: var(--black);
-    }
-    .container .product .product-buttons>:not(button:first-child) {
-        width: 30px;
-        height: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .container .product .product-discount-tag {
-        position: absolute;
-        top: -10px;
-        right: 20px;
-    }
-    .container .product .product-discount-tag p {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -80%);
-        font-size: 16px;
-        font-weight: 600;
-        color: white;
-    }
-    .list-categories {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-    .category {
-        background-color: var(--red);
-        border-radius: 10px;
-        height: 100px;
-        width: 30%;
-        display: grid;
-        grid-template-columns: 100px auto;
-        transition: 0.3s;
-        overflow: hidden;
-        position: relative;
-        cursor: pointer;
-        margin: 10px 0px;
-        border: 1px solid var(--gray);
-        box-shadow: 0px 0px 5px var(--gray);
-    }
-    .category>* {
-        align-self: center;
-        color: white;
-    }
-    .category .category-image {
-        width: 100%;
-        grid-column: 1 / 2;
-        grid-row: 1 / 3;
-        margin-left: -100px;
-        background-color: white;
-    }
-    .category:hover .category-image {
-        margin-left: 0px;
-        transition: 0.3s;
-    }
-    .category .category-name {
-        grid-column: 2 / 3;
-        grid-row: 1 / 2;
-        margin-top: 10px;
-        margin-left: -60px;
-        font-size: 26px;
-        font-weight: 600;
-    }
-    .category:hover .category-name {
-        margin-left: 10px;
-        transition: 0.3s;
-    }
-    .category .category-product-count {
-        grid-column: 2 / 3;
-        grid-row: 2 / 3;
-        margin-bottom: 10px;
-        font-size: 22px;
-        font-weight: 400;
-        margin-left: -60px;
-    }
-    .category:hover .category-product-count {
-        margin-left: 10px;
-        transition: 0.3s;
-    }
-    .category svg {
-        position: absolute;
-        left: 10px;
-    }
-    .category:hover svg {
-        display: none;
-    }
-    .view-more {
-        text-align: right;
-    }
-    .view-more button {
-        background-color: unset;
-    }
-    .view-more button * {
-        display: inline-block;
-        color: var(--red);
-        font-size: 24px;
-        font-weight: 600;
-        vertical-align: middle;
-        margin: 0px 5px;
-    }
-</style>
 <body>
     <header>
+        <div class="iconmenu" style="display: none;"><img src="<?=$IMAGE_DIR?>/icon/more.png" alt=""></div>
         <img src="<?=$IMAGE_DIR?>/horizontal-logo-red.png" alt="" class="logo">
-        <img src="<?=$IMAGE_DIR?>/logo-red.png" alt="" class="logo" style="display: none;">
-        <div class="menu">
-            <a href="<?=$SITE_URL?>/trangchu">Trang chủ</a>
-            <a href="<?=$SITE_URL?>/thucdon">Thực đơn</a>
-            <a href="<?=$SITE_URL?>/gioithieu">Giới thiệu</a>
+        <div class="menu" id="menu">
+            <a href="<?=$SITE_URL?>/trangchu"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none">
+            <path d="M12.3335 2H10.6668C10.4828 2 10.3335 2.14924 10.3335 2.33333V2.37261L12.6668 4.23927V2.33333C12.6668 2.14924 12.5176 2 12.3335 2Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.16675 6.33333C7.16675 5.87309 7.53988 5.5 8.00008 5.5C8.46035 5.5 8.83341 5.87309 8.83341 6.33333C8.83341 6.7936 8.46035 7.16667 8.00008 7.16667C7.53988 7.16667 7.16675 6.7936 7.16675 6.33333Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.8335 7.30679L14.3545 7.72359C14.5702 7.89605 14.8848 7.86112 15.0573 7.64545C15.2298 7.42985 15.1948 7.11519 14.9792 6.94265L9.5619 2.60887C8.64889 1.87843 7.3515 1.87843 6.43844 2.60887L1.02117 6.94265C0.805535 7.11519 0.770575 7.42985 0.943082 7.64545C1.11558 7.86112 1.43023 7.89605 1.64586 7.72359L2.16685 7.30679V14.1665H1.33352C1.05737 14.1665 0.833515 14.3903 0.833515 14.6665C0.833515 14.9426 1.05737 15.1665 1.33352 15.1665H14.6668C14.943 15.1665 15.1668 14.9426 15.1668 14.6665C15.1668 14.3903 14.943 14.1665 14.6668 14.1665H13.8335V7.30679ZM6.16685 6.33312C6.16685 5.3206 6.98763 4.49979 8.00016 4.49979C9.0127 4.49979 9.8335 5.3206 9.8335 6.33312C9.8335 7.34565 9.0127 8.16645 8.00016 8.16645C6.98763 8.16645 6.16685 7.34565 6.16685 6.33312ZM8.0331 8.83312C8.47636 8.83312 8.85823 8.83305 9.16409 8.87419C9.49183 8.91825 9.80603 9.01765 10.0608 9.27245C10.3157 9.52732 10.415 9.84145 10.4591 10.1693C10.4976 10.4559 10.5 10.8095 10.5002 11.2178C10.5002 11.2451 10.5002 11.2725 10.5002 11.3002V14.1665H9.50016V11.3331C9.50016 10.8476 9.49909 10.5337 9.46803 10.3025C9.4389 10.0856 9.39183 10.0177 9.35376 9.97959C9.31569 9.94152 9.24769 9.89445 9.03083 9.86525C8.79956 9.83419 8.48569 9.83312 8.00016 9.83312C7.51463 9.83312 7.20076 9.83419 6.96956 9.86525C6.75269 9.89445 6.68469 9.94152 6.64663 9.97959C6.60856 10.0177 6.56149 10.0856 6.53233 10.3025C6.50124 10.5337 6.50018 10.8476 6.50018 11.3331V14.1665H5.50018V11.3002C5.50015 10.857 5.50014 10.4751 5.54125 10.1693C5.58532 9.84145 5.68469 9.52732 5.93952 9.27245C6.19435 9.01765 6.50853 8.91825 6.8363 8.87419C7.1421 8.83305 7.52403 8.83312 7.96729 8.83312H8.0331Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.16675 6.33333C7.16675 5.87309 7.53988 5.5 8.00008 5.5C8.46035 5.5 8.83341 5.87309 8.83341 6.33333C8.83341 6.7936 8.46035 7.16667 8.00008 7.16667C7.53988 7.16667 7.16675 6.7936 7.16675 6.33333Z" fill="white"/>
+            </svg>Trang chủ</a>
+            <a href="<?=$SITE_URL?>/thucdon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none">
+            <path d="M12.3335 2H10.6668C10.4828 2 10.3335 2.14924 10.3335 2.33333V2.37261L12.6668 4.23927V2.33333C12.6668 2.14924 12.5176 2 12.3335 2Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.16675 6.33333C7.16675 5.87309 7.53988 5.5 8.00008 5.5C8.46035 5.5 8.83341 5.87309 8.83341 6.33333C8.83341 6.7936 8.46035 7.16667 8.00008 7.16667C7.53988 7.16667 7.16675 6.7936 7.16675 6.33333Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.8335 7.30679L14.3545 7.72359C14.5702 7.89605 14.8848 7.86112 15.0573 7.64545C15.2298 7.42985 15.1948 7.11519 14.9792 6.94265L9.5619 2.60887C8.64889 1.87843 7.3515 1.87843 6.43844 2.60887L1.02117 6.94265C0.805535 7.11519 0.770575 7.42985 0.943082 7.64545C1.11558 7.86112 1.43023 7.89605 1.64586 7.72359L2.16685 7.30679V14.1665H1.33352C1.05737 14.1665 0.833515 14.3903 0.833515 14.6665C0.833515 14.9426 1.05737 15.1665 1.33352 15.1665H14.6668C14.943 15.1665 15.1668 14.9426 15.1668 14.6665C15.1668 14.3903 14.943 14.1665 14.6668 14.1665H13.8335V7.30679ZM6.16685 6.33312C6.16685 5.3206 6.98763 4.49979 8.00016 4.49979C9.0127 4.49979 9.8335 5.3206 9.8335 6.33312C9.8335 7.34565 9.0127 8.16645 8.00016 8.16645C6.98763 8.16645 6.16685 7.34565 6.16685 6.33312ZM8.0331 8.83312C8.47636 8.83312 8.85823 8.83305 9.16409 8.87419C9.49183 8.91825 9.80603 9.01765 10.0608 9.27245C10.3157 9.52732 10.415 9.84145 10.4591 10.1693C10.4976 10.4559 10.5 10.8095 10.5002 11.2178C10.5002 11.2451 10.5002 11.2725 10.5002 11.3002V14.1665H9.50016V11.3331C9.50016 10.8476 9.49909 10.5337 9.46803 10.3025C9.4389 10.0856 9.39183 10.0177 9.35376 9.97959C9.31569 9.94152 9.24769 9.89445 9.03083 9.86525C8.79956 9.83419 8.48569 9.83312 8.00016 9.83312C7.51463 9.83312 7.20076 9.83419 6.96956 9.86525C6.75269 9.89445 6.68469 9.94152 6.64663 9.97959C6.60856 10.0177 6.56149 10.0856 6.53233 10.3025C6.50124 10.5337 6.50018 10.8476 6.50018 11.3331V14.1665H5.50018V11.3002C5.50015 10.857 5.50014 10.4751 5.54125 10.1693C5.58532 9.84145 5.68469 9.52732 5.93952 9.27245C6.19435 9.01765 6.50853 8.91825 6.8363 8.87419C7.1421 8.83305 7.52403 8.83312 7.96729 8.83312H8.0331Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.16675 6.33333C7.16675 5.87309 7.53988 5.5 8.00008 5.5C8.46035 5.5 8.83341 5.87309 8.83341 6.33333C8.83341 6.7936 8.46035 7.16667 8.00008 7.16667C7.53988 7.16667 7.16675 6.7936 7.16675 6.33333Z" fill="white"/>
+            </svg>Thực đơn</a>
+            <a href="<?=$SITE_URL?>/gioithieu"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none">
+            <path d="M12.3335 2H10.6668C10.4828 2 10.3335 2.14924 10.3335 2.33333V2.37261L12.6668 4.23927V2.33333C12.6668 2.14924 12.5176 2 12.3335 2Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.16675 6.33333C7.16675 5.87309 7.53988 5.5 8.00008 5.5C8.46035 5.5 8.83341 5.87309 8.83341 6.33333C8.83341 6.7936 8.46035 7.16667 8.00008 7.16667C7.53988 7.16667 7.16675 6.7936 7.16675 6.33333Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.8335 7.30679L14.3545 7.72359C14.5702 7.89605 14.8848 7.86112 15.0573 7.64545C15.2298 7.42985 15.1948 7.11519 14.9792 6.94265L9.5619 2.60887C8.64889 1.87843 7.3515 1.87843 6.43844 2.60887L1.02117 6.94265C0.805535 7.11519 0.770575 7.42985 0.943082 7.64545C1.11558 7.86112 1.43023 7.89605 1.64586 7.72359L2.16685 7.30679V14.1665H1.33352C1.05737 14.1665 0.833515 14.3903 0.833515 14.6665C0.833515 14.9426 1.05737 15.1665 1.33352 15.1665H14.6668C14.943 15.1665 15.1668 14.9426 15.1668 14.6665C15.1668 14.3903 14.943 14.1665 14.6668 14.1665H13.8335V7.30679ZM6.16685 6.33312C6.16685 5.3206 6.98763 4.49979 8.00016 4.49979C9.0127 4.49979 9.8335 5.3206 9.8335 6.33312C9.8335 7.34565 9.0127 8.16645 8.00016 8.16645C6.98763 8.16645 6.16685 7.34565 6.16685 6.33312ZM8.0331 8.83312C8.47636 8.83312 8.85823 8.83305 9.16409 8.87419C9.49183 8.91825 9.80603 9.01765 10.0608 9.27245C10.3157 9.52732 10.415 9.84145 10.4591 10.1693C10.4976 10.4559 10.5 10.8095 10.5002 11.2178C10.5002 11.2451 10.5002 11.2725 10.5002 11.3002V14.1665H9.50016V11.3331C9.50016 10.8476 9.49909 10.5337 9.46803 10.3025C9.4389 10.0856 9.39183 10.0177 9.35376 9.97959C9.31569 9.94152 9.24769 9.89445 9.03083 9.86525C8.79956 9.83419 8.48569 9.83312 8.00016 9.83312C7.51463 9.83312 7.20076 9.83419 6.96956 9.86525C6.75269 9.89445 6.68469 9.94152 6.64663 9.97959C6.60856 10.0177 6.56149 10.0856 6.53233 10.3025C6.50124 10.5337 6.50018 10.8476 6.50018 11.3331V14.1665H5.50018V11.3002C5.50015 10.857 5.50014 10.4751 5.54125 10.1693C5.58532 9.84145 5.68469 9.52732 5.93952 9.27245C6.19435 9.01765 6.50853 8.91825 6.8363 8.87419C7.1421 8.83305 7.52403 8.83312 7.96729 8.83312H8.0331Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.16675 6.33333C7.16675 5.87309 7.53988 5.5 8.00008 5.5C8.46035 5.5 8.83341 5.87309 8.83341 6.33333C8.83341 6.7936 8.46035 7.16667 8.00008 7.16667C7.53988 7.16667 7.16675 6.7936 7.16675 6.33333Z" fill="white"/>
+            </svg>Giới thiệu</a>
+            <a href="<?=$SITE_URL?>/lienhe"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none">
+            <path d="M12.3335 2H10.6668C10.4828 2 10.3335 2.14924 10.3335 2.33333V2.37261L12.6668 4.23927V2.33333C12.6668 2.14924 12.5176 2 12.3335 2Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.16675 6.33333C7.16675 5.87309 7.53988 5.5 8.00008 5.5C8.46035 5.5 8.83341 5.87309 8.83341 6.33333C8.83341 6.7936 8.46035 7.16667 8.00008 7.16667C7.53988 7.16667 7.16675 6.7936 7.16675 6.33333Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.8335 7.30679L14.3545 7.72359C14.5702 7.89605 14.8848 7.86112 15.0573 7.64545C15.2298 7.42985 15.1948 7.11519 14.9792 6.94265L9.5619 2.60887C8.64889 1.87843 7.3515 1.87843 6.43844 2.60887L1.02117 6.94265C0.805535 7.11519 0.770575 7.42985 0.943082 7.64545C1.11558 7.86112 1.43023 7.89605 1.64586 7.72359L2.16685 7.30679V14.1665H1.33352C1.05737 14.1665 0.833515 14.3903 0.833515 14.6665C0.833515 14.9426 1.05737 15.1665 1.33352 15.1665H14.6668C14.943 15.1665 15.1668 14.9426 15.1668 14.6665C15.1668 14.3903 14.943 14.1665 14.6668 14.1665H13.8335V7.30679ZM6.16685 6.33312C6.16685 5.3206 6.98763 4.49979 8.00016 4.49979C9.0127 4.49979 9.8335 5.3206 9.8335 6.33312C9.8335 7.34565 9.0127 8.16645 8.00016 8.16645C6.98763 8.16645 6.16685 7.34565 6.16685 6.33312ZM8.0331 8.83312C8.47636 8.83312 8.85823 8.83305 9.16409 8.87419C9.49183 8.91825 9.80603 9.01765 10.0608 9.27245C10.3157 9.52732 10.415 9.84145 10.4591 10.1693C10.4976 10.4559 10.5 10.8095 10.5002 11.2178C10.5002 11.2451 10.5002 11.2725 10.5002 11.3002V14.1665H9.50016V11.3331C9.50016 10.8476 9.49909 10.5337 9.46803 10.3025C9.4389 10.0856 9.39183 10.0177 9.35376 9.97959C9.31569 9.94152 9.24769 9.89445 9.03083 9.86525C8.79956 9.83419 8.48569 9.83312 8.00016 9.83312C7.51463 9.83312 7.20076 9.83419 6.96956 9.86525C6.75269 9.89445 6.68469 9.94152 6.64663 9.97959C6.60856 10.0177 6.56149 10.0856 6.53233 10.3025C6.50124 10.5337 6.50018 10.8476 6.50018 11.3331V14.1665H5.50018V11.3002C5.50015 10.857 5.50014 10.4751 5.54125 10.1693C5.58532 9.84145 5.68469 9.52732 5.93952 9.27245C6.19435 9.01765 6.50853 8.91825 6.8363 8.87419C7.1421 8.83305 7.52403 8.83312 7.96729 8.83312H8.0331Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.16675 6.33333C7.16675 5.87309 7.53988 5.5 8.00008 5.5C8.46035 5.5 8.83341 5.87309 8.83341 6.33333C8.83341 6.7936 8.46035 7.16667 8.00008 7.16667C7.53988 7.16667 7.16675 6.7936 7.16675 6.33333Z" fill="white"/>
+            </svg>Liên hệ</a>
+        </div>
+        <div class="search-an" style="display: none;">
+            <img src="<?=$IMAGE_DIR?>/icon/search.png" alt="">
         </div>
         <div class="search-box">
             <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
