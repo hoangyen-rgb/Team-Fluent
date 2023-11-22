@@ -1,34 +1,5 @@
     <!-- css trang -->
     <style>
-        @media screen and (max-width:720px) {
-            main{
-            padding: 0px 15px !important;
-        }
-        .banner{
-            width: 100%;
-        }
-        .banner p {
-            padding:5px 10px !important;
-            font-size: 15px;
-            bottom: 15% !important;
-        }
-        .category {
-            width: 450px !important;
-        }
-        .list-products .product{
-            width:49% !important;
-        }
-        .product-description{
-           height: 65px !important;
-        }
-        .buy-now{
-            font-size: 14px !important;
-        }
-        .product-name{
-            font-size:20px !important;
-        }
-
-    }
         main {
             padding: 0px 100px;
         }
@@ -253,6 +224,35 @@
             vertical-align: middle;
             margin: 0px 5px;
         }
+        @media screen and (max-width:720px) {
+            main{
+            padding: 0px 15px !important;
+        }
+        .banner{
+            width: 100%;
+        }
+        .banner p {
+            padding:5px 10px !important;
+            font-size: 15px;
+            bottom: 15% !important;
+        }
+        .category {
+            width: 450px !important;
+        }
+        .list-products .product{
+            width:49% !important;
+        }
+        .product-description{
+           height: 65px !important;
+        }
+        .buy-now{
+            font-size: 14px !important;
+        }
+        .product-name{
+            font-size:20px !important;
+        }
+
+    }
     </style>
     <div class="banner">
             <img src="<?=$IMAGE_DIR?>/banner.png" alt="">

@@ -3,31 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý bán hàng</title>
+    <title>Document</title>
+    
     <style>
-*{
-
+    /* general */
+    @font-face {
+    font-family: "MS Sans Serif";
+    src: url(font/Microsoft.ttf) format("truetype");
+  }
+@font-face {
+  font-family: "BR Sans Serif";
+  src: url(font/BadScript.ttf) format("truetype");
 }
+:root {
+    --red: #c34439;
+    --lightgray: #faf9f8;
+    --black: #202020;
+    --lightblack: #4E4E4E;
+    --gray: #BDBDBD;
+    --yellow: #FFB11B;
+}
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  color: var(--black);
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--lightgray);
+}
+.a {
+  text-decoration: none;
+}
+    /* header */
     header {
-    font-family: Segoe UI;
     position: fixed;
     width: 100%;
     border-bottom: 1px solid var(--gray);
     display: grid;
-    grid-template-columns: 250px 50px auto;
-}
-
-header .logo img {
-    width: 195px;
-    height: 48px;
+    grid-template-columns: 200px 50px auto;
 }
 .logo {
+    
     height: 70px;
     border-bottom: 1px solid var(--gray);
     background: linear-gradient(267deg, var(--red) 1.51%, var(--yellow) 97.91%);
     display: flex;
     justify-content: center;
     align-items: center;
+}
+header .logo>img {
+    width: 150px;
+    height: auto;
+    border: unset;
 }
 header .left {
     display: flex;
@@ -47,7 +76,7 @@ header .right .avt {
     border-radius: 50%;
 }
 .sidebar {
-    width: 250px;
+    width: 200px;
     height: 100vh;
     border-right: 1px solid var(--gray);
     background-color: white;
@@ -62,19 +91,12 @@ header .right .avt {
 .sidebar ul li {
     box-sizing: border-box;
     height: 40px;
-    padding: 15% 10%  ;
+    padding: 10px 5px 10px 10px;
     color: var(--lightblack);
-    display: flex;
-    align-items: center;
-    font-size: 18px;
-    font-weight: 600;
-    position: relative;
 }
-
 .sidebar ul li:hover {
-    position: absolute;
     cursor: pointer;
-    background-color: rgb(132, 7, 7);
+    background-color: rgb(245, 245, 245);
 }
 
 .sidebar ul li svg {
@@ -104,21 +126,22 @@ main {
     color: var(--red);
     fill: var(--red);
 }
+
     </style>
 </head>
 <body>
-    <header>
+<header>
         <div class="logo">
-            <img src="../content/image/admin/logo-white.png">
+            <img class="logo" src="<?=$IMAGE_DIR?>/admin/logo-white.png" alt="">
         </div>
         <div class="left"> 
-            <img src="../content/image/icon/more.png" alt="">
+            <img src="<?=$IMAGE_DIR?>/icon/more.png" alt="">
         </div>
         <div class="right">
-            <img src="../content/image/icon/belt.png" alt="">
-            <img src="../content/image/icon/mail.png" alt="">
-            <img class="avt" src="../content/image/svg/user.svg" alt="">
-            <img src="../content/image/icon/gear.png" alt="">
+            <img src="<?=$IMAGE_DIR?>/icon/belt.png" alt="">
+            <img src="<?=$IMAGE_DIR?>/icon/mail.png" alt="">
+            <img class="avt" src="<?=$IMAGE_DIR?>/svg/user.svg" alt="">
+            <img src="<?=$IMAGE_DIR?>/icon/gear.png" alt="">
         </div>
     </header>
     <div class="sidebar">
@@ -170,12 +193,3 @@ main {
     <?php require $VIEW_NAME;?>
 </body>
 </html>
-<script>
-    const menuItems = document.querySelectorAll('.menucon li');
-    menuItems.forEach(item => {
-        item.addEventListener('click', function() {
-            menuItems.forEach(item => item.classList.remove('ghim'));
-            this.classList.add('ghim');
-        });
-    });
-</script>

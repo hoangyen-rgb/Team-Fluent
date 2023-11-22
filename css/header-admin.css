@@ -5,9 +5,6 @@ header {
     display: grid;
     grid-template-columns: 200px 50px auto;
 }
-header * {
-    
-}
 .logo {
     
     height: 70px;
