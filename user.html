@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="user.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="item1">
+            <div class="anh">
+                <img src="image/Ellipse 11.png" alt="">
+                <div class="tennguoidung">
+                    Tên người dùng
+                </div>
+                <div class="sdt">
+                    0903522XXX
+                </div>
+            </div>
+
+            <div class="gach"></div>
+            <div class="diemvahang">
+                <div class="diemmuahang">
+                    <h3>1000 <img src="image/Group 20 1.jpg" alt=""></h3>
+                    <p>điểm mua hàng</p>
+                </div>
+
+                <div class="gachdoc"></div>
+                <div class="hangthanh">
+                    <h3>Kim cương <img src="image/Group 12 1.png" alt=""></h3>
+                    <p>Hạng thành viên</p>
+                </div>
+            </div>
+            <div class="gach"></div>
+
+            <div class="capnhatten">
+                <img src="image/capnhatten.png" alt="">
+                <p>Cập nhật tên</p>
+            </div>
+
+            <div class="capnhatanhdaidien">
+                <img src="image/capnhatanhdaidien.png" alt="">
+                <p>Cập nhật ảnh đại diện</p>
+            </div>
+
+            <div class="capnhatsodienthoai">
+                <img src="image/dienthoai.png" alt="">
+                <p>Cập nhật số điện thoại</p>
+            </div>
+
+            <div class="doimatkhau">
+                <img src="image/doimatkhau.png" alt="">
+                <p>Đổi mật khẩu</p>
+            </div>
+
+            <div class="doimatkhau">
+                <img src="image/lichsudathang.png" alt="">
+                <p>Lịch sử đặt hàng</p>
+            </div>
+            <div class="dangxuat"> <input type="button" value="Đăng xuất"> <img src="image/dangxuat.png" alt=""></div>
+
+        </div>
+        <div class="item2">
+
+            <div class="dienten">
+                <div class="login">
+                    <p>Số nhà / đường</p>
+                    <input type="text" placeholder="Địa chỉ giao hàng" id="sonha">
+                    <br>
+                    <p>Khu phố</p>
+                    <input type="text" placeholder="Địa chỉ giao hàng" id="khupho">
+                    <p>Xã</p>
+                    <input type="text" placeholder="Địa chỉ giao hàng" id="xa">
+                    <div class="new">
+                        <p>Tỉnh</p>
+                        <input type="text" placeholder="Địa chỉ giao hàng" id="tinh">
+                        <p>Huyện</p>
+                        <input type="text" placeholder="Địa chỉ giao hàng" id="huyen">
+                    </div>
+                    <!-- <input type="button" value="Đặt hàng" onclick="return validateForm()"> -->
+                </div>
+
+
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d17041.468210147563!2d106.618228!3d10.8482083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1svi!2s!4v1699604988752!5m2!1svi!2s"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+            </div>
+            <div class="capnhat"><input type="button" value="cập nhật" onclick="return validateForm()">
+                <img src="image/capnhat.png" alt="">
+                <!-- <button>Cập nhật</button> -->
+            </div>
+        </div>
+
+
+        <div class="item3">
+            <div class="tong">
+                <div class="tong1"></div>
+                <div class="tong2"></div>
+            </div>
+            <div class="diem">
+                <p>Điểm mua hàng:
+                </p>
+
+                <div class="hang">
+                    <p>Hạng tiếp theo:
+                    </p>
+                </div>
+            </div>
+            <div class="so">1000/2000 <img src="image/diemmuahang.png" alt=""></div>
+            <div class="hang1">
+                <p>Lục bảo <img src="image/lucbao.png" alt=""></p>
+            </div>
+            <div class="luuy">
+                <p style="color: red;">Lưu ý: điểm mua hàng xẽ được làm mới mỗi tháng</p>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script>
+    function validateForm() {
+        var sonha = document.getElementById("sonha").value;
+        var khupho = document.getElementById("khupho").value;
+        var xa = document.getElementById("xa").value;
+        var tinh = document.getElementById("tinh").value;
+        var huyen = document.getElementById("huyen").value;
+
+        var sonhaRegex = /^[\/\d]+$/; // Biểu thức chính quy kiểm tra số nhà/đường
+        var khuphoRegex = /^[\/\d]+$/; // Biểu thức chính quy kiểm tra số nhà/đường
+        var xaRegex = /^[\/\d]+$/; // Biểu thức chính quy kiểm tra số nhà/đường
+        var tihkhuphoRegex = /^[\/\d]+$/; // Biểu thức chính quy kiểm tra số nhà/đường
+        var huyenRegex = /^[\/\d]+$/; // Biểu thức chính quy kiểm tra số nhà/đường
+
+        if (sonha.trim() === "") {
+            alert("Vui lòng nhập số nhà/đường.");
+            sonha.focus();
+            return false;
+        }
+
+        if (sonha.length > 15) {
+            alert("Số nhà/đường không được vượt quá 15 ký tự.");
+            sonha.focus();
+
+            return false;
+        }
+
+        if (!sonhaRegex.test(sonha)) {
+            alert("Số nhà/đường chỉ được chứa ký hiệu '/' và số.");
+            sonha.focus();
+
+            return false;
+        }  
+        if (khupho.trim() === "") {
+            alert("Vui lòng nhập số nhà/đường.");
+         khupho.focus();
+            return false;
+        }
+
+        if (khupho.length > 15) {
+            alert("Số nhà/đường không được vượt quá 15 ký tự.");
+            khupho.focus();
+
+            return false;
+        }
+    
+
+        // Kiểm tra các trường khác (khupho, xa, tinh, huyen)...
+
+        // Nếu không có lỗi, thực hiện đặt hàng
+        placeOrder();
+    }
+
+    function placeOrder() {
+        // Thực hiện xử lý đặt hàng
+        alert("Đặt hàng thành công!");
+    }
+
+</script>
+</html>
