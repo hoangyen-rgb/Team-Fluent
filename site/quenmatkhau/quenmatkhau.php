@@ -93,33 +93,87 @@
         color: var(--red);
     }
 </style>
+<?php
+if (isset($_POST['nutguiyeucau'])) {
+    $email = $_POST['email'];
+    $conn = new PDO("mysql:host=localhost; dbname=chickcuisine; charset=utf8", "root", "");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = "SELECT * FROM user WHERE Email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([$email]);
+    $count = $stmt->rowCount();
+
+    if ($count == 0) {
+        echo '<script>alert("Email bạn nhập chưa đăng ký thành viên với chúng tôi");</script>';
+    } else {
+        $matkhaumoi = substr(md5(rand(0, 999999)), 0, 8);
+        $sql = "UPDATE user SET password = ? WHERE Email = ?";
+        $stmt = $conn->prepare($sql); // Tạo 1 prepare stement
+        $stmt->execute([$matkhaumoi, $email]);
+        // echo "Đã cập nhật";
+        GuiMatKhauMoi($email,$matkhaumoi); 
+    }
+}
+
+?>
+<?php
+function GuiMatKhauMoi($email,$matkhaumoi) {
+    require_once "../../PHPMailer-master/src/PHPMailer.php"; 
+    require_once "../../PHPMailer-master/src/SMTP.php"; 
+    require_once "../../PHPMailer-master/src/Exception.php"; 
+    $mail = new PHPMailer\PHPMailer\PHPMailer(true);//true:enables exceptions
+    try {
+        $mail->SMTPDebug = 0; //0,1,2: chế độ debug
+        $mail->isSMTP();  
+        $mail->CharSet  = "utf-8";
+        $mail->Host = 'smtp.gmail.com';  //SMTP servers
+        $mail->SMTPAuth = true; // Enable authentication
+        $mail->Username = 'nhatmminh25@gmail.com'; // SMTP username
+        $mail->Password = 'zbyhbakwniwmfzbc';   // SMTP password
+        $mail->SMTPSecure = 'ssl';  // encryption TLS/SSL 
+        $mail->Port = 465;  // port to connect to                
+        $mail->setFrom('nhatmminh25@gmail.com', 'Nhật Minh' ); 
+        $mail->addAddress($email); 
+        $mail->isHTML(true);  // Set email format to HTML
+        $mail->Subject = 'Thử gửi lại mật khẩu';
+        $noidungthu = "<p>Bạn nhận được thư này, do bạn hoặc ai đó yêu cầu mật khẩu mới từ Shopwise<br>
+        Mật khẩu mới của bạn là: {$matkhaumoi}</p>"; 
+        $mail->Body = $noidungthu;
+        $mail->smtpConnect( array(
+            "ssl" => array(
+                "verify_peer" => false,
+                "verify_peer_name" => false,
+                "allow_self_signed" => true
+            )
+        ));
+        // $mail->send();
+        echo '<script>alert("Đã gửi lại mật khẩu, vui lòng vào gmail xem!");</script>';
+    } catch (Exception $e) {
+        echo "Gửi email thất bại. Lỗi: {$mail->ErrorInfo}";
+        
+    }
+
+}
+?>
 <main>
     <div>
         <img src="<?=$IMAGE_DIR?>/login-image.png" alt>
         <div>
-            <form onsubmit="return check_form();" action="" method="post">
-                <h2>Đăng nhập</h2>
-                <p>Chào mừng quay trở lại!</p>
+            <form method="post" onsubmit="return check_form();">
+                <h2>Quên mật khẩu</h2>
+                <p>Mời bạn nhập gmail để lấy mật khẩu!</p>
                 <label>
                     <p class="input-message" id="email-message"></p>
                     <div>
                         <svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path id="Vector" d="M13.5 0H1.5C0.675 0 0.00749999 0.632812 0.00749999 1.40625L0 9.84375C0 10.6172 0.675 11.25 1.5 11.25H13.5C14.325 11.25 15 10.6172 15 9.84375V1.40625C15 0.632812 14.325 0 13.5 0ZM13.2 2.98828L7.8975 6.09609C7.6575 6.23672 7.3425 6.23672 7.1025 6.09609L1.8 2.98828C1.6125 2.87578 1.5 2.68594 1.5 2.48203C1.5 2.01094 2.0475 1.72969 2.475 1.97578L7.5 4.92188L12.525 1.97578C12.9525 1.72969 13.5 2.01094 13.5 2.48203C13.5 2.68594 13.3875 2.87578 13.2 2.98828Z" fill="#BDBDBD"/>
                         </svg>                                
-                        <input required class="email" type="text" placeholder="Email" name="email">
+                        <input required class="email" type="text" placeholder="Email" name="email" value="<?php if(isset($email)==true) echo $email?>">
                     </div>
                 </label>
-                <label>
-                    <p class="input-message" id="pass-message"></p>
-                    <div>
-                        <svg width="15" height="19" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path id="Vector" d="M12.1875 6.5625V4.6875C12.1875 2.0625 10.125 0 7.5 0C4.875 0 2.8125 2.0625 2.8125 4.6875V6.5625C1.21875 6.5625 0 7.78125 0 9.375V15.9375C0 17.5312 1.21875 18.75 2.8125 18.75H12.1875C13.7812 18.75 15 17.5312 15 15.9375V9.375C15 7.78125 13.7812 6.5625 12.1875 6.5625ZM4.6875 4.6875C4.6875 3.09375 5.90625 1.875 7.5 1.875C9.09375 1.875 10.3125 3.09375 10.3125 4.6875V6.5625H4.6875V4.6875ZM8.53125 12.6562L8.4375 12.75V14.0625C8.4375 14.625 8.0625 15 7.5 15C6.9375 15 6.5625 14.625 6.5625 14.0625V12.75C6 12.1875 5.90625 11.3437 6.46875 10.7812C7.03125 10.2187 7.875 10.125 8.4375 10.6875C9 11.1562 9.09375 12.0937 8.53125 12.6562Z" fill="#BDBDBD"/>
-                        </svg>                                
-                        <input required class="pass" type="password" placeholder="Mật khẩu" name="password">
-                    </div>
-                </label>
-                <p style="width: fit-content; align-self:self-end; font-weight: 600; cursor:pointer;"><a href="<?=$SITE_URL?>/quenmatkhau">Quên mật khẩu?</a></p>
-                <input class="submit" type="submit" value="Đăng nhập">
+                
+                <p style="width: fit-content; align-self:self-end; font-weight: 600; cursor:pointer;"><a href="<?=$SITE_URL?>/dangnhap">Đăng Nhập?</a></p>
+                <input class="submit" type="submit" name="nutguiyeucau" value="Xác nhận">
                 <a href="<?=$SITE_URL?>/dangky" class="inline-content">
                     <p>Chuyển sang đăng ký</p>
                     <svg width="12" height="15" viewBox="0 0 25 19" fill="none" xmlns="http://www.w3.org/2000/svg">

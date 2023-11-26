@@ -63,7 +63,7 @@
         display: inline-block;
     }
     .detail-product .product-buttons .buttons-quantity {
-        margin-right: 30px;
+        margin-right: 30%;
     }
     .detail-product .product-buttons .buttons-quantity>* {
         display: inline-flex;
@@ -206,8 +206,11 @@
         width: 1fr;
         position: relative;
     }
+    .user-comment-form .stars{
+        align-self:left !important;
+    }
     .user-comment-form .comment-form input {
-        width: calc(100% - 15px);
+        width: 100%;
         height: 40px;
         border: 1px solid var(--gray);
         border-radius: 10px;
@@ -244,14 +247,16 @@
         font-weight: 400;
     }
     .container .list-products {
-        width: 100%;
-        display: inline-grid;
-        grid-template-columns: repeat(4, 1fr);
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0 7% 0 7%;
+        
+        justify-content: space-between;
     }
     .container .product {
         justify-self: center;
         position: relative;
-        width: 260px;
+        width: 230px;
         padding: 10px;
         margin: 15px 0px;
     }
@@ -335,6 +340,71 @@
         font-size: 16px;
         font-weight: 600;
         color: white;
+    }
+    @media screen and (max-width:720px) {
+ 
+        .list-products{
+            padding: 0 !important;
+        }
+        .product{
+            width:49% !important;
+        }
+        .product-buttons,.user-comment-form{
+            display:flex;
+            /* justify-content: space-between; */
+        }
+        
+        .product-buttons{
+            
+        }
+        .container .product .product-image{
+            height:130px;
+        }
+        .detail-product .product-buttons .buttons-quantity {
+            margin-right: 0%;
+        }
+        .detail-product,.comment-box {
+        display: flex;
+        flex-direction: column;
+        }
+        .filter-box{
+            display:flex !important;
+        }
+        .product-image,.comments {
+        order: 2; /* Đặt vị trí sau */
+        }
+        .column{
+            column-count:1 !important;
+        }
+        .product-name,.filter-box {
+        order: 1; /* Đặt vị trí đầu tiên */
+        }
+
+        .product-description,.user-comment-form {
+        order: 3; /* Đặt vị trí sau */
+        align-self: none !important;
+        grid-row:3/3 !important;
+        }
+        .product-rating {
+        order: 4; /* Đặt vị trí sau */
+        }
+
+        .product-price {
+        order: 3; /* Đặt vị trí sau */
+        display:block;
+        }
+
+        .product-path {
+        order: 1; /* Đặt vị trí sau */
+        }
+
+        .product-line {
+        order: 7; /* Đặt vị trí sau */
+        }
+
+        .product-buttons {
+        order: 8; /* Đặt vị trí sau */
+        }
     }
 </style>
 <main>
