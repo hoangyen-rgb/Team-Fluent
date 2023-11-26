@@ -64,7 +64,7 @@
         display: inline-block;
     }
     .detail-product .product-buttons .buttons-quantity {
-        margin-right: 30px;
+        margin-right: 30%;
     }
     .detail-product .product-buttons .buttons-quantity>* {
         display: inline-flex;
@@ -218,8 +218,11 @@
         width: 1fr;
         position: relative;
     }
+    .user-comment-form .stars{
+        align-self:left !important;
+    }
     .user-comment-form .comment-form input {
-        width: calc(100% - 15px);
+        width: 100%;
         height: 40px;
         border: 1px solid var(--gray);
         border-radius: 10px;
@@ -256,14 +259,16 @@
         font-weight: 400;
     }
     .container .list-products {
-        width: 100%;
-        display: inline-grid;
-        grid-template-columns: repeat(4, 1fr);
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0 7% 0 7%;
+        
+        justify-content: space-between;
     }
     .container .product {
         justify-self: center;
         position: relative;
-        width: 260px;
+        width: 230px;
         padding: 10px;
         margin: 15px 0px;
     }

@@ -6,6 +6,7 @@
     $SITE_URL = "$ROOT_URL/site";
     $IMAGE_DIR = "$ROOT_URL/content/image";
     $SOUND_DIR = "$ROOT_URL/content/sound";
+    $PHPMailer = "$ROOT_URL/PHPMailer-master/src";
     $VIEW_NAME = "index.php";
     $MESSAGE = "";
 ?>
