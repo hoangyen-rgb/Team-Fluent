@@ -1,76 +1,122 @@
-<!-- css global -->
-<style>
-    :root {
-        --red: #c34439;
-        --black: #202020;
-        --lightblack: #4E4E4E;
-        --gray: #BDBDBD;
-        --lightgray: #faf9f8;
-        --yellow: #FFB11B;
-    }
-    * {
-        margin: 0px;
-        padding: 0px;
-        box-sizing: border-box;
-        color: var(--black);
-    }
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: var(--lightgray);
-        
-        color: var(--lightblack);
-    }
-    a {
-        text-decoration: none;
-    }
-    /* Đường gạch ngang */
-    .line {
-        border-bottom: 1px solid var(--gray);
-        width: 100%;
-        margin: 10px auto;
-    }
-    .whitediv {
-        background-color: white;
-        border: 1px solid var(--gray);
-        box-shadow: 0px 0px 5px var(--gray);
-        border-radius: 10px;
-            overflow: hidden;
-    }
-        .jumpAnimate {
-        animation:jump 1s ease 0s 1 normal;
-    }
+<!DOCTYPE html>
+<!--
+ @license
+ Copyright 2019 Google LLC. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+-->
+<html>
+  <head>
+    <style>
+      /**
+       * @license
+       * Copyright 2019 Google LLC. All Rights Reserved.
+       * SPDX-License-Identifier: Apache-2.0
+       */
+      /** 
+       * Always set the map height explicitly to define the size of the div element
+       * that contains the map. 
+       */
+      #map {
+        height: 100%;
+      }
 
-    @keyframes jump{
-        0%{ transform:translateY(0); }
-        20%{ transform:translateY(0); }
-        40%{ transform:translateY(-30px); }
-        50%{ transform:translateY(0); }
-        60%{ transform:translateY(-15px); }
-        80%{ transform:translateY(0); }
-        100%{ transform:translateY(0); }
-    }
-    
-</style>
-<style>
-    .message {
-        width: fit-content;
-        margin: 0px auto;
-        background-color: white;
-        border: 1px solid var(--gray);
-        box-shadow: 0px 0px 5px var(--gray);
-        padding: 20px;
-        border-radius: 10px;
-        text-align: center;
-    }
-    .message p {
-        margin-top: 20px;
-        color: var(--lightblack);
-        font-weight: 600;
-    }
-</style>
-<div class="message jumpAnimate">
-    <svg width="50" height="50" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M45 0C20.19 0 0 20.19 0 45C0 69.81 20.19 90 45 90C69.81 90 90 69.81 90 45C90 20.19 69.81 0 45 0ZM45 86C22.39 86 4 67.61 4 45C4 22.39 22.39 4 45 4C67.61 4 86 22.39 86 45C86 67.61 67.61 86 45 86ZM67.41 29.59C68.19 30.37 68.19 31.64 67.41 32.42L39.41 60.42C39.02 60.8 38.51 61 38 61C37.49 61 36.98 60.8 36.59 60.41L22.59 46.41C21.81 45.63 21.81 44.36 22.59 43.58C23.37 42.8 24.64 42.8 25.42 43.58L38 56.17L64.59 29.58C65.37 28.8 66.63 28.8 67.41 29.59Z" fill="#56D237"/>
-    </svg>
-    <p>Đơn hàng của bạn đã được gửi đi!</p>
-</div>
+      /* Optional: Makes the sample page fill the window. */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      .custom-map-control-button {
+        background-color: #fff;
+        border: 0;
+        border-radius: 2px;
+        box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+        margin: 10px;
+        padding: 0 0.5em;
+        font: 400 18px Roboto, Arial, sans-serif;
+        overflow: hidden;
+        height: 40px;
+        cursor: pointer;
+      }
+      .custom-map-control-button:hover {
+        background: rgb(235, 235, 235);
+      }
+    </style>
+    <title>Geolocation</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <script>
+      /**
+       * @license
+       * Copyright 2019 Google LLC. All Rights Reserved.
+       * SPDX-License-Identifier: Apache-2.0
+       */
+      // Note: This example requires that you consent to location sharing when
+      // prompted by your browser. If you see the error "The Geolocation service
+      // failed.", it means you probably did not give permission for the browser to
+      // locate you.
+      let map, infoWindow;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: -34.397, lng: 150.644 },
+          zoom: 6,
+        });
+        infoWindow = new google.maps.InfoWindow();
+
+        const locationButton = document.createElement("button");
+
+        locationButton.textContent = "Pan to Current Location";
+        locationButton.classList.add("custom-map-control-button");
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(
+          locationButton
+        );
+        locationButton.addEventListener("click", () => {
+          // Try HTML5 geolocation.
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+              (position) => {
+                const pos = {
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude,
+                };
+
+                infoWindow.setPosition(pos);
+                infoWindow.setContent("Location found.");
+                infoWindow.open(map);
+                map.setCenter(pos);
+              },
+              () => {
+                handleLocationError(true, infoWindow, map.getCenter());
+              }
+            );
+          } else {
+            // Browser doesn't support Geolocation
+            handleLocationError(false, infoWindow, map.getCenter());
+          }
+        });
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(
+          browserHasGeolocation
+            ? "Error: The Geolocation service failed."
+            : "Error: Your browser doesn't support geolocation."
+        );
+        infoWindow.open(map);
+      }
+
+      window.initMap = initMap;
+    </script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=INSERT_YOUR_API_KEY&callback=initMap&v=weekly"
+      defer
+    ></script>
+  </body>
+</html>

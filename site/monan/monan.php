@@ -32,6 +32,7 @@
     .detail-product .product-description {
         color: var(--lightblack);
         line-height: 30px;
+        height: 210px;
         text-align: justify;
     }
     .detail-product .product-rating {
@@ -104,6 +105,7 @@
     }
     .comment-box {
         width: 100%;
+        height: fit-content;
         margin: 50px auto;
         display: grid;
         grid-template-columns: 90% 10%;
@@ -113,12 +115,15 @@
     .comment-box .comments {
         width: 100%;
         overflow-y: scroll;
-        height: 500px;
+        height: 400px;
+        max-height: 400px;
         justify-content: space-between;
+        height: 100%;
+        min-height: 250px;
     }
     .comment-box .column {
         column-count: 2;
-        column-gap: 10px;
+        column-gap: 20px;
     }
     .comment-box .comments .comment {
         width: 1fr;
@@ -140,15 +145,15 @@
         border-radius: 50%;
         width: 50px;
         height: 50px;
-        background-color: var(--lightgray);
+        border: 1px solid var(--gray);
     }
     .comment-box .comments .comment .right {
         padding: 10px;
         grid-column: 2 / 3;
     }
     .comment .user-name {
-        font-size: 20px;
-        font-weight: bold;
+        font-size: 18px;
+        font-weight: 600;
         margin-bottom: 5px;
     }
     .comment .time {
@@ -163,11 +168,15 @@
     .comment .content {
         color: var(--lightblack);
         font-size: 15px;
+        font-weight: 400;
+        line-height: 30px;
     }
     .filter-box {
         width: 100%;
         text-align: center;
         padding: 10px 0px;
+        height: 100%;
+        min-height: 250px;
     }
     .filter-box label {
         cursor: pointer;
@@ -201,6 +210,9 @@
     }
     .user-comment-form .stars svg:hover path {
         cursor: pointer;
+    }
+    .user-comment-form .stars svg.selected path{
+        fill: var(--yellow);
     }
     .user-comment-form .comment-form {
         width: 1fr;
@@ -336,9 +348,21 @@
         font-weight: 600;
         color: white;
     }
+    .empty-comment-box {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px 0px;
+    }
+    .empty-comment-box p {
+        text-align: center;
+        margin: 5px 0px;
+    }
 </style>
 <main>
-    <div class="detail-product">
+    <div class="detail-product" data-id="<?=$product['Id']?>">
         <?php extract($product) ?>
         <img class="product-image" src="<?=$IMAGE_DIR?>/<?=$Image?>" alt="">
         <div class="product-path">
@@ -363,6 +387,7 @@
                     Chưa có lượt đánh giá
                 <?php } ?>
             </span>
+            <span>| <?=$Views?> Lượt xem</span>
         </div>
         <div class="product-price">
             <?php if($Discount > 0) {?>
@@ -391,6 +416,7 @@
     
     <div class="line"></div>
     <div class="title">Đánh giá món ăn</div>
+    <?php if($comments) {?>
     <div class="comment-box">
         <div class="comments" style="grid-column: 1 / 2; grid-row: 1 / 2;">
             <div class="column">
@@ -410,7 +436,7 @@
                                     </svg>
                                     ', ceil($Rating))?>
                             </p>
-                            <p class="content">"<?php nl2br($Content) ?>"</p>
+                            <p class="content">"<?=nl2br($Content);?>"</p>
                         </div>
                     </div>
                 <?php } ?>
@@ -466,7 +492,8 @@
                 </label>
             </div>
         </form>
-        <form class="user-comment-form"  style="grid-column: 1 / 2; grid-row: 2 / 3;">
+        <?php if ($comment_form) { ?>
+        <form class="user-comment-form"  style="grid-column: 1 / 2; grid-row: 2 / 3;" data-rate="0">
             <div class="stars">
                 <svg width="24" height="24" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#BDBDBD"/>
@@ -485,14 +512,21 @@
                 </svg>
             </div>
             <div class="comment-form">
-                <input type="text" placeholder="Để lại bình luận">
-                <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <input type="text" placeholder="Để lại bình luận" class="content">
+                <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer" class="comment-button">
                     <path d="M1.36708 15.92L18.4068 8.86742C19.1977 8.53743 19.1977 7.46257 18.4068 7.13257L1.36708 0.0800295C0.722601 -0.193398 0.00976486 0.268601 0.00976486 0.938027L0 5.28458C0 5.75601 0.3613 6.16144 0.849544 6.21801L14.6473 8L0.849544 9.77256C0.3613 9.83856 0 10.244 0 10.7154L0.00976486 15.062C0.00976486 15.7314 0.722601 16.1934 1.36708 15.92Z" fill="#C34439"/>
                 </svg>
                     
             </div>
         </form>
+        <?php } ?>
     </div>
+    <?php } else {?>
+        <div class="empty-comment-box">
+            <p>Sản phẩm chưa có đánh giá!</p>
+            <p> Có thể đánh giá sau khi mua hàng bạn nhé!</p>
+        </div>
+    <?php } ?>
     <div class="line"></div>
     <div class="container">
         <div class="container-title">
@@ -595,6 +629,48 @@
             }, 3000);
             var audio = new Audio('<?=$SOUND_DIR?>/ting.mp3');
             audio.play();
+        }
+
+        document.querySelector(".stars").querySelectorAll("svg").forEach(function (element) {
+            element.addEventListener("click", function() {
+                let list =document.querySelector(".stars").querySelectorAll("svg");
+                list.forEach(function (element) {
+                    element.classList.remove("selected");
+                });
+
+
+
+                for(let i = 0; i < list.length; i++) {
+                    if (list[i] === element) {
+                        document.querySelector(".user-comment-form").setAttribute("data-rate", i+1);
+                        list[i].classList.add("selected");
+                        break;
+                    } else {
+                        
+                        list[i].classList.add("selected");
+                    }
+                }
+            });
+        });
+
+        let comment_button = document.querySelector(".comment-button");
+        if (comment_button != null) {
+            comment_button.addEventListener("click", function () {
+                let rate = document.querySelector(".user-comment-form").getAttribute("data-rate");
+                let content = document.querySelector(".content").value;
+                let product_id = document.querySelector(".detail-product").getAttribute("data-id");
+                $.post("<?=$SITE_URL?>/monan/comment_handler.php",
+                {
+                    content: content,
+                    rating: rate,
+                    product_id: product_id
+
+                },
+                function(data, textStatus, jqXHR) {
+                    window.location.reload();
+                }
+            );
+            });
         }
     </script>
 </main>

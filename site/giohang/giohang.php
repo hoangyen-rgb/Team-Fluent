@@ -410,10 +410,12 @@
                 <div class="cart-information">
                     <p>Số sản phẩm</p>
                     <p class="cart-product-count right"></p>
-                    <p>Tạm tính</p>
-                    <p class="cart-total-price right"></p>
+                    <p>Tổng tiền</p>
+                    <p class="cart-total-original-price right"></p>
                     <p>Tổng giảm giá</p>
                     <p class="cart-total-discount right"></p>
+                    <p>Tạm tính</p>
+                    <p class="cart-total-price right"></p>
                     <p class="voucher-form-message" style="grid-column: 1 / 3; color: var(--red); height: 10px; font-size: 14px;"></p>
                     <div class="voucher-form">
                         <input type="text" name="code">
@@ -580,26 +582,36 @@
         let products_list = document.querySelectorAll(".product");
         let products_array = Array.from(products_list);
         let total_product = 0;
+        let total_original_price = 0;
         let total_price = 0;
         let total_discount = 0;
+        let final_total_price = 0;
         let voucher_discount = Number.parseInt(document.querySelector(".voucher-discount").innerText.replace(".","").replace(" vnđ", "")) || 0;
         
         products_array.forEach(product => {
-            total_product += Number.parseInt(product.querySelector(".product-quantity").innerText);
+            let product_quantity = Number.parseInt(product.querySelector(".product-quantity").innerText);
+            total_product += product_quantity;
             
             let price = Number.parseInt(product.querySelector(".product-price").innerText.replace(".","").replace(" vnđ", ""));
-            if (product.querySelector(".product-original-price") != null) {
-                total_discount += (Number.parseInt(product.querySelector(".product-original-price").innerText.replace(".","").replace(" vnđ", "")) - price) * Number.parseInt(product.querySelector(".product-quantity").innerText);
+            let original_price = Number.parseInt(product.querySelector(".product-original-price").innerText.replace(".","").replace(" vnđ", "")) || 0;
+            
+            total_price += price * product_quantity;
+            if (original_price == 0) {
+                total_original_price += price * product_quantity;
+            } else {
+                total_original_price += original_price * product_quantity;
             }
-            total_price += price * Number.parseInt(product.querySelector(".product-quantity").innerText);
 
         });
-        let final_total_price = total_price - total_discount - voucher_discount;
+        total_discount = total_original_price - total_price;
+        final_total_price = total_price - voucher_discount;
         document.querySelector(".cart-product-count").innerText = total_product;
+        document.querySelector(".cart-total-original-price").innerText = total_original_price.toLocaleString('vi-VN', {useGrouping: true, maximumFractionDigits: 0,}) + " vnđ";
         document.querySelector(".cart-total-price").innerText = total_price.toLocaleString('vi-VN', {useGrouping: true, maximumFractionDigits: 0,}) + " vnđ";
         document.querySelector(".cart-total-discount").innerText = total_discount.toLocaleString('vi-VN', {useGrouping: true, maximumFractionDigits: 0,}) + " vnđ";
         document.querySelector(".voucher-discount").innerText = voucher_discount.toLocaleString('vi-VN', {useGrouping: true, maximumFractionDigits: 0,}) + " vnđ";
         document.querySelector(".cart-final-total-price").innerText = final_total_price.toLocaleString('vi-VN', {useGrouping: true, maximumFractionDigits: 0,}) + " vnđ";
+    
     }
     
     function get_total_price() {

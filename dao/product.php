@@ -207,6 +207,10 @@
         return pdo_query_value($sql);
     }
 
+    function increase_product_views($product_id) {
+        $sql = "UPDATE product SET Views = Views + 1 WHERE Id = $product_id"; 
+        return pdo_execute($sql);
+    }
 
 
 
@@ -227,10 +231,7 @@
     //     return pdo_query_one($sql);
     // }
 
-    // function increase_product_views($id) {
-    //     $sql = "UPDATE product SET Views = Views + 1 WHERE id = $id"; 
-    //     return pdo_execute($sql);
-    // }
+
 
     // function get_similar_products ($id, $limit = null) {
     //     $product = get_product_by_id($id);
