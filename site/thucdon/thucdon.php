@@ -1,8 +1,39 @@
-
+    <!-- css trang -->
+    <style>
+        main {
+            padding: 0px 100px;
+        }
+        .banner {
+            width: calc(100% + 200px);
+            margin-left: -100px;
+            height: fit-content;
+            position: relative;
+        }
+        .banner img {
+            width: 100%;
+        }
+        .banner p {
+            position: absolute;
+            right: 100px;
+            bottom: 100px;
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            background-color: var(--red);
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0);
+        }
+        .banner p:hover {
+            border: 1px solid white;
+            background-color: rgba(0, 0, 0, 0.4);
+            transition: 0.3s;
+        }
     </style>
     <!-- css thân trang -->
     <style>
-        .monanhot{
+            .monanhot{
             position: relative;
         }
         .tieude{
@@ -286,6 +317,11 @@
         }
     </style>
     <main>
+
+        <div class="banner">
+            <img src="<?=$IMAGE_DIR?>/banner.png" alt>
+                <p>Khám phá ngay !</p>
+        </div>
         <div class="tieude">
             <h2>Danh sách món ăn</h2>
             <p>Toàn bộ món ăn mà ChickCuisine có cung cấp cho bạn</p>

@@ -235,7 +235,7 @@
     }
     .user-comment-form .comment-form svg {
         position: absolute;
-        right: 35px;
+        right: 15px;
         top: 50%;
         transform: translate(0px, -50%);
     }
@@ -259,16 +259,15 @@
         font-weight: 400;
     }
     .container .list-products {
-        display: flex;
-        flex-wrap: wrap;
-        padding: 0 7% 0 7%;
+        display: grid;
+        grid-template-columns: repeat(4, auto);
         
         justify-content: space-between;
     }
     .container .product {
         justify-self: center;
         position: relative;
-        width: 230px;
+        width: 260px;
         padding: 10px;
         margin: 15px 0px;
     }

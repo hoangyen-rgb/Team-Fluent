@@ -118,7 +118,7 @@
                         <input required class="pass" type="password" placeholder="Mật khẩu" name="password">
                     </div>
                 </label>
-                <p style="width: fit-content; align-self:self-end; font-weight: 600; cursor:pointer;"><a href="<?=$SITE_URL?>/quenmatkhau">Quên mật khẩu?</a></p>
+                <p style="width: fit-content; align-self:self-end; font-weight: 600; cursor:pointer;">Quên mật khẩu?</p>
                 <input class="submit" type="submit" value="Đăng nhập">
                 <a href="<?=$SITE_URL?>/dangky" class="inline-content">
                     <p>Chuyển sang đăng ký</p>
