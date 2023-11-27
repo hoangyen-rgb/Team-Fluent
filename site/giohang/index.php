@@ -97,7 +97,11 @@
             extract($product);
             insert_order_detail($product_in_cart['Quantity'], ($Price * (100 - $Discount) / 100), $id_order, $Id);
         }
-        clear_cart_by_user_id($user_id);
+        if (isset($_SESSION['LOGGED_IN_USER_ID'])) {
+            
+            clear_cart_by_user_id($user_id);
+        }
+        $_SESSION['cart'] = null;
         $cart = null;
         $_SESSION['message'] = true;
         unset($paybutton);
