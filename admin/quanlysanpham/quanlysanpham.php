@@ -113,7 +113,6 @@
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<main>
         <div class="toolbar">
             <div class="left">
                 <div class="add-button">
@@ -152,7 +151,7 @@
                     <td class="product-image"><img src="<?=$IMAGE_DIR?>/<?=$Image?>" alt=""></td>
                     <td class="product-name"><?=$Name?></td>
                     <td class="product-price"><?=number_format($Price)?> vnđ</td>
-                    <td class="product-category"><?=get_category_name_by_product_id($Id)?></td>
+                    <td class="product-category"></td>
                     <td class="product-action">
                         <div class="edit-button">
                             <a href="<?=$ADMIN_URL?>/suasanpham?id=<?=$Id?>" class="a">
@@ -168,7 +167,6 @@
             </table>
             
         </div>
-    </main>
     <script>
 
         $(".remove-button").click(function() {

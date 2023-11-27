@@ -3,6 +3,7 @@
     require '../../dao/product.php';
     require '../../dao/cart.php';
     require '../../dao/order.php';
+    require '../../dao/user.php';
     require '../../dao/voucher.php';
     extract($_REQUEST);
     $_SESSION['message'] = isset($_POST['message']) ? $_SESSION['message'] : false;
@@ -45,40 +46,61 @@
         unset($cart_product_quantity);
     }
     if (isset($paybutton)) {
-        if (isset($_SESSION['LOGGED_IN_USER_ID'])) {
-            $note = $note ? $note : null;
-            $total_price = 0;
-            foreach ($cart as $product_in_cart) {
-                $product = get_product_by_id($product_in_cart['Id']);
-                extract($product);
-                if ($Discount == 0) {
-                    $total_price += $Price * $product_in_cart['Quantity'];
-                } else {
-                    $total_price += ($Price * (100 - $Discount) / 100)* $product_in_cart['Quantity'];
-                }
+        
+        $user_id = null;
+        $note = $note ? $note : null;
+        $total_price = 0;
+        foreach ($cart as $product_in_cart) {
+            $product = get_product_by_id($product_in_cart['Id']);
+            extract($product);
+            if ($Discount == 0) {
+                $total_price += $Price * $product_in_cart['Quantity'];
+            } else {
+                $total_price += ($Price * (100 - $Discount) / 100)* $product_in_cart['Quantity'];
             }
-            $voucher = $code ? get_voucher_by_code($code) : null;
-            if ($voucher) {
-                extract($voucher);
-                if ($DiscountPrice) {
-                    $total_price -= $DiscountPrice;
-                } else {
-                    $total_price -=  $total_price*$DiscountPercentage/100;
-                }
-            }
-            $other_address = isset($other_address) ? true : false;
-            $date = date("Y-m-d H:i:s");
-            $id_order = insert_order($total_price, $note, $date, 1, $_SESSION['LOGGED_IN_USER_ID']);
-            foreach ($cart as $product_in_cart) {
-                $product = get_product_by_id($product_in_cart['Id']);
-                extract($product);
-                insert_order_detail($product_in_cart['Quantity'], ($Price * (100 - $Discount) / 100), $id_order, $Id);
-            }
-            clear_cart_by_user_id($_SESSION['LOGGED_IN_USER_ID']);
-            $cart = null;
-            $_SESSION['message'] = true;
-            unset($paybutton);
         }
+        
+        $voucher = $code ? get_voucher_by_code($code) : null;
+        if ($voucher) {
+            extract($voucher);
+            if ($DiscountPrice) {
+                $total_price -= $DiscountPrice;
+            } else {
+                $total_price -=  $total_price*$DiscountPercentage/100;
+            }
+        }
+        $other_address = isset($other_address) ? true : false;
+        $recipientname = null;
+        $recipientphonenumber = null;
+        $recipientaddress = null;
+        if ($other_address) {
+            $recipientname = $orderer_name;
+            $recipientphonenumber = $orderer_phone_number;
+            $recipientaddress = $orderer_address;
+        } else {
+            if (isset($recipient_name) && isset($recipient_phone_number) && isset($recipient_address)) {
+                $recipientname = $recipient_name;
+                $recipientphonenumber = $recipient_phone_number;
+                $recipientaddress = $recipient_address;
+            }
+        }
+        $date = date("Y-m-d H:i:s");
+        if (isset($_SESSION['LOGGED_IN_USER_ID'])) {
+            $user_id = $_SESSION['LOGGED_IN_USER_ID'];
+        } else {
+            $user_id = insert_user(null, null, null, 0);
+        }
+        
+        $id_order = insert_order($total_price, $note, $date, 1, $user_id, $recipientname, $recipientphonenumber, $recipientaddress);
+        foreach ($cart as $product_in_cart) {
+            $product = get_product_by_id($product_in_cart['Id']);
+            extract($product);
+            insert_order_detail($product_in_cart['Quantity'], ($Price * (100 - $Discount) / 100), $id_order, $Id);
+        }
+        clear_cart_by_user_id($user_id);
+        $cart = null;
+        $_SESSION['message'] = true;
+        unset($paybutton);
     }
     $VIEW_NAME = "giohang/giohang.php";
     require '../layout.php';  

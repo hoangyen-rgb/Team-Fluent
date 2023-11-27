@@ -310,5 +310,7 @@
             </div>
         </div>
     </div>
+    <div class="box-changename hidden"></div>
+    <div class="box-phonenumber hidden"></div>
     
 </main>

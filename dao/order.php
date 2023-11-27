@@ -1,9 +1,9 @@
 <?php
     require_once 'pdo.php';
     
-    function insert_order($total_price, $note, $date, $status, $user_id) {
-        $sql = "INSERT INTO `order` (TotalPrice, Note, Date, Status, UserId) VALUES (?, ?, ?, ?, ?)";
-        return pdo_execute($sql, $total_price, $note, $date, $status, $user_id);
+    function insert_order($total_price, $note, $date, $status, $user_id, $recipient_name, $recipient_phonenumber, $recipient_address) {
+        $sql = "INSERT INTO `order` (TotalPrice, Note, Date, Status, UserId, RecipientName, RecipientPhoneNumber, RecipientAddress) VALUES (?, ?, ?, ?, ?,  ?, ?, ?)";
+        return pdo_execute($sql, $total_price, $note, $date, $status, $user_id, $recipient_name, $recipient_phonenumber, $recipient_address);
     }
 
     function insert_order_detail($quantity, $price, $order_id, $product_id) {

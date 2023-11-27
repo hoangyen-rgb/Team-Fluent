@@ -434,22 +434,22 @@
                 <div class="line"></div>
                 <div class="orderer-information">
                     <label for="orderer-name">Tên người đặt hàng</label>
-                    <input type="text" name="orderer-name" id="orderer-name" required>
+                    <input type="text" name="orderer_name" id="orderer-name" required>
                     <label for="orderer-phone-number">Số điện thoại</label>
-                    <input type="text" name="orderer-phone-number" id="orderer-phone-number" required>
+                    <input type="text" name="orderer_phone_number" id="orderer-phone-number" required>
                     <label for="orderer-address">Địa chỉ</label>
-                    <input type="text" name="orderer-address" id="orderer-address" required>
+                    <input type="text" name="orderer_address" id="orderer-address" required>
                 </div>
                 <input type="checkbox" name="other_address" id="otherAddress">
                 <label for="otherAddress">Giao đến địa chỉ khác</label>
                 <div class="line"></div>
                 <div class="recipient-information hidden">
                     <label for="recipient-name">Tên người đặt hàng</label>
-                    <input type="text" name="recipient-name" id="recipient-name">
+                    <input type="text" name="recipient_name" id="recipient-name">
                     <label for="recipient-phone-number">Số điện thoại</label>
-                    <input type="text" name="recipient-phone-number" id="recipient-phone-number">
+                    <input type="text" name="recipient_phone-number" id="recipient-phone-number">
                     <label for="recipient-address">Địa chỉ</label>
-                    <input type="text" name="recipient-address" id="recipient-address">
+                    <input type="text" name="recipient_address" id="recipient-address">
                 </div>
                 <div class="checkout-buttons">
                     <div class="note-button">
