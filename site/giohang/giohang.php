@@ -355,6 +355,37 @@
         color: var(--lightblack);
         font-weight: 600;
     }
+    /* CSS cho di động (Mobile) */
+    @media (max-width: 768px) {
+        main {
+            padding: 0px 25px;
+
+        }
+
+        main .container {
+            grid-template-columns: 100%;
+        }
+
+        main .cart table tr:first-child td {
+        font-size: 16px; /* Đặt kích thước chữ mới cho mobile */
+        font-weight: 500; /* Cũng có thể đặt trọng số chữ mới */
+        padding: 0px;
+    }
+    main .checkout-title {
+        font-size: 28px; /* Đặt kích thước chữ mới cho mobile */
+    }
+
+        main .cart,
+        main .checkout {
+            border-radius: 0px;
+            margin-bottom: 20px;
+        }
+        main .cart table td:nth-child(3){
+            width: 50%;
+            padding-left: 10px;
+        }    
+            
+    }
 </style>
 <main>
     <?php if($_SESSION['message']) { $_SESSION['message'] = false;?>
