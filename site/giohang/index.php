@@ -73,7 +73,7 @@
         $recipientname = null;
         $recipientphonenumber = null;
         $recipientaddress = null;
-        if ($other_address) {
+        if (!$other_address) {
             $recipientname = $orderer_name;
             $recipientphonenumber = $orderer_phone_number;
             $recipientaddress = $orderer_address;
@@ -97,12 +97,9 @@
             extract($product);
             insert_order_detail($product_in_cart['Quantity'], ($Price * (100 - $Discount) / 100), $id_order, $Id);
         }
-        if (isset($_SESSION['LOGGED_IN_USER_ID'])) {
-            
-            clear_cart_by_user_id($user_id);
-        }
-        $_SESSION['cart'] = null;
+        clear_cart_by_user_id($user_id);
         $cart = null;
+        $_SESSION['cart'] = null;
         $_SESSION['message'] = true;
         unset($paybutton);
     }
