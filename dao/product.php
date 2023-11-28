@@ -211,7 +211,24 @@
         $sql = "UPDATE product SET Views = Views + 1 WHERE Id = $product_id"; 
         return pdo_execute($sql);
     }
+    function insert_product($name, $image, $description, $price, $cost, $discount, $views, $isspecial, $categoryid) {
+        $sql = "INSERT INTO product (Name, Image, Description, Price, Cost, Discount, Views, IsSpecial, CategoryId) VALUES (?,?,?,?,?,?,?,?,?)";
+        return pdo_execute($sql, $name, $image, $description, $price, $cost, $discount, $views, $isspecial, $categoryid);
+    }
+    function update_product($id, $name, $image, $description, $price, $cost, $discount, $isspecial, $categoryid) {
+        if ($image == "") {
+            $sql = "UPDATE product SET Name = ?, Description = ?, Price = ?, Cost = ?, Discount = ?, IsSpecial = ?, Categoryid = ? WHERE Id =$id";
+            return pdo_execute($sql, $name, $description, $price, $cost, $discount, $isspecial, $categoryid);
+        } else {
+            $sql = "UPDATE product SET Name = ?, Image = ?, Description = ?, Price = ?, Cost = ?, Discount = ?, IsSpecial = ?, Categoryid = ? WHERE Id =$id";
+            return pdo_execute($sql, $name, $image, $description, $price, $cost, $discount, $isspecial, $categoryid);
+        }
+    }
 
+    function remove_product($id) {
+        $sql = "DELETE FROM product WHERE id = $id";
+        return pdo_execute($sql);
+    }
 
 
 
@@ -252,22 +269,11 @@
     //     return pdo_query_value($sql);
     // }
 
-    // function insert_product($name, $image, $description, $price, $discount, $views, $isspecial, $categoryid) {
-    //     $sql = "INSERT INTO product (Name, Image, Description, Price, Discount, Views, IsSpecial, CategoryId) VALUES (?,?,?,?,?,?,?,?)";
-    //     return pdo_execute($sql, $name, $image, $description, $price, $discount, $views, $isspecial, $categoryid);
-    // }
+
 
     // function delete_product($id) {
     //     $sql = "DELETE FROM product WHERE Id = $id";
     //     return pdo_execute($sql);
     // }
-    // function update_product($id, $name, $image, $description, $price, $discount, $isspecial, $categoryid) {
-    //     if ($image == "") {
-    //         $sql = "UPDATE product SET Name = ?, Description = ?, Price = ?, Discount = ?, IsSpecial = ?, Categoryid = ? WHERE Id =$id";
-    //         return pdo_execute($sql, $name, $description, $price, $discount, $isspecial, $categoryid);
-    //     } else {
-    //         $sql = "UPDATE product SET Name = ?, Image = ?, Description = ?, Price = ?, Discount = ?, IsSpecial = ?, Categoryid = ? WHERE Id =$id";
-    //         return pdo_execute($sql, $name, $image, $description, $price, $discount, $isspecial, $categoryid);
-    //     }
-    // }
+
 ?>

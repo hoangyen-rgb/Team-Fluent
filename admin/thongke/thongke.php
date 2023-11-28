@@ -100,7 +100,7 @@
         box-shadow: 1px 1px 2px var(--gray) inset;
         overflow: hidden;
     }
-    .revenue .left .buttons a {
+    .revenue .left .buttons p {
         height: 100%;
         width: 100%;
         color: var(--lightblack);
@@ -111,11 +111,9 @@
         justify-content: center;
         align-items: center;
         border-radius: 5px;
+        cursor: pointer;
     }
-    .revenue .left .buttons a:hover {
-        background-color: rgb(245, 245, 245);
-    }
-    .top a {
+    .top .interval {
         color: var(--lightblack);
         font-size: 12px;
         font-weight: 600;
@@ -125,9 +123,10 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        cursor: pointer;
 
     }
-    .revenue .left .buttons a.selected {
+    .revenue .left .buttons p.selected {
         background-color: var(--red);
         color: white;
     }
@@ -310,7 +309,11 @@
     <div class="revenue">
         <div class="top">
             <p class="title">Thống kê doanh thu</p>
-            <a href="">Chuyển sang tháng trước</a>
+                <?php if ($time_frame == "current") { ?>
+                    <p class="interval" onclick='ApplyFilters(new filter("time_frame", "previous"))'>Chuyển sang <?=$interval_name?> trước</p>
+                <?php } else { ?>
+                    <p class="interval" onclick='ApplyFilters(new filter("time_frame", "current"))'>Chuyển sang <?=$interval_name?> hiện tại</p>
+                <?php } ?>
             <div class="legends">
                 <div class="legend">
                     <div class="import"></div>
@@ -323,15 +326,14 @@
             </div>
         </div>
         <div class="left">
-            <p class="small">Toàn bộ</p>
             <p class="total-revenue-current"><?=number_format($revenue, 0, '.', '.')?> vnđ</p>
-            <p class="small">Tổng doanh thu tháng hiện tại</p>
+            <p class="small">Tổng doanh thu <?=$interval_name?> <?=$time_frame_name?></p>
             <p class="total-order-current"><?=$total_orders?></p>
-            <p class="small">Tổng đơn hàng tháng hiện tại</p>
+            <p class="small">Tổng đơn hàng <?=$interval_name?> <?=$time_frame_name?></p>
             <div class="buttons">
-                <a href="" class="selected">Theo tháng</a>
-                <a href="">Theo tuần</a>
-                <a href="">Theo ngày</a>
+                <p <?php if ($interval == "month") { ?>class="selected"<?php } ?> onclick='ApplyFilters(new filter("interval", "month"))'>Theo tháng</p>
+                <p <?php if ($interval == "week") { ?>class="selected"<?php } ?> onclick='ApplyFilters(new filter("interval", "week"))'>Theo tuần</p>
+                <p <?php if ($interval == "day") { ?>class="selected"<?php } ?> onclick='ApplyFilters(new filter("interval", "day"))'>Theo ngày</p>
             </div>
         </div>
         <div class="right">
@@ -474,14 +476,15 @@
         var data = google.visualization.arrayToDataTable([
         ['Tháng', 'Nhập vào', 'Bán ra'],
         <?php foreach($revenue_statistic as $row) {extract($row); ?>
-        ['T<?=$Month?>',  <?=$TotalCost?>,      <?=$TotalPrice?>],
+        ['T<?=$Period?>',  <?=$TotalCost?>,      <?=$TotalPrice?>],
         <?php } ?>
       ]);
 
         var options = {
         legend: 'none',
         colors: ['#c34439','#ffb11b'],
-        chartArea:{left:50,top:10,width:'100%',height:'75%', backgroundColor: '#FFFFFF'}
+        chartArea:{left:50,top:10,width:'100%',height:'75%', backgroundColor: '#FFFFFF'},
+        vAxis: { minValue: 0, maxValue: <?=$max_revenue_statistic_value?>}
         };
         var container = document.getElementById("revenue-chart");
         var chart = new google.visualization.AreaChart(container);
@@ -533,4 +536,35 @@
 
       chart.draw(data, options);
     }
+</script>
+<script>
+    function filter(key, value) {
+            this.key = key;
+            this.value = value;
+        }
+        function ApplyFilters(...filters) {
+            var current_url = new URL(window.location.href);
+            var params = new URLSearchParams(current_url.search);
+            var redirectToCategory = false;
+            filters.forEach(filter => {
+                if (filter.value === "") {
+                    return;
+                }
+                params.set(filter.key, filter.value);
+            });
+            if (redirectToCategory) {
+                return;
+            }
+            var filter_array = [];
+            if (params.get("time_frame") != null) {
+                filter_array.push("time_frame=" + params.get("time_frame"));
+            }
+            if (params.get("interval") != null) {
+                filter_array.push("interval=" + params.get("interval"));
+            }
+            var url = "<?=$ADMIN_URL?>/thongke/?" + filter_array.join("&");
+            
+
+            window.location.href = url;
+        }
 </script>
