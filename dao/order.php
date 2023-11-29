@@ -17,4 +17,15 @@
         $sql = "SELECT * FROM `order` WHERE Id = $order_id";
         return pdo_query_one($sql);
     }
+
+    function get_order_by_status(...$status) {
+        $statusPlaceholders = implode(', ', $status);
+        $sql = "SELECT * FROM `order` WHERE Status IN ($statusPlaceholders)";
+        return pdo_query($sql);
+    }
+
+    function get_order_detail_by_order_id($order_id) {
+        $sql = "SELECT * FROM orderdetail WHERE OrderId = $order_id";
+        return pdo_query($sql);
+    }
 ?>

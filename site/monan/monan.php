@@ -16,6 +16,7 @@
         grid-row: 1 / 9;
         width: 100%;
         border-radius: 10px;
+        height: 450px;
     }
     .detail-product .product-path {
         color: #289FD3;
@@ -371,7 +372,7 @@
         <img class="product-image" src="<?=$IMAGE_DIR?>/<?=$Image?>" alt="">
         <div class="product-path">
             <?php $category_product = get_category_by_product_id($Id)?>
-            <?=$category_product['Name']?> > <?=$Name?>
+            <?=$category_product ? $category_product['Name'] : "Chưa phân loại"?> > <?=$Name?>
         </div>
         <div class="product-line"></div>
         <div class="product-name"><?=$Name?></div>

@@ -1,6 +1,11 @@
 <?php
     require_once 'pdo.php';
 
+    function get_users() {
+        $sql = "SELECT * FROM user WHERE Role <> 0";
+        return pdo_query($sql);
+    }
+
     /**
      * Lấy người dùng theo id
      * 

@@ -14,6 +14,7 @@
         --gray: #BDBDBD;
         --lightgray: #faf9f8;
         --yellow: #FFB11B;
+        --green: #56D237;
     }
     * {
         margin: 0px;
@@ -73,6 +74,7 @@
         left: 250px;
         top: 70px;
         padding: 15px;
+        padding-bottom: 0px;
         width: calc(100% - 250px);
         display: block;
     }

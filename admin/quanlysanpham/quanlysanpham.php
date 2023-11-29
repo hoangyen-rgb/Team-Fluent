@@ -171,7 +171,7 @@
                     <td class="product-name"><?=$Name?></td>
                     <td class="product-price"><?=number_format($Price)?> vnđ</td>
                     <?php $category = get_category_by_product_id($Id);?>
-                    <td class="product-category"><?=$category['Name']?></td>
+                    <td class="product-category"><?=$category ? $category['Name'] : "Chưa phân loại"?></td>
                     <td class="product-action">
                         <div class="edit-button">
                             <a href="<?=$ADMIN_URL?>/suasanpham?id=<?=$Id?>" class="a">

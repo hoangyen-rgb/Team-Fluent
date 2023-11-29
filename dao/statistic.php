@@ -202,7 +202,7 @@
     }
 
     function get_users_count() {
-        $sql = "SELECT COUNT(Id) FROM user";
+        $sql = "SELECT COUNT(Id) FROM user WHERE Role <> 0";
         return pdo_query_value($sql);
     }
 

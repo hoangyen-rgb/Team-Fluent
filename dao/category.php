@@ -49,6 +49,32 @@
         return pdo_query_one($sql);
     }
 
+    function get_category_by_id($category_id) {
+        $sql = "SELECT * FROM category WHERE Id = $category_id";
+        return pdo_query_one($sql);
+    }
+
+    function insert_category($name, $image) {
+        $sql = "INSERT INTO category (Name, Image) VALUES (? , ?)";
+        return pdo_execute($sql, $name, $image);
+    }
+
+    function update_category($id, $name, $image) {
+
+        if ($image == "") {
+            $sql = "UPDATE category SET Name = ? WHERE id = $id";
+            return pdo_execute($sql, $name);
+        } else {
+            $sql = "UPDATE category SET Name = ?, Image = ? WHERE id = $id";
+            return pdo_execute($sql, $name, $image);
+        }
+    }
+
+    function remove_category($id) {
+        $sql = "DELETE FROM category WHERE Id = $id";
+        return pdo_execute($sql);
+    }
+
 
 
 

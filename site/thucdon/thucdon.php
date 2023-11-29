@@ -231,6 +231,7 @@
             font-weight: 400;
             color: var(--lightblack);
             margin-bottom: 10px;
+            height: 56px;
         }
         .product .product-price {
         width: 100%;
