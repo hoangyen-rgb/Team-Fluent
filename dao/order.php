@@ -20,7 +20,7 @@
 
     function get_order_by_status(...$status) {
         $statusPlaceholders = implode(', ', $status);
-        $sql = "SELECT * FROM `order` WHERE Status IN ($statusPlaceholders)";
+        $sql = "SELECT * FROM `order` WHERE Status IN ($statusPlaceholders) ORDER BY Date ASC";
         return pdo_query($sql);
     }
 

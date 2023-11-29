@@ -261,9 +261,8 @@
     }
     .container .list-products {
         display: grid;
-        grid-template-columns: repeat(4, auto);
+        grid-template-columns: repeat(4, 1fr);
         
-        justify-content: space-between;
     }
     .container .product {
         justify-self: center;

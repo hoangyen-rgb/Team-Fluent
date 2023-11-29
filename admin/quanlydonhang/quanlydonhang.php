@@ -202,7 +202,7 @@
                             $interval = $currentTime->diff($sqlTime);
                             
                             if ($interval->h <= 1) {
-                                return $interval->format('%h giờ %i phút');
+                                return $interval->format('%h giờ %i phút trước');
                             } else {
                                 return $sqlDateTime;
                             }
