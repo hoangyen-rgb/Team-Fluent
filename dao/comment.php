@@ -8,10 +8,14 @@
      * 
      * @return array danh sách bình luận
      */
-    function get_comment_by_product_id($product_id) {
+    function get_comment_by_product_id($product_id, $rating = null) {
         $sql = "SELECT * FROM comment WHERE ProductId = $product_id";
+        if($rating != null) {
+            $sql .= " AND Rating = $rating";
+        }
         return pdo_query($sql);
     }
+
 
     function insert_comment($content, $rating, $user_id, $product_id) {
         $sql = "INSERT INTO comment (Content, Rating, Time, UserId, ProductId) VALUES (?, ?, NOW(), ?, ?)";

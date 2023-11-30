@@ -11,6 +11,55 @@
         grid-template-columns: 70% 30%;
         gap: 30px;
     }
+    main .menucon {
+        grid-column: 1 / 3;
+        height: 70px;
+    }
+    .menucon ul {
+        width: 100%;
+        height: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0;
+    justify-items: center;
+  }
+  .menucon ul > li svg {
+    margin-right: 10px;
+  }
+  .menucon ul > li {
+    align-self: center;
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    padding: 10px 15px;
+  }
+  .menucon ul li.selected {
+    background-color: var(--red);
+    border-radius: 5px;
+  }
+  
+  .menucon ul li.selected svg path{
+    fill: white;
+  }
+  
+  .menucon ul li.selected a {
+    color: white;
+  }
+  .menucon {
+    border-radius: 10px;
+    border: 1px solid #BDBDBD;
+    background: #FFF;
+    box-shadow: 0px 0px 4px var(--gray);
+  }
+  
+  .menucon ul li a {
+    text-decoration: none;
+    color: #4E4E4E;
+  }
     main .cart, main .checkout {
         border: 1px solid var(--gray);
         background-color: white;
@@ -93,6 +142,7 @@
         margin: 0px 5px;
         color: var(--lightblack);
         background-color: white;
+        border: unset;
     }
     main .product-name {
         font-size: 18px;
@@ -270,16 +320,27 @@
     }
     .vouchers-list .voucher {
         padding: 5px 0px 5px 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        display: grid;
+        grid-template-columns: 120px auto;
+        grid-template-rows: auto 20px;
         cursor: pointer;
     }
-    .vouchers-list .voucher>* {
+    .vouchers-list .voucher .code {
+        font-weight: 600;
+        grid-column: 1 / 2;
+        grid-row:  1 / 2;
+    }
+    .vouchers-list .voucher .discount {
+        text-align: right;
+        grid-column: 2 / 3;
+        grid-row:  1 / 2;
 
     }
-    .voucher .code {
-        font-weight: 600;
+    .vouchers-list .voucher .max-discount {
+        text-align: right;
+        grid-column: 2 / 3;
+        grid-row:  2 / 3;
+        font-weight: 400;
     }
     .popup-background {
         width: 100%;
@@ -398,6 +459,30 @@
     <?php } ?>
     <?php if($cart) { ?>
         <div class="container">
+            
+            <div class="menucon">
+                <ul>
+                    <li data-name="giohang">
+                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.5 20C6.11875 20 5.0125 21.1187 5.0125 22.5C5.0125 23.8813 6.11875 25 7.5 25C8.88125 25 10 23.8813 10 22.5C10 21.1187 8.88125 20 7.5 20ZM0 0V2.5H2.5L6.99375 11.9812L5.30625 15.0437C5.1125 15.4062 5 15.8125 5 16.25C5 17.6313 6.11875 18.75 7.5 18.75H22.5V16.25H8.03125C7.85625 16.25 7.71875 16.1125 7.71875 15.9375C7.71875 15.8813 7.73125 15.8313 7.75625 15.7875L8.875 13.75H18.1875C19.125 13.75 19.9437 13.2313 20.375 12.4625L24.8438 4.35C24.9438 4.175 25 3.96875 25 3.75C25 3.41848 24.8683 3.10054 24.6339 2.86612C24.3995 2.6317 24.0815 2.5 23.75 2.5H5.26875L4.08125 0H0ZM20 20C18.6187 20 17.5125 21.1187 17.5125 22.5C17.5125 23.8813 18.6187 25 20 25C21.3813 25 22.5 23.8813 22.5 22.5C22.5 21.1187 21.3813 20 20 20Z" fill="#4E4E4E"/>
+                        </svg>
+                        <a href="<?=$SITE_URL?>/giohang">Giỏ hàng</a>
+                    </li>
+                    <li data-name="khomagiamgia">
+                    <svg width="25" height="16" viewBox="0 0 25 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M23.7903 0H1.20968C0.540323 0 0 0.540323 0 1.20968V4.25C0 4.91936 0.540323 5.45968 1.20968 5.45968C2.37097 5.45968 3.31452 6.40323 3.31452 7.56452C3.31452 8.72581 2.37097 9.66936 1.20968 9.66936C0.540323 9.66936 0 10.2097 0 10.879V13.9194C0 14.5887 0.540323 15.129 1.20968 15.129H23.7903C24.4597 15.129 25 14.5887 25 13.9194V10.879C25 10.2097 24.4597 9.66936 23.7903 9.66936C22.629 9.66936 21.6855 8.72581 21.6855 7.56452C21.6855 6.40323 22.629 5.45968 23.7903 5.45968C24.4597 5.45968 25 4.91936 25 4.25V1.20968C25 0.540323 24.4597 0 23.7903 0ZM17.7419 10.3871C17.7419 11.0484 17.2016 11.5968 16.5323 11.5968C15.8629 11.5968 15.3226 11.0484 15.3226 10.3871V4.74194C15.3226 4.08065 15.8629 3.53226 16.5323 3.53226C17.2016 3.53226 17.7419 4.08065 17.7419 4.74194V10.3871Z" fill="#4E4E4E"/>
+                    </svg>
+
+                        <a href="<?=$SITE_URL?>/khomagiamgia">Kho mã giảm giá</a>
+                    </li>
+                    <li>
+                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3.57143 0C1.59898 0 0 1.59898 0 3.57143V21.4286C0 23.4011 1.59898 25 3.57143 25H21.4286C23.4011 25 25 23.4011 25 21.4286V3.57143C25 1.59898 23.4011 0 21.4286 0H3.57143ZM8.03571 7.58929C8.03571 8.32895 7.43609 8.92857 6.69643 8.92857C5.95677 8.92857 5.35714 8.32895 5.35714 7.58929C5.35714 6.84963 5.95677 6.25 6.69643 6.25C7.43609 6.25 8.03571 6.84963 8.03571 7.58929ZM6.69643 14.2857C5.95677 14.2857 5.35714 13.6861 5.35714 12.9464C5.35714 12.2068 5.95677 11.6071 6.69643 11.6071C7.43609 11.6071 8.03571 12.2068 8.03571 12.9464C8.03571 13.6861 7.43609 14.2857 6.69643 14.2857ZM8.03571 18.3036C8.03571 19.0432 7.43609 19.6429 6.69643 19.6429C5.95677 19.6429 5.35714 19.0432 5.35714 18.3036C5.35714 17.5639 5.95677 16.9643 6.69643 16.9643C7.43609 16.9643 8.03571 17.5639 8.03571 18.3036ZM11.6071 7.14286H18.75C19.243 7.14286 19.6429 7.54261 19.6429 8.03571C19.6429 8.52882 19.243 8.92857 18.75 8.92857H11.6071C11.114 8.92857 10.7143 8.52882 10.7143 8.03571C10.7143 7.54261 11.114 7.14286 11.6071 7.14286ZM10.7143 13.3929C10.7143 12.8998 11.114 12.5 11.6071 12.5H18.75C19.243 12.5 19.6429 12.8998 19.6429 13.3929C19.6429 13.8859 19.243 14.2857 18.75 14.2857H11.6071C11.114 14.2857 10.7143 13.8859 10.7143 13.3929ZM11.6071 17.8571H18.75C19.243 17.8571 19.6429 18.257 19.6429 18.75C19.6429 19.243 19.243 19.6429 18.75 19.6429H11.6071C11.114 19.6429 10.7143 19.243 10.7143 18.75C10.7143 18.257 11.114 17.8571 11.6071 17.8571Z" fill="#4E4E4E"/>
+                        </svg>
+                        <a href="#">Sổ địa chỉ</a>
+                    </li>
+                </ul>
+            </div>
             <div class="cart">
                 <table>
                     <tr>
@@ -554,6 +639,7 @@
                 let order_price = get_total_price();
                 $.post("<?=$SITE_URL?>/giohang/get_voucher.php",
                     {
+                        get_voucher_list: true,
                         order_price: order_price
 
                     },
@@ -565,7 +651,7 @@
             document.querySelector(".vouchers-list").classList.toggle("hidden");
         });
         document.querySelector(".voucher-form").querySelector("input").addEventListener("input", function() {
-            check_voucher(document.querySelector(".voucher-form").querySelector("input").value);
+            check_voucher(document.querySelector(".voucher-form").querySelector("input").value, get_total_price() );
         });
         document.querySelector(".note-button").addEventListener("click", function() {
             document.querySelector(".popup-background").classList.toggle("hidden");
@@ -598,16 +684,17 @@
             function(data, textStatus, jqXHR) {
             }
         );
-        update_order();
+        check_voucher(document.querySelector(".voucher-form").querySelector("input").value, get_total_price() );
 
         let remaining_products = document.querySelectorAll('tr').length;
         if (remaining_products === 1) {
-            // Nếu chỉ còn lại một dòng, reload trang
+            // Nếu chỉ còn lại một dòng (dòng tên cột của table), reload trang
             location.reload();
         }
         
     }
     function update_order() {
+        // check_voucher(document.querySelector(".voucher-form").querySelector("input").value, get_total_price() );
         let products_list = document.querySelectorAll(".product");
         let products_array = Array.from(products_list);
         let total_product = 0;
@@ -657,27 +744,25 @@
     function select_voucher(code) {
         document.querySelector(".voucher-form").querySelector("input").value = code;
         document.querySelector(".vouchers-list").classList.toggle("hidden");
-        check_voucher(code)
+        check_voucher(code, get_total_price() );
     };
-    function check_voucher(voucher_code) {
+    function check_voucher(voucher_code, order_price) {
         //
             $.post("<?=$SITE_URL?>/giohang/get_voucher.php",
                 {
-                    voucher_code: voucher_code
+                    get_voucher: true,
+                    voucher_code: voucher_code,
+                    order_price: order_price
 
                 },
                 function(data, textStatus, jqXHR) {
                     if (data == 0) {
-                        document.querySelector(".voucher-form-message").innerText = "Mã giảm giá không hợp lệ";
+                        if (document.querySelector(".voucher-form").querySelector("input").value != "") {
+                            document.querySelector(".voucher-form-message").innerText = "Mã giảm giá không hợp lệ hoặc hết lượt dùng";
+                        }
                         document.querySelector(".voucher-discount").innerText = "";
                     } else {
-                        if (data.endsWith(" vnđ")) {
-                            document.querySelector(".voucher-discount").innerText = data;
-                        } else {
-                            let discount_percentage = data.replace(" %", "");
-                            let discount_price = (get_total_price() * discount_percentage) / 100;
-                            document.querySelector(".voucher-discount").innerText = discount_price;
-                        }
+                        document.querySelector(".voucher-discount").innerText = data;
                         document.querySelector(".voucher-form-message").innerText = "";
                     }
                 update_order();
@@ -695,6 +780,13 @@
             setTimeout(function() {
             messageElement.classList.toggle("hidden");
             }, 2000);
+        }
+    });
+
+    document.querySelector(".menucon").querySelectorAll("li").forEach(function (element) {
+        let url = window.location.href;
+        if (url.includes(element.getAttribute("data-name"))) {
+            element.classList.add("selected");
         }
     });
 </script>

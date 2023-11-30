@@ -173,6 +173,9 @@
     .filter-box label {
         cursor: pointer;
     }
+    .filter-box input {
+        margin-right: 10px;
+    }
     .filter-box>div:first-child>* {
         display: inline-block;
         vertical-align: middle;
@@ -343,6 +346,9 @@
         font-weight: 600;
         color: white;
     }
+    .stars .selected path {
+        fill: var(--yellow);
+    }
     @media screen and (max-width:720px) {
  
         .list-products{
@@ -470,117 +476,159 @@
     
     <div class="line"></div>
     <div class="title">Đánh giá món ăn</div>
-    <?php if($comments) {?>
     <div class="comment-box">
-        <div class="comments" style="grid-column: 1 / 2; grid-row: 1 / 2;">
-            <div class="column">
-                <?php foreach($comments as $comment) { extract($comment); ?>
-                    <div class="comment">
-                        <?php $user = get_user_by_id($UserId); extract($user); ?>
-                        <div class="left">
-                            <img class="user-avatar" src="<?=$IMAGE_DIR?>/<?=$Avatar?>" alt="">
+        <?php if($comments) {?>
+            <div class="comments" style="grid-column: 1 / 2; grid-row: 1 / 2;">
+                <div class="column">
+                    <?php foreach($comments as $comment) { extract($comment); ?>
+                        <div class="comment">
+                            <?php $user = get_user_by_id($UserId); extract($user); ?>
+                            <div class="left">
+                                <img class="user-avatar" src="<?=$IMAGE_DIR?>/<?=$Avatar?>" alt="">
+                            </div>
+                            <div class="right">
+                                <p class="user-name"><?=$Name?></p>
+                                <p class="time"><?=$Time?></p>
+                                <p class="rating">
+                                <?=str_repeat('
+                                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
+                                        </svg>
+                                        ', ceil($Rating))?>
+                                </p>
+                                <p class="content">"<?=nl2br($Content);?>"</p>
+                            </div>
                         </div>
-                        <div class="right">
-                            <p class="user-name"><?=$Name?></p>
-                            <p class="time"><?=$Time?></p>
-                            <p class="rating">
-                            <?=str_repeat('
-                                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
-                                    </svg>
-                                    ', ceil($Rating))?>
-                            </p>
-                            <p class="content">"<?=nl2br($Content);?>"</p>
-                        </div>
-                    </div>
-                <?php } ?>
+                    <?php } ?>
+                </div>
             </div>
-        </div>
-        <form class="filter-box" style="grid-column: 2 / 3; grid-row: 1 / 2;">
-            <div>
-                <p>Lọc</p>
-                <img src="image/icon/filter.png" alt="">
-            </div>
-            <div>
-                <input type="radio" name="filter" id="filter-all">
-                <label for="filter-all">Tất cả</label>
-            </div>
-            <div>
-                <input type="radio" name="filter" id="filter-5">
-                <label for="filter-5">5
-                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
+            <form class="filter-box" style="grid-column: 2 / 3; grid-row: 1 / 2;" method="get" action="<?=$_SERVER['PHP_SELF'];?>">
+                <div>
+                    <p>Lọc</p>
+                    <svg width="20" height="16" viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.5 17C19.3284 17 20 17.6716 20 18.5C20 19.3284 19.3284 20 18.5 20H9.5C8.67157 20 8 19.3284 8 18.5C8 17.6716 8.67157 17 9.5 17H18.5ZM22.5 8.5C23.3284 8.5 24 9.17157 24 10C24 10.8284 23.3284 11.5 22.5 11.5H5.5C4.67157 11.5 4 10.8284 4 10C4 9.17157 4.67157 8.5 5.5 8.5H22.5ZM26.5 0C27.3284 0 28 0.671573 28 1.5C28 2.32843 27.3284 3 26.5 3H1.5C0.671573 3 0 2.32843 0 1.5C0 0.671573 0.671573 0 1.5 0H26.5Z" fill="#4E4E4E"/>
                     </svg>
-                </label>
-            </div>
-            
-            <div>
-                <input type="radio" name="filter" id="filter-4">
-                <label for="filter-4">4                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
-                    </svg>
-                </label>
-            </div>
-            
-            <div>
-                <input type="radio" name="filter" id="filter-3">
-                <label for="filter-3">3                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
-                    </svg>
-                </label>
-            </div>
-            
-            <div>
-                <input type="radio" name="filter" id="filter-2">
-                <label for="filter-2">2                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
-                    </svg>
-                </label>
-            </div>
-            
-            <div>
-                <input type="radio" name="filter" id="filter-1">
-                <label for="filter-1">1                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
-                    </svg>
-                </label>
-            </div>
-        </form>
-        <?php if ($comment_form) { ?>
-        <form class="user-comment-form"  style="grid-column: 1 / 2; grid-row: 2 / 3;" data-rate="0">
-            <div class="stars">
-                <svg width="24" height="24" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#BDBDBD"/>
-                </svg>
-                <svg width="24" height="24" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#BDBDBD"/>
-                </svg>
-                <svg width="24" height="24" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#BDBDBD"/>
-                </svg>
-                <svg width="24" height="24" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#BDBDBD"/>
-                </svg>
-                <svg width="24" height="24" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#BDBDBD"/>
-                </svg>
-            </div>
-            <div class="comment-form">
-                <input type="text" placeholder="Để lại bình luận" class="content">
-                <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer" class="comment-button">
-                    <path d="M1.36708 15.92L18.4068 8.86742C19.1977 8.53743 19.1977 7.46257 18.4068 7.13257L1.36708 0.0800295C0.722601 -0.193398 0.00976486 0.268601 0.00976486 0.938027L0 5.28458C0 5.75601 0.3613 6.16144 0.849544 6.21801L14.6473 8L0.849544 9.77256C0.3613 9.83856 0 10.244 0 10.7154L0.00976486 15.062C0.00976486 15.7314 0.722601 16.1934 1.36708 15.92Z" fill="#C34439"/>
-                </svg>
+
+                </div>
+                <div>
                     
+                    <label for="filter-all"><input type="radio" name="filter" id="filter-all">Tất cả</label>
+                </div>
+                <div>
+                    
+                    <label for="filter-5"><input type="radio" name="filter" id="filter-5">5
+                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
+                        </svg>
+                    </label>
+                </div>
+                
+                <div>
+                    
+                    <label for="filter-4"><input type="radio" name="filter" id="filter-4">4
+                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
+                        </svg>
+                    </label>
+                </div>
+                
+                <div>
+                    
+                    <label for="filter-3"><input type="radio" name="filter" id="filter-3">3
+                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
+                        </svg>
+                    </label>
+                </div>
+                
+                <div>
+                    
+                    <label for="filter-2"><input type="radio" name="filter" id="filter-2">2
+                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
+                        </svg>
+                    </label>
+                </div>
+                
+                <div>
+                    
+                    <label for="filter-1"><input type="radio" name="filter" id="filter-1">1
+                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
+                        </svg>
+                    </label>
+                </div>
+            </form>
+            <form class="user-comment-form"  style="grid-column: 1 / 2; grid-row: 2 / 3;" data-rate="0">
+                <div class="stars">
+                    <svg width="24" height="24" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#BDBDBD"/>
+                    </svg>
+                    <svg width="24" height="24" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#BDBDBD"/>
+                    </svg>
+                    <svg width="24" height="24" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#BDBDBD"/>
+                    </svg>
+                    <svg width="24" height="24" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#BDBDBD"/>
+                    </svg>
+                    <svg width="24" height="24" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#BDBDBD"/>
+                    </svg>
+                </div>
+                <div class="comment-form">
+                    <input type="text" 
+                        <?php if ($comment_form) { ?>
+                            placeholder="Để lại bình luận"
+                        <?php } else {?>
+                            readonly placeholder="Bạn chỉ được bình luận (1 lần) sau khi mua hàng!" style="cursor:not-allowed";
+                        <?php }?>
+                    class="content">
+                    <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer" class="comment-button">
+                        <path d="M1.36708 15.92L18.4068 8.86742C19.1977 8.53743 19.1977 7.46257 18.4068 7.13257L1.36708 0.0800295C0.722601 -0.193398 0.00976486 0.268601 0.00976486 0.938027L0 5.28458C0 5.75601 0.3613 6.16144 0.849544 6.21801L14.6473 8L0.849544 9.77256C0.3613 9.83856 0 10.244 0 10.7154L0.00976486 15.062C0.00976486 15.7314 0.722601 16.1934 1.36708 15.92Z" fill="#C34439"/>
+                    </svg>
+                        
+                </div>
+            </form>
+        <?php } else {?>
+            <form class="user-comment-form"  style="grid-column: 1 / 2; grid-row: 2 / 3;" data-rate="0">
+                <div class="stars">
+                    <svg width="24" height="24" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#BDBDBD"/>
+                    </svg>
+                    <svg width="24" height="24" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#BDBDBD"/>
+                    </svg>
+                    <svg width="24" height="24" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#BDBDBD"/>
+                    </svg>
+                    <svg width="24" height="24" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#BDBDBD"/>
+                    </svg>
+                    <svg width="24" height="24" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#BDBDBD"/>
+                    </svg>
+                </div>
+                <div class="comment-form">
+                    <input type="text" 
+                        <?php if ($comment_form) { ?>
+                            placeholder="Để lại bình luận"
+                        <?php } else {?>
+                            readonly placeholder="Bạn chỉ được bình luận (1 lần) sau khi mua hàng!" style="cursor:not-allowed";
+                        <?php }?>
+                    class="content">
+                    <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer" class="comment-button">
+                        <path d="M1.36708 15.92L18.4068 8.86742C19.1977 8.53743 19.1977 7.46257 18.4068 7.13257L1.36708 0.0800295C0.722601 -0.193398 0.00976486 0.268601 0.00976486 0.938027L0 5.28458C0 5.75601 0.3613 6.16144 0.849544 6.21801L14.6473 8L0.849544 9.77256C0.3613 9.83856 0 10.244 0 10.7154L0.00976486 15.062C0.00976486 15.7314 0.722601 16.1934 1.36708 15.92Z" fill="#C34439"/>
+                    </svg>
+                        
+                </div>
+            </form>
+            <div class="empty-comment-box">
+                <p style="text-align: center;">Không có đánh giá</p>
             </div>
-        </form>
         <?php } ?>
     </div>
-    <?php } else {?>
-        <div class="empty-comment-box">
-            <p>Sản phẩm chưa có đánh giá!</p>
-            <p> Có thể đánh giá sau khi mua hàng bạn nhé!</p>
-        </div>
-    <?php } ?>
     <div class="line"></div>
     <div class="container">
         <div class="container-title">
@@ -647,6 +695,7 @@
     </div>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    
     <script>
         var product_quantity = Number.parseInt(document.getElementById("product-quantity").innerText);
         function changeQuantity(quantity) {
@@ -684,8 +733,8 @@
             var audio = new Audio('<?=$SOUND_DIR?>/ting.mp3');
             audio.play();
         }
-
-        document.querySelector(".stars").querySelectorAll("svg").forEach(function (element) {
+        if (document.querySelector(".stars") && !document.querySelector(".comment-form").querySelector(".content").readOnly) {
+            document.querySelector(".stars").querySelectorAll("svg").forEach(function (element) {
             element.addEventListener("click", function() {
                 let list =document.querySelector(".stars").querySelectorAll("svg");
                 list.forEach(function (element) {
@@ -705,13 +754,15 @@
                     }
                 }
             });
-        });
+        });   
+        }
+
 
         let comment_button = document.querySelector(".comment-button");
-        if (comment_button != null) {
+        if (comment_button != null  && !document.querySelector(".comment-form").querySelector(".content").readOnly) {
             comment_button.addEventListener("click", function () {
                 let rate = document.querySelector(".user-comment-form").getAttribute("data-rate");
-                let content = document.querySelector(".content").value;
+                let content = document.querySelector(".comment-form").querySelector(".content").value;
                 let product_id = document.querySelector(".detail-product").getAttribute("data-id");
                 $.post("<?=$SITE_URL?>/monan/comment_handler.php",
                 {
@@ -725,6 +776,40 @@
                 }
             );
             });
+        }
+
+        document.querySelector(".filter-box").querySelectorAll("label").forEach(function (element) {
+            element.addEventListener("click", function() {
+                let labelIndex = Array.from(document.querySelector(".filter-box").querySelectorAll("label")).indexOf(element);
+                ApplyFilters(new filter('filter', 6 - labelIndex));
+            });
+        });
+        function filter(key, value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        function ApplyFilters(...filters) {
+            var current_url = new URL(window.location.href);
+            var params = new URLSearchParams(current_url.search);
+            var redirectToCategory = false;
+            filters.forEach(filter => {
+                if (filter.value === "") {
+                    return;
+                }
+                params.set(filter.key, filter.value);
+            });
+            var filter_array = [];
+            if (params.get("id") != null) {
+                filter_array.push("id=" + params.get("id"));
+            }
+            if (params.get("filter") != null) {
+                filter_array.push("filter=" + params.get("filter"));
+            }
+            var url = "<?=$SITE_URL?>/monan/?" + filter_array.join("&");
+            
+
+            window.location.href = url;
         }
     </script>
 </main>

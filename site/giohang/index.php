@@ -23,18 +23,23 @@
         );
         $productExists = false;
         if (!isset($_SESSION['LOGGED_IN_USER_ID'])) {
-            foreach ($_SESSION['cart'] as &$item) {
+            foreach ($_SESSION['cart'] as $key => &$item) {
                 if ($item['Id'] == $product_to_cart['Id']) {
-                    $item['Quantity'] += $product_to_cart['Quantity']; 
-                    $productExists = true;
-                    break;
+                    if ($product_to_cart['Quantity'] == 0) {
+                        unset($_SESSION['cart'][$key]);
+                    } else {
+                        $item['Quantity'] += $product_to_cart['Quantity'];
+                        $productExists = true;
+                        break;
+                    }
+                     
                 }
             }
-            if (!$productExists) {
+            if (!$productExists && $product_to_cart['Quantity'] != 0) {
                 $_SESSION['cart'][] = $product_to_cart;
             }
 
-            $_SESSION['cart'] = array_filter($_SESSION['cart'], function ($item) use ($product_to_cart) {
+            $_SESSION['cart'] = array_filter($_SESSION['cart'], function ($item)  {
                 return $item['Quantity'] != 0;
             });
         } else {
