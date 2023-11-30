@@ -1,36 +1,5 @@
     <!-- css trang -->
-    <style>
-        main {
-            padding: 0px 100px;
-        }
-        .banner {
-            width: calc(100% + 200px);
-            margin-left: -100px;
-            height: fit-content;
-            position: relative;
-        }
-        .banner img {
-            width: 100%;
-        }
-        .banner p {
-            position: absolute;
-            right: 100px;
-            bottom: 100px;
-            color: white;
-            font-size: 20px;
-            font-weight: 600;
-            background-color: var(--red);
-            padding: 10px 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            border: 1px solid rgba(0, 0, 0, 0);
-        }
-        .banner p:hover {
-            border: 1px solid white;
-            background-color: rgba(0, 0, 0, 0.4);
-            transition: 0.3s;
-        }
-    </style>
+
     <!-- css thân trang -->
     <style>
             .monanhot{
@@ -316,13 +285,35 @@
             background-color: var(--red);
             color: white;
         }
+        @media screen and (max-width:720px) {
+            .danhmuc {
+               display:none;
+            }
+            .container-sanpham{
+                grid-template-columns:auto;
+                gap:0;
+            }
+            .list-products{
+                grid-template-columns: auto auto;
+                gap:10px;
+            }
+            .discount-percentage{
+                top:60% !important; 
+            }
+            .product{
+                width:100%;
+            }
+            .sotrang{
+                display:flex;
+                align-items: center;
+                justify-content:center !important;
+            }
+            .sotrang>* {
+                margin: 0 15px;
+            }
+        }
     </style>
     <main>
-
-        <div class="banner">
-            <img src="<?=$IMAGE_DIR?>/banner.png" alt>
-                <p>Khám phá ngay !</p>
-        </div>
         <div class="tieude">
             <h2>Danh sách món ăn</h2>
             <p>Toàn bộ món ăn mà ChickCuisine có cung cấp cho bạn</p>

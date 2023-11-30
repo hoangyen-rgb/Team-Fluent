@@ -33,7 +33,6 @@
     .detail-product .product-description {
         color: var(--lightblack);
         line-height: 30px;
-        height: 210px;
         text-align: justify;
     }
     .detail-product .product-rating {
@@ -106,7 +105,6 @@
     }
     .comment-box {
         width: 100%;
-        height: fit-content;
         margin: 50px auto;
         display: grid;
         grid-template-columns: 90% 10%;
@@ -116,15 +114,12 @@
     .comment-box .comments {
         width: 100%;
         overflow-y: scroll;
-        height: 400px;
-        max-height: 400px;
+        height: 500px;
         justify-content: space-between;
-        height: 100%;
-        min-height: 250px;
     }
     .comment-box .column {
         column-count: 2;
-        column-gap: 20px;
+        column-gap: 10px;
     }
     .comment-box .comments .comment {
         width: 1fr;
@@ -146,15 +141,15 @@
         border-radius: 50%;
         width: 50px;
         height: 50px;
-        border: 1px solid var(--gray);
+        background-color: var(--lightgray);
     }
     .comment-box .comments .comment .right {
         padding: 10px;
         grid-column: 2 / 3;
     }
     .comment .user-name {
-        font-size: 18px;
-        font-weight: 600;
+        font-size: 20px;
+        font-weight: bold;
         margin-bottom: 5px;
     }
     .comment .time {
@@ -169,15 +164,11 @@
     .comment .content {
         color: var(--lightblack);
         font-size: 15px;
-        font-weight: 400;
-        line-height: 30px;
     }
     .filter-box {
         width: 100%;
         text-align: center;
         padding: 10px 0px;
-        height: 100%;
-        min-height: 250px;
     }
     .filter-box label {
         cursor: pointer;
@@ -211,9 +202,6 @@
     }
     .user-comment-form .stars svg:hover path {
         cursor: pointer;
-    }
-    .user-comment-form .stars svg.selected path{
-        fill: var(--yellow);
     }
     .user-comment-form .comment-form {
         width: 1fr;
@@ -325,6 +313,9 @@
         border: none;
         border-radius: 5px;
     }
+    button{
+        border: 1px solid var(--red);
+    }
     .container .product .product-buttons button:first-child {
         width: 100%;
     }
@@ -352,17 +343,76 @@
         font-weight: 600;
         color: white;
     }
-    .empty-comment-box {
-        width: 100%;
+    @media screen and (max-width:720px) {
+ 
+        .list-products{
+            padding: 0 !important;
+        }
+        .product{
+            width:49% !important;
+        }
+        .product-buttons{
+            display:flex;
+            justify-content: space-between;
+        }
+        .user-comment-form{
+            
+            display:flex;
+        }
+        .discount-percentage{
+            top:60% !important;
+        }
+        .product-buttons{
+            
+        }
+        .container .product .product-image{
+            height:130px;
+        }
+        .detail-product .product-buttons .buttons-quantity {
+            margin-right: 0%;
+        }
+        .detail-product,.comment-box {
         display: flex;
-        justify-content: center;
         flex-direction: column;
-        align-items: center;
-        margin: 20px 0px;
-    }
-    .empty-comment-box p {
-        text-align: center;
-        margin: 5px 0px;
+        }
+        .filter-box{
+            display:flex !important;
+        }
+        .product-image,.comments {
+        order: 2; /* Đặt vị trí sau */
+        }
+        .column{
+            column-count:1 !important;
+        }
+        .product-name,.filter-box {
+        order: 1; /* Đặt vị trí đầu tiên */
+        }
+
+        .product-description,.user-comment-form {
+        order: 3; /* Đặt vị trí sau */
+        align-self: none !important;
+        grid-row:3/3 !important;
+        }
+        .product-rating {
+        order: 4; /* Đặt vị trí sau */
+        }
+
+        .product-price {
+        order: 3; /* Đặt vị trí sau */
+        display:block;
+        }
+
+        .product-path {
+        order: 1; /* Đặt vị trí sau */
+        }
+
+        .product-line {
+        order: 7; /* Đặt vị trí sau */
+        }
+
+        .product-buttons {
+        order: 8; /* Đặt vị trí sau */
+        }
     }
 </style>
 <main>
