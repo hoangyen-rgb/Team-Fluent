@@ -133,13 +133,17 @@
     .order-detail>.order-info>:is(:last-child) {
         border-right: 1px solid var(--gray);
     }
+    .order-detail tr td:nth-child(2) {
+        text-align: left;
+        padding-left: 20px;
+    }
     .product-list {
         width: 100%;
     }
     .product-list .product {
         height: 100px;
         display: grid;
-        grid-template-columns: 100px 1fr 1fr 1fr;
+        grid-template-columns: 100px 300px 1fr 1fr;
     }
     .product-list :not(tr:last-child) {
         border-bottom: 1px solid var(--gray);
@@ -201,7 +205,7 @@
 
                             $interval = $currentTime->diff($sqlTime);
                             
-                            if ($interval->h <= 1) {
+                            if ($interval->days * 24 + $interval->h <= 1) {
                                 return $interval->format('%h giờ %i phút trước');
                             } else {
                                 return $sqlDateTime;

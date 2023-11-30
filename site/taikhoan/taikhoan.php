@@ -197,26 +197,28 @@
 <!-- popup -->
 <main>
     <div class="container">
+        <?php extract($user); ?>
         <div class="profile  whitediv">
             <div class="user-avatar">
-                <img src="<?=$IMAGE_DIR?>/default.png" alt="">
+                <img src="<?=$IMAGE_DIR?>/<?=$Avatar?>" alt="">
                 <div class="tennguoidung">
-                    Tên người dùng
+                    <?=$Name?>
                 </div>
                 <div class="sdt">
-                    0903522XXX
+                    <?=$PhoneNumber?>
                 </div>
             </div>
 
             <div class="line"></div>
             <div class="diemvahang">
                 <div class="diemmuahang">
-                    <p>1000</p>
+                    <p><?=$Point?></p>
                     <img src="<?=$IMAGE_DIR?>/point.png" alt="">
                     <p>điểm mua hàng</p>
                 </div>
                 <div class="vertical-line" ></div>
                 <div class="hangthanh">
+                    <!-- Tính hạng -->
                     <p>Kim cương</p>
                     <img src="<?=$IMAGE_DIR?>/diamond.png" alt="">
                     <p>Hạng thành viên</p>
