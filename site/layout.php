@@ -14,7 +14,7 @@
         --gray: #BDBDBD;
         --lightgray: #faf9f8;
         --yellow: #FFB11B;
-        --green: 
+        --green:  #56D237;
     }
     button{
         border: 1px solid var(--red);
@@ -24,9 +24,6 @@
         padding: 0px;
         box-sizing: border-box;
     }
-    .original-price{
-        color: #4E4E4E;
-    }
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background-color: var(--lightgray);
@@ -34,12 +31,18 @@
     }
     a {
         text-decoration: none;
+        color: var(--lightblack);
     }
     /* Đường gạch ngang */
     .line {
         border-bottom: 1px solid var(--gray);
         width: 100%;
         margin: 10px auto;
+    }
+    .vertical-line {
+        border-right: 1px solid var(--gray);
+        height: 100%;
+        margin: auto 10px ;
     }
     .whitediv {
         background-color: white;
@@ -458,7 +461,19 @@
                 <path d="M9.75 7.5C10.9926 7.5 12 8.50735 12 9.75C12 11.4241 11.3115 12.7654 10.1818 13.6722C9.06987 14.5647 7.57962 15 6 15C4.42038 15 2.93013 14.5647 1.81823 13.6722C0.688455 12.7654 0 11.4241 0 9.75C0 8.58051 0.892315 7.61933 2.03328 7.5103L2.24997 7.5H9.75ZM6 0C7.65686 0 9 1.34314 9 3C9 4.65686 7.65686 6 6 6C4.34314 6 3 4.65686 3 3C3 1.34314 4.34314 0 6 0Z" fill="white"/>
             </svg>
                 
-            <p><?php if (isset($_SESSION['LOGGED_IN_USER_ID'])) { ?>Tài khoản<?php } else { ?>Đăng ký<?php } ?></p>
+            <p>
+                <?php if (isset($_SESSION['LOGGED_IN_USER_ID'])) {
+                require_once "../../dao/user.php";
+                $user = get_user_by_id($_SESSION['LOGGED_IN_USER_ID']);
+                extract($user);
+                if(strlen($Email) >= 9) {
+                    $Email = mb_substr($Email, 0, 6, 'UTF-8')."...";
+                }
+                echo $Email;
+                } else { ?>
+                    Đăng ký
+                <?php } ?>
+            </p>
         </a>
     </header>
     <?php require $VIEW_NAME;?>
