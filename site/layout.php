@@ -56,6 +56,22 @@
 </style>
 <!-- css header footer --> 
 <style>
+    .global-message {
+        width: 350px;
+        background-color: white;
+        border: 1px solid var(--gray);
+        box-shadow: 0px 0px 5px var(--gray);
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        position: absolute;
+        top: 10px;
+        left: calc(50% - 175px);
+    }
+    .global-message p {
+        color: var(--lightblack);
+        font-weight: 600;
+    }
     header {
         width: 100%;
         padding: 10px 100px;
@@ -255,6 +271,18 @@
     100% {
         transform: scale(1);
     }
+}
+    .jumpAnimate {
+        animation: jump 0.8s ease-in-out;
+    }
+    @keyframes jump{
+0%{ transform:translateY(0); }
+20%{ transform:translateY(0); }
+40%{ transform:translateY(-30px); }
+50%{ transform:translateY(0); }
+60%{ transform:translateY(-15px); }
+80%{ transform:translateY(0); }
+100%{ transform:translateY(0); }
 }
     header .cart #cart-count p {
         color: white;
@@ -477,6 +505,17 @@
         </a>
     </header>
     <?php require $VIEW_NAME;?>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var messageElement = document.querySelector(".global-message");
+
+            if (messageElement) {
+                setTimeout(function() {
+                messageElement.classList.toggle("hidden");
+                }, 4000);
+            }
+        });
+    </script>
     <footer>
         <div class="gallery">
             <img style="margin-top: -100px;" src="<?=$IMAGE_DIR?>/footer-image (1).png" alt="">

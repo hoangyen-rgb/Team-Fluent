@@ -44,5 +44,10 @@
         $sql = "DELETE FROM cartdetail WHERE UserId = $user_id";
         return pdo_execute($sql);
     }
+
+    function get_product_count_by_user_id($user_id) {
+        $sql = "SELECT COUNT(*) FROM cartdetail WHERE UserId = $user_id";
+        return pdo_query_value($sql);
+    }
 ?>
     

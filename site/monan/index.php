@@ -4,6 +4,7 @@
     require '../../dao/category.php';
     require '../../dao/comment.php';
     require '../../dao/user.php';
+    require '../../dao/cart.php';
     extract($_REQUEST);
     $comment_form = false;
     // Xử lí hiện thị form bình luận

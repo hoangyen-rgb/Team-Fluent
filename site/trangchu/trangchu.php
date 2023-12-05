@@ -48,11 +48,12 @@
             font-weight: 400;
         }
         .container .list-products {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
         }
         .container .product {
+            justify-self: center;
             position: relative;
             width: 260px;
             padding: 10px;
@@ -412,7 +413,7 @@
         </div>
         <div class="list-categories">
             <?php foreach ($hot_categories as $category) { extract($category); ?>
-                <a class="category" href="<?=$SITE_URL?>/thucdon?category=<?=$Id?>">
+                <a class="category" href="<?=$SITE_URL?>/thucdon?category_id=<?=$Id?>">
                     <img class="category-image" src="<?=$IMAGE_DIR?>/<?=$Image?>" alt="">
                     <p class="category-name"><?=$Name?></p>
                     <p class="category-product-count">(<?=get_product_count_by_category_id($Id) ?> món)</p>

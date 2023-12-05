@@ -721,9 +721,17 @@
                 function(data, textStatus, jqXHR) {
                 }
             );
-            showNotification(quantity);
+            showNotification();
         });
-        function showNotification(quantity) {
+        function showNotification() {
+            let quantity =
+            <?php
+                if($_SESSION['LOGGED_IN_USER_ID']) {
+                    echo get_product_count_by_user_id($_SESSION['LOGGED_IN_USER_ID']);
+                } else {
+                    echo ($_SESSION['cart'] ? count($_SESSION['cart']) : 0);
+                }
+            ?> + 1;
             var notification = document.getElementById('cart-count');
             notification.innerHTML = "<p>" + quantity + "</p>";
             notification.classList.add('show');

@@ -36,7 +36,27 @@
 
 
     function insert_user($email, $password, $phonenumber, $role) {
-        $sql = "INSERT INTO user (Email, Password, PhoneNumber, Role) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO user (Email, Password, PhoneNumber, Role, Point) VALUES (?, ?, ?, ?, 500)";
         return pdo_execute($sql, $email, $password, $phonenumber, $role);
+    }
+
+    function update_user_name($id, $name) {
+        $sql = "UPDATE user SET Name = ? WHERE Id = $id";
+        return pdo_execute($sql, $name);
+    }
+
+    function update_user_avatar($id, $avatar) {
+        $sql = "UPDATE user SET Avatar = ? WHERE Id = $id";
+        return pdo_execute($sql, $avatar);
+    }
+
+    function update_user_phone_number($id, $phone_number) {
+        $sql = "UPDATE user SET PhoneNumber = ? WHERE Id = $id";
+        return pdo_execute($sql, $phone_number);
+    }
+
+    function update_user_password($id, $password) {
+        $sql = "UPDATE user SET Password = ? WHERE Id = $id";
+        return pdo_execute($sql, $password);
     }
 ?>

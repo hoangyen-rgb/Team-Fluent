@@ -28,4 +28,9 @@
         $sql = "SELECT * FROM orderdetail WHERE OrderId = $order_id";
         return pdo_query($sql);
     }
+
+    function get_orders_by_user_id($user_id) {
+        $sql = "SELECT * FROM `order` WHERE UserId = $user_id";
+        return pdo_query($sql);
+    }
 ?>
