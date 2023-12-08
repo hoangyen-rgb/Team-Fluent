@@ -6,7 +6,8 @@
     $tab = isset($tab) ? $tab : "new";
     $orders = null;
     switch ($tab) {
-        case "delivering": $orders = get_order_by_status(3, 4, 5); break;
+        case "cancelled": $orders = get_order_by_status(5); break;
+        case "delivering": $orders = (get_order_by_status(3) + get_order_by_status(4)); break;
         case "preparing": $orders = get_order_by_status(2); break;
         default: $orders = get_order_by_status(1); break;
     }

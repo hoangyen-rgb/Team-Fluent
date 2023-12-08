@@ -6,7 +6,7 @@
     extract($_REQUEST);
     $user = get_user_by_id($_SESSION['LOGGED_IN_USER_ID']);
     $orders = get_orders_by_user_id($_SESSION['LOGGED_IN_USER_ID']);
-    $order_id = isset($order_id) ? $order_id : ($orders ? $orders[0]['Id'] : null);
+    $order_id = isset($order_id) ? $order_id : null;
     if (isset($logout)) {
         $_SESSION['LOGGED_IN_USER_ID'] = null;
         header("location: ".$SITE_URL."/trangchu");
@@ -15,7 +15,7 @@
         update_user_name($_SESSION['LOGGED_IN_USER_ID'], $update_name);
     }
     if (isset($_FILES['update_avatar']) && $_FILES['update_avatar']) {
-        $targetFile = $_SERVER['DOCUMENT_ROOT'] . $IMAGE_DIR . "/" . basename($_FILES["update_avatar"]["name"]);
+        $targetFile = $_SERVER['DOCUMENT_ROOT'] . "/content/image/" . basename($_FILES["update_avatar"]["name"]);
         move_uploaded_file($_FILES["update_avatar"]["tmp_name"], $targetFile);
         update_user_avatar($_SESSION['LOGGED_IN_USER_ID'], basename($_FILES["update_avatar"]["name"]));
 
@@ -29,6 +29,14 @@
         } else {
             $MESSAGE = "Mật khẩu cũ không đúng!";
         }
+    }
+    if (isset($update_address)) {
+        $new_address = $sonha."<!>".$khupho."<!>".$xa."<!>".$huyen."<!>".$tinh."<!>";
+        $sql = "UPDATE user SET Address = ? WHERE Id = ".$_SESSION['LOGGED_IN_USER_ID'];
+        pdo_execute($sql, $new_address);
+    }
+    if (isset($cancel_order_id)) {
+        cancel_order($cancel_order_id);
     }
     $VIEW_NAME = "taikhoan/taikhoan.php";
 

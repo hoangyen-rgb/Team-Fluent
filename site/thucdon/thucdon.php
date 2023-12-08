@@ -2,13 +2,12 @@
 
     <!-- css thân trang -->
     <style>
-            .monanhot{
+        .monanhot{
             position: relative;
         }
         .tieude{
             text-align: center;
             padding: 10px;
-            padding-top: 10%;
         }
         .tieude >h2{
             color: #c34439;
@@ -394,59 +393,60 @@
                 <div class="list-products">
                 <?php if($products) { ?>
                     <?php foreach($products as $product) {extract($product);?>
-                        <a class="product whitediv" href="<?=$SITE_URL?>/monan?id=<?=$Id?>">
-                            <img class="product-image" src="<?=$IMAGE_DIR?>/<?=$Image?>" alt="">
-                            <?php if(strlen($Name) >= 15) {
-                                $Name = mb_substr($Name, 0, 12, 'UTF-8')."...";
-                            } ?>
-                            <p class="product-name">
-                                <?=$Name?>
-                            </p>
-                            <p class="product-rating">
-                                <?=str_repeat('
-                                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
-                                        </svg>
-                                        ', ceil($Rating))?>
-                            </p>
-                            <?php if(strlen($Description) >= 80) {
-                                $Description = mb_substr($Description, 0, 77, 'UTF-8')."...";
-                            } ?>
-                                <p class="product-description">
-                                    <?=$Description?>
-                                </p>
-                                <div class="product-price">
-                                <?php if($Discount > 0) {?>
-                                    <p class="original-price"><?=number_format($Price, 0, '.', '.')?> vnđ</p>
-                                    <p class="discount-price"><?=number_format($Price * (100 - $Discount) / 100, 0, '.', '.')?> vnđ</p>
-                                <?php } else {?>
-                                    <p class="discount-price"><?=number_format($Price, 0, '.', '.')?> vnđ</p>
-                                <?php } ?>
-                            </div>
-                            <div class="product-buttons">
-                                <button class="buy-now">Mua ngay</button>
-                                <button class="add-to-cart">
-                                    <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M0.851191 0C0.381095 0 0 0.368234 0 0.822466C0 1.2767 0.381095 1.64493 0.851191 1.64493H1.26947C1.6495 1.64493 1.9835 1.88836 2.0879 2.24145L4.78713 11.3699C5.10033 12.4292 6.10232 13.1595 7.24244 13.1595H15.0201C16.0642 13.1595 17.0032 12.5452 17.391 11.6084L19.9008 5.54571C20.348 4.46522 19.5244 3.28986 18.3202 3.28986H4.16842L3.72478 1.78955C3.41157 0.7303 2.40958 0 1.26947 0H0.851191Z" fill="white"/>
-                                        <path d="M7.66075 19.7391C9.07105 19.7391 10.2143 18.6344 10.2143 17.2717C10.2143 15.9091 9.07105 14.8043 7.66075 14.8043C6.25045 14.8043 5.10718 15.9091 5.10718 17.2717C5.10718 18.6344 6.25045 19.7391 7.66075 19.7391Z" fill="white"/>
-                                        <path d="M14.4702 19.7391C15.8805 19.7391 17.0238 18.6344 17.0238 17.2717C17.0238 15.9091 15.8805 14.8043 14.4702 14.8043C13.0599 14.8043 11.9166 15.9091 11.9166 17.2717C11.9166 18.6344 13.0599 19.7391 14.4702 19.7391Z" fill="white"/>
-                                    </svg>
-                                </button>
-                                <button class="share">
-                                    <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M16 2.67857C16 4.1579 14.7208 5.35714 13.1429 5.35714C12.2302 5.35714 11.4175 4.95599 10.8944 4.33152L5.61723 6.80522C5.68054 7.02679 5.71429 7.2597 5.71429 7.5C5.71429 7.74032 5.68053 7.97325 5.6172 8.19493L10.8944 10.6685C11.4175 10.044 12.2302 9.64286 13.1429 9.64286C14.7208 9.64286 16 10.8421 16 12.3214C16 13.8007 14.7208 15 13.1429 15C11.5649 15 10.2857 13.8007 10.2857 12.3214C10.2857 12.0811 10.3194 11.8482 10.3827 11.6266L5.10554 9.15289C4.58247 9.77743 3.76977 10.1786 2.85714 10.1786C1.27919 10.1786 0 8.97932 0 7.5C0 6.02067 1.27919 4.82143 2.85714 4.82143C3.76982 4.82143 4.58255 5.22261 5.10562 5.84715L10.3827 3.37346C10.3194 3.15185 10.2857 2.9189 10.2857 2.67857C10.2857 1.19924 11.5649 0 13.1429 0C14.7208 0 16 1.19924 16 2.67857Z" fill="white"/>
-                                    </svg>
-                                </button>
-                            </div> 
-                            <div class="product-discount-tag">
-                                <?php if ($Discount > 0) {?>
-                                <svg width="40" height="43" viewBox="0 0 40 43" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M3.11058 42.6954C1.78157 43.4902 0 42.637 0 41.2057V6.51187C0 2.55976 2.75926 0.0456356 7.17194 0.0385553L32.7994 1.16327e-05C37.2177 -0.00704253 39.9921 2.50341 40 6.46053V41.2057C40 42.637 38.2184 43.4902 36.8894 42.6954L20 32.5955L3.11058 42.6954Z" fill="#C34439"/>
-                                </svg>                            
-                                <p class="discount-percentage"><?=$Discount?>%</p>
-                                <?php } ?>
-                            </div>
-                        </a>
+                        <div class="product whitediv" onclick="linkto('<?=$SITE_URL?>/monan?id=<?=$Id?>')">
+                    <img class="product-image" src="<?=$IMAGE_DIR?>/<?=$Image?>" alt="">
+                    <?php $SubName = $Name;
+                        if(strlen($Name) >= 15) {
+                        $SubName = mb_substr($Name, 0, 12, 'UTF-8')."...";
+                    } ?>
+                    <p class="product-name">
+                        <?=$SubName?>
+                    </p>
+                    <p class="product-rating">
+                        <?=str_repeat('
+                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.50637 0.587923C5.88359 -0.195976 6.97352 -0.195973 7.35076 0.587923L8.77987 3.55771L11.9755 4.03395C12.8191 4.15964 13.1559 5.22275 12.5454 5.83294L10.2331 8.14459L10.7789 11.4087C10.923 12.2703 10.0413 12.9273 9.28679 12.5206L6.42857 10.9794L3.57033 12.5206C2.81586 12.9273 1.93409 12.2703 2.07818 11.4087L2.62405 8.14459L0.311682 5.83294C-0.298681 5.22275 0.0381291 4.15964 0.881643 4.03395L4.07725 3.55771L5.50637 0.587923Z" fill="#FFB11B"/>
+                            </svg>
+                            ', ceil($Rating))?>
+                    </p>
+                    <?php if(strlen($Description) >= 80) {
+                        $Description = mb_substr($Description, 0, 77, 'UTF-8')."...";
+                    } ?>
+                        <p class="product-description">
+                            <?=$Description?>
+                        </p>
+                    <div class="product-price">
+                        <?php if($Discount > 0) {?>
+                            <p class="original-price"><?=number_format($Price, 0, '.', '.')?> vnđ</p>
+                            <p class="discount-price"><?=number_format($Price * (100 - $Discount) / 100, 0, '.', '.')?> vnđ</p>
+                        <?php } else {?>
+                            <p class="discount-price"><?=number_format($Price, 0, '.', '.')?> vnđ</p>
+                        <?php } ?>
+                    </div>
+                    <div class="product-buttons">
+                        <button class="buy-now" onclick="addtocart(event, '<?=$Id?>');linkto('<?=$SITE_URL?>/giohang');">Mua ngay</button>
+                        <button class="add-to-cart" onclick="addtocart(event, '<?=$Id?>')">
+                            <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.851191 0C0.381095 0 0 0.368234 0 0.822466C0 1.2767 0.381095 1.64493 0.851191 1.64493H1.26947C1.6495 1.64493 1.9835 1.88836 2.0879 2.24145L4.78713 11.3699C5.10033 12.4292 6.10232 13.1595 7.24244 13.1595H15.0201C16.0642 13.1595 17.0032 12.5452 17.391 11.6084L19.9008 5.54571C20.348 4.46522 19.5244 3.28986 18.3202 3.28986H4.16842L3.72478 1.78955C3.41157 0.7303 2.40958 0 1.26947 0H0.851191Z" fill="white"/>
+                                <path d="M7.66075 19.7391C9.07105 19.7391 10.2143 18.6344 10.2143 17.2717C10.2143 15.9091 9.07105 14.8043 7.66075 14.8043C6.25045 14.8043 5.10718 15.9091 5.10718 17.2717C5.10718 18.6344 6.25045 19.7391 7.66075 19.7391Z" fill="white"/>
+                                <path d="M14.4702 19.7391C15.8805 19.7391 17.0238 18.6344 17.0238 17.2717C17.0238 15.9091 15.8805 14.8043 14.4702 14.8043C13.0599 14.8043 11.9166 15.9091 11.9166 17.2717C11.9166 18.6344 13.0599 19.7391 14.4702 19.7391Z" fill="white"/>
+                            </svg>
+                        </button>
+                        <button class="share" onclick="copy(event, '<?=$Name?>', <?=$Price?>, '<?=$SITE_URL?>/monan/?id=<?=$Id?>')">
+                            <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16 2.67857C16 4.1579 14.7208 5.35714 13.1429 5.35714C12.2302 5.35714 11.4175 4.95599 10.8944 4.33152L5.61723 6.80522C5.68054 7.02679 5.71429 7.2597 5.71429 7.5C5.71429 7.74032 5.68053 7.97325 5.6172 8.19493L10.8944 10.6685C11.4175 10.044 12.2302 9.64286 13.1429 9.64286C14.7208 9.64286 16 10.8421 16 12.3214C16 13.8007 14.7208 15 13.1429 15C11.5649 15 10.2857 13.8007 10.2857 12.3214C10.2857 12.0811 10.3194 11.8482 10.3827 11.6266L5.10554 9.15289C4.58247 9.77743 3.76977 10.1786 2.85714 10.1786C1.27919 10.1786 0 8.97932 0 7.5C0 6.02067 1.27919 4.82143 2.85714 4.82143C3.76982 4.82143 4.58255 5.22261 5.10562 5.84715L10.3827 3.37346C10.3194 3.15185 10.2857 2.9189 10.2857 2.67857C10.2857 1.19924 11.5649 0 13.1429 0C14.7208 0 16 1.19924 16 2.67857Z" fill="white"/>
+                            </svg>
+                        </button>
+                    </div> 
+                    <div class="product-discount-tag">
+                        <?php if ($Discount > 0) {?>
+                        <svg width="40" height="43" viewBox="0 0 40 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3.11058 42.6954C1.78157 43.4902 0 42.637 0 41.2057V6.51187C0 2.55976 2.75926 0.0456356 7.17194 0.0385553L32.7994 1.16327e-05C37.2177 -0.00704253 39.9921 2.50341 40 6.46053V41.2057C40 42.637 38.2184 43.4902 36.8894 42.6954L20 32.5955L3.11058 42.6954Z" fill="#C34439"/>
+                        </svg>                            
+                        <p class="discount-percentage"><?=$Discount?>%</p>
+                        <?php } ?>
+                    </div>
+                </div>
                     <?php } ?>
                     
                 <?php } else { ?>
@@ -469,6 +469,7 @@
             </div>
         </div>
     </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script>
         function changePage(page_index) {
 
@@ -563,5 +564,61 @@
             
 
             window.location.href = url;
+        }
+        function linkto(url) {
+        window.location.href = url;
+    }
+    function copy(event, name, price, url) {
+        event.stopPropagation();
+        let text = "Mua ngay " + name + " chỉ với " + price.toLocaleString('vi-VN', {useGrouping: true, maximumFractionDigits: 0,}) + " vnđ tại " + url + " !";
+        
+        var hiddenTextarea = document.createElement('textarea');
+        hiddenTextarea.value = text;
+        document.body.appendChild(hiddenTextarea);
+
+        // Copy nội dung vào clipboard
+        hiddenTextarea.select();
+        document.execCommand('copy');
+        alert("Đã sao chép vào bảng nhớ tạm");
+
+        // Loại bỏ đối tượng textarea ẩn
+        document.body.removeChild(hiddenTextarea);
+        // navigator.clipboard.writeText(text).then(function() {
+        // }).catch(function(err) {
+        // console.error('Unable to write to clipboard', err);
+        // });
+    }
+    function addtocart(event, id) {
+        event.stopPropagation();
+        $.post("<?=$SITE_URL?>/giohang/index.php",
+                {
+                    cart_product_id: id,
+                    cart_product_quantity: 1
+
+                },
+                function(data, textStatus, jqXHR) {
+                    $.post("<?=$SITE_URL?>/giohang/cart_count.php",
+                {
+
+                },
+                function(data, textStatus, jqXHR) {
+                    showNotification(data);
+                }
+            );
+                }
+                
+            );
+
+
+    }
+        function showNotification(quantity) {
+            var notification = document.getElementById('cart-count');
+            notification.innerHTML = "<p>" + quantity + "</p>";
+            notification.classList.add('show');
+            setTimeout(function() {
+                notification.classList.remove('show');
+            }, 3000);
+            var audio = new Audio('<?=$SOUND_DIR?>/ting.mp3');
+            audio.play();
         }
     </script>

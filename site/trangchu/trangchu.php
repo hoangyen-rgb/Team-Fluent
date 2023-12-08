@@ -10,11 +10,14 @@
             width: 100%;
             margin: auto;
         }
+        .banner p a{
+            color: white;
+        }
         .banner p {
             position: absolute;
             right: 6.5%;
             bottom: 20%;
-            color: white;
+            
             font-size: 20px;
             font-weight: 600;
             background-color: var(--red);
@@ -47,17 +50,28 @@
             font-size: 20px;
             font-weight: 400;
         }
-        .container .list-products {
+        .container .list-products,
+        .list-products2 {
             width: 100%;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
+            overflow:hidden;
+            height:820px;
+            
         }
+        .container .list-products.active,
+        .list-products2.active {
+            overflow: visible;
+            height: auto;
+        }
+        
         .container .product {
             justify-self: center;
             position: relative;
             width: 260px;
             padding: 10px;
             margin: 15px 0px;
+            cursor: pointer;
         }
         .container .product .product-image {
             width: 100%;
@@ -213,18 +227,26 @@
         }
         .view-more {
             text-align: right;
+            width: 100%;
         }
-        .view-more button {
+        .view-more a {
             background-color: unset;
             border:none;
+            align-items:center;
+            text-align: right !important;
+            width: 100%;
+
         }
-        .view-more button * {
+        .view-more a path{
+            height:100%;
+        }
+        .view-more a>* {
             display: inline-block;
             color: var(--red);
             font-size: 24px;
             font-weight: 600;
             vertical-align: middle;
-            margin: 0px 5px;
+            margin: 10px 5px;
         }
         @media screen and (max-width:720px) {
             main{
@@ -258,7 +280,7 @@
     </style>
     <div class="banner">
         <img src="<?=$IMAGE_DIR?>/banner.png" alt>
-            <p>Khám phá ngay !</p>
+            <p><a href="<?=$SITE_URL?>/thucdon">Khám phá ngay !</a></p>
     </div>
 <main>
     
@@ -269,13 +291,14 @@
         </div>
         <div class="list-products">
             <?php foreach($hot_products as $product) {extract($product);?>
-                <a class="product whitediv" href="<?=$SITE_URL?>/monan?id=<?=$Id?>">
+                <div class="product whitediv" onclick="linkto('<?=$SITE_URL?>/monan?id=<?=$Id?>')">
                     <img class="product-image" src="<?=$IMAGE_DIR?>/<?=$Image?>" alt="">
-                    <?php if(strlen($Name) >= 15) {
-                        $Name = mb_substr($Name, 0, 12, 'UTF-8')."...";
+                    <?php $SubName = $Name;
+                        if(strlen($Name) >= 15) {
+                        $SubName = mb_substr($Name, 0, 12, 'UTF-8')."...";
                     } ?>
                     <p class="product-name">
-                        <?=$Name?>
+                        <?=$SubName?>
                     </p>
                     <p class="product-rating">
                         <?=str_repeat('
@@ -299,15 +322,15 @@
                         <?php } ?>
                     </div>
                     <div class="product-buttons">
-                        <button class="buy-now">Mua ngay</button>
-                        <button class="add-to-cart">
+                        <button class="buy-now" onclick="addtocart(event, '<?=$Id?>');linkto('<?=$SITE_URL?>/giohang');">Mua ngay</button>
+                        <button class="add-to-cart" onclick="addtocart(event, '<?=$Id?>')">
                             <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.851191 0C0.381095 0 0 0.368234 0 0.822466C0 1.2767 0.381095 1.64493 0.851191 1.64493H1.26947C1.6495 1.64493 1.9835 1.88836 2.0879 2.24145L4.78713 11.3699C5.10033 12.4292 6.10232 13.1595 7.24244 13.1595H15.0201C16.0642 13.1595 17.0032 12.5452 17.391 11.6084L19.9008 5.54571C20.348 4.46522 19.5244 3.28986 18.3202 3.28986H4.16842L3.72478 1.78955C3.41157 0.7303 2.40958 0 1.26947 0H0.851191Z" fill="white"/>
                                 <path d="M7.66075 19.7391C9.07105 19.7391 10.2143 18.6344 10.2143 17.2717C10.2143 15.9091 9.07105 14.8043 7.66075 14.8043C6.25045 14.8043 5.10718 15.9091 5.10718 17.2717C5.10718 18.6344 6.25045 19.7391 7.66075 19.7391Z" fill="white"/>
                                 <path d="M14.4702 19.7391C15.8805 19.7391 17.0238 18.6344 17.0238 17.2717C17.0238 15.9091 15.8805 14.8043 14.4702 14.8043C13.0599 14.8043 11.9166 15.9091 11.9166 17.2717C11.9166 18.6344 13.0599 19.7391 14.4702 19.7391Z" fill="white"/>
                             </svg>
                         </button>
-                        <button class="share">
+                        <button class="share" onclick="copy(event, '<?=$Name?>', <?=$Price?>, '<?=$SITE_URL?>/monan/?id=<?=$Id?>')">
                             <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M16 2.67857C16 4.1579 14.7208 5.35714 13.1429 5.35714C12.2302 5.35714 11.4175 4.95599 10.8944 4.33152L5.61723 6.80522C5.68054 7.02679 5.71429 7.2597 5.71429 7.5C5.71429 7.74032 5.68053 7.97325 5.6172 8.19493L10.8944 10.6685C11.4175 10.044 12.2302 9.64286 13.1429 9.64286C14.7208 9.64286 16 10.8421 16 12.3214C16 13.8007 14.7208 15 13.1429 15C11.5649 15 10.2857 13.8007 10.2857 12.3214C10.2857 12.0811 10.3194 11.8482 10.3827 11.6266L5.10554 9.15289C4.58247 9.77743 3.76977 10.1786 2.85714 10.1786C1.27919 10.1786 0 8.97932 0 7.5C0 6.02067 1.27919 4.82143 2.85714 4.82143C3.76982 4.82143 4.58255 5.22261 5.10562 5.84715L10.3827 3.37346C10.3194 3.15185 10.2857 2.9189 10.2857 2.67857C10.2857 1.19924 11.5649 0 13.1429 0C14.7208 0 16 1.19924 16 2.67857Z" fill="white"/>
                             </svg>
@@ -321,33 +344,35 @@
                         <p class="discount-percentage"><?=$Discount?>%</p>
                         <?php } ?>
                     </div>
-                </a>
+                </div>
             <?php } ?>
         </div>
-    </div>
-    <div class="view-more">
-        <button>
+        <div class="view-more">
+        <a href="<?=$SITE_URL?>/thucdon">
             <p>Xem thêm</p>
             <svg width="25" height="19" viewBox="0 0 25 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path id="Vector" d="M0 9.44109C0 8.65897 0.671578 8.02493 1.5 8.02493H19.0739L12.4998 2.47157C11.8824 1.95004 11.8297 1.05476 12.3821 0.471886C12.9345 -0.110989 13.8828 -0.160724 14.5002 0.360802L24.0001 8.38571C24.3181 8.65437 24.4999 9.0382 24.4999 9.44109C24.4999 9.844 24.3181 10.2278 24.0001 10.4965L14.5002 18.5214C13.8828 19.0429 12.9345 18.9933 12.3821 18.4104C11.8297 17.8275 11.8824 16.9321 12.4998 16.4106L19.0739 10.8573H1.5C0.671578 10.8573 0 10.2232 0 9.44109Z" fill="#C34439"/>
             </svg>
-        </button>
+        </a>
         <div class="line"></div> 
     </div>
+    </div>
+    
     <div class="container">
         <div class="container-title">
             <p>Sự kiện giảm giá</p>
             <p>Đồng loạt giảm giá, lên tới 30%!</p>
         </div>
-        <div class="list-products">
+        <div class="list-products2">
             <?php foreach($discount_products as $product) {extract($product);?>
-                <a class="product whitediv" href="<?=$SITE_URL?>/monan?id=<?=$Id?>">
+                <div class="product whitediv" onclick="linkto('<?=$SITE_URL?>/monan?id=<?=$Id?>')">
                     <img class="product-image" src="<?=$IMAGE_DIR?>/<?=$Image?>" alt="">
-                    <?php if(strlen($Name) >= 15) {
-                        $Name = mb_substr($Name, 0, 12, 'UTF-8')."...";
+                    <?php $SubName = $Name;
+                        if(strlen($Name) >= 15) {
+                        $SubName = mb_substr($Name, 0, 12, 'UTF-8')."...";
                     } ?>
                     <p class="product-name">
-                        <?=$Name?>
+                        <?=$SubName?>
                     </p>
                     <p class="product-rating">
                         <?=str_repeat('
@@ -371,15 +396,15 @@
                         <?php } ?>
                     </div>
                     <div class="product-buttons">
-                        <button class="buy-now">Mua ngay</button>
-                        <button class="add-to-cart">
+                        <button class="buy-now" onclick="addtocart(event, '<?=$Id?>');linkto('<?=$SITE_URL?>/giohang');">Mua ngay</button>
+                        <button class="add-to-cart" onclick="addtocart(event, '<?=$Id?>')">
                             <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.851191 0C0.381095 0 0 0.368234 0 0.822466C0 1.2767 0.381095 1.64493 0.851191 1.64493H1.26947C1.6495 1.64493 1.9835 1.88836 2.0879 2.24145L4.78713 11.3699C5.10033 12.4292 6.10232 13.1595 7.24244 13.1595H15.0201C16.0642 13.1595 17.0032 12.5452 17.391 11.6084L19.9008 5.54571C20.348 4.46522 19.5244 3.28986 18.3202 3.28986H4.16842L3.72478 1.78955C3.41157 0.7303 2.40958 0 1.26947 0H0.851191Z" fill="white"/>
                                 <path d="M7.66075 19.7391C9.07105 19.7391 10.2143 18.6344 10.2143 17.2717C10.2143 15.9091 9.07105 14.8043 7.66075 14.8043C6.25045 14.8043 5.10718 15.9091 5.10718 17.2717C5.10718 18.6344 6.25045 19.7391 7.66075 19.7391Z" fill="white"/>
                                 <path d="M14.4702 19.7391C15.8805 19.7391 17.0238 18.6344 17.0238 17.2717C17.0238 15.9091 15.8805 14.8043 14.4702 14.8043C13.0599 14.8043 11.9166 15.9091 11.9166 17.2717C11.9166 18.6344 13.0599 19.7391 14.4702 19.7391Z" fill="white"/>
                             </svg>
                         </button>
-                        <button class="share">
+                        <button class="share" onclick="copy(event, '<?=$Name?>', <?=$Price?>, '<?=$SITE_URL?>/monan/?id=<?=$Id?>')">
                             <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M16 2.67857C16 4.1579 14.7208 5.35714 13.1429 5.35714C12.2302 5.35714 11.4175 4.95599 10.8944 4.33152L5.61723 6.80522C5.68054 7.02679 5.71429 7.2597 5.71429 7.5C5.71429 7.74032 5.68053 7.97325 5.6172 8.19493L10.8944 10.6685C11.4175 10.044 12.2302 9.64286 13.1429 9.64286C14.7208 9.64286 16 10.8421 16 12.3214C16 13.8007 14.7208 15 13.1429 15C11.5649 15 10.2857 13.8007 10.2857 12.3214C10.2857 12.0811 10.3194 11.8482 10.3827 11.6266L5.10554 9.15289C4.58247 9.77743 3.76977 10.1786 2.85714 10.1786C1.27919 10.1786 0 8.97932 0 7.5C0 6.02067 1.27919 4.82143 2.85714 4.82143C3.76982 4.82143 4.58255 5.22261 5.10562 5.84715L10.3827 3.37346C10.3194 3.15185 10.2857 2.9189 10.2857 2.67857C10.2857 1.19924 11.5649 0 13.1429 0C14.7208 0 16 1.19924 16 2.67857Z" fill="white"/>
                             </svg>
@@ -393,19 +418,20 @@
                         <p class="discount-percentage"><?=$Discount?>%</p>
                         <?php } ?>
                     </div>
-                </a>
+                </div>
             <?php } ?>
         </div>
-    </div>
-    <div class="view-more">
-        <button>
+        <div class="view-more" >
+        <a href="<?=$SITE_URL?>/thucdon">
             <p>Xem thêm</p>
             <svg width="25" height="19" viewBox="0 0 25 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path id="Vector" d="M0 9.44109C0 8.65897 0.671578 8.02493 1.5 8.02493H19.0739L12.4998 2.47157C11.8824 1.95004 11.8297 1.05476 12.3821 0.471886C12.9345 -0.110989 13.8828 -0.160724 14.5002 0.360802L24.0001 8.38571C24.3181 8.65437 24.4999 9.0382 24.4999 9.44109C24.4999 9.844 24.3181 10.2278 24.0001 10.4965L14.5002 18.5214C13.8828 19.0429 12.9345 18.9933 12.3821 18.4104C11.8297 17.8275 11.8824 16.9321 12.4998 16.4106L19.0739 10.8573H1.5C0.671578 10.8573 0 10.2232 0 9.44109Z" fill="#C34439"/>
             </svg>
-        </button>
+        </a>
         <div class="line"></div> 
     </div>
+    </div>
+    
     <div class="container">
         <div class="container-title">
             <p>Danh mục ưa thích</p>
@@ -419,9 +445,104 @@
                     <p class="category-product-count">(<?=get_product_count_by_category_id($Id) ?> món)</p>
                     <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M8.70711 8.70711C9.09763 8.31658 9.09763 7.68342 8.70711 7.29289L2.34315 0.928932C1.95262 0.538408 1.31946 0.538408 0.928932 0.928932C0.538408 1.31946 0.538408 1.95262 0.928932 2.34315L6.58579 8L0.928932 13.6569C0.538408 14.0474 0.538408 14.6805 0.928932 15.0711C1.31946 15.4616 1.95262 15.4616 2.34315 15.0711L8.70711 8.70711ZM7 9H8V7H7V9Z" fill="white"/>
-                    </svg>                        
+                    </svg>  
+                                          
                 </a>
             <?php } ?>
         </div>
     </div>
 </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+    function linkto(url) {
+        window.location.href = url;
+    }
+    function copy(event, name, price, url) {
+        event.stopPropagation();
+        let text = "Mua ngay " + name + " chỉ với " + price.toLocaleString('vi-VN', {useGrouping: true, maximumFractionDigits: 0,}) + " vnđ tại " + url + " !";
+        
+        var hiddenTextarea = document.createElement('textarea');
+        hiddenTextarea.value = text;
+        document.body.appendChild(hiddenTextarea);
+
+        // Copy nội dung vào clipboard
+        hiddenTextarea.select();
+        document.execCommand('copy');
+        alert("Đã sao chép vào bảng nhớ tạm");
+
+        // Loại bỏ đối tượng textarea ẩn
+        document.body.removeChild(hiddenTextarea);
+        // navigator.clipboard.writeText(text).then(function() {
+        // }).catch(function(err) {
+        // console.error('Unable to write to clipboard', err);
+        // });
+    }
+    function addtocart(event, id) {
+        event.stopPropagation();
+        $.post("<?=$SITE_URL?>/giohang/index.php",
+                {
+                    cart_product_id: id,
+                    cart_product_quantity: 1
+
+                },
+                function(data, textStatus, jqXHR) {
+                    $.post("<?=$SITE_URL?>/giohang/cart_count.php",
+                {
+
+                },
+                function(data, textStatus, jqXHR) {
+                    showNotification(data);
+                }
+            );
+                }
+                
+            );
+
+
+    }
+        function showNotification(quantity) {
+            var notification = document.getElementById('cart-count');
+            notification.innerHTML = "<p>" + quantity + "</p>";
+            notification.classList.add('show');
+            setTimeout(function() {
+                notification.classList.remove('show');
+            }, 3000);
+            var audio = new Audio('<?=$SOUND_DIR?>/ting.mp3');
+            audio.play();
+        }
+</script>
+
+<!-- JavaScript -->
+<!-- <script>
+  function toggleContent(button, contents, svgPath) {
+    var expanded = false;
+    var buttonText = button.querySelector('p');
+    var svg = button.querySelector('svg path');
+
+    button.addEventListener('click', function () {
+      expanded = !expanded;
+      contents.forEach(function (content) {
+        if (expanded) {
+          content.classList.add('active');
+        } else {
+          content.classList.remove('active');
+        }
+      });
+
+      buttonText.textContent = expanded ? 'Ẩn bớt' : 'Xem thêm';
+      svg.setAttribute('d', svgPath[expanded ? 1 : 0]);
+    });
+  }
+
+  var viewMoreButton = document.getElementById('view-more-button');
+  var viewMoreButton2 = document.getElementById('view-more-button2');
+  var contents = document.querySelectorAll('main .container .list-products');
+  var contents2 = document.querySelectorAll('main .container .list-products2');
+  var svgPath = [
+    'M0 9.44109C0 8.65897 0.671578 8.02493 1.5 8.02493H19.0739L12.4998 2.47157C11.8824 1.95004 11.8297 1.05476 12.3821 0.471886C12.9345 -0.110989 13.8828 -0.160724 14.5002 0.360802L24.0001 8.38571C24.3181 8.65437 24.4999 9.0382 24.4999 9.44109C24.4999 9.844 24.3181 10.2278 24.0001 10.4965L14.5002 18.5214C13.8828 19.0429 12.9345 18.9933 12.3821 18.4104C11.8297 17.8275 11.8824 16.9321 12.4998 16.4106L19.0739 10.8573H1.5C0.671578 10.8573 0 10.2232 0 9.44109Z',
+    'M10.2499 0.191162C11.0321 0.191162 11.6661 0.86274 11.6661 1.69116L11.6661 19.2651L17.2195 12.691C17.741 12.0736 18.6363 12.0209 19.2192 12.5733C19.802 13.1257 19.8518 14.0739 19.3302 14.6913L11.3053 24.1913C11.0367 24.5093 10.6528 24.6911 10.2499 24.6911C9.84704 24.6911 9.4632 24.5093 9.19457 24.1913L1.16964 14.6913C0.648112 14.0739 0.697771 13.1257 1.28066 12.5733C1.86356 12.0209 2.75895 12.0736 3.28048 12.691L8.83378 19.2651L8.83378 1.69116C8.83378 0.86274 9.46781 0.191162 10.2499 0.191162Z'
+  ];
+
+  toggleContent(viewMoreButton, contents, svgPath);
+  toggleContent(viewMoreButton2, contents2, svgPath);
+</script> -->

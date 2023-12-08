@@ -8,6 +8,10 @@
     extract($_REQUEST);
     $_SESSION['message'] = isset($_POST['message']) ? $_SESSION['message'] : false;
     $cart = null;
+    $user = null;
+    if (isset($_SESSION['LOGGED_IN_USER_ID'])) {
+        $user = get_user_by_id($_SESSION['LOGGED_IN_USER_ID']);
+    }
     if (!isset($_SESSION['LOGGED_IN_USER_ID'])) {
         if (!isset($_SESSION['cart'])) {
             $_SESSION['cart'] = array();
@@ -16,7 +20,7 @@
     } else {
         $cart = get_cart_by_user_id($_SESSION['LOGGED_IN_USER_ID']);
     }
-    if (isset($cart_product_id) && isset($cart_product_quantity)) {  
+    if (isset($cart_product_id) && isset($cart_product_quantity)) {
         $product_to_cart = array(
             'Id' => $cart_product_id,
             'Quantity' => $cart_product_quantity

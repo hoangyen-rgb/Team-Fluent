@@ -89,6 +89,9 @@
     .container .right img {
         height: 100%;
     }
+    .container input {
+        cursor: not-allowed;
+    }
 </style>
 
 <div class="toolbar">
@@ -101,22 +104,22 @@
             <div class="left">
                 <div style="grid-column: 1 / 4; grid-row: 1 / 2;">
                     <label for="user-name">Tên người dùng</label>
-                    <input type="text" id="user-name" value="<?=$Name?>">
+                    <input type="text" id="user-name" value="<?=$Name?>" readonly>
                 </div>
                 <div style="grid-column: 1 / 2; grid-row: 2 / 3;">
                     <label for="user-phonenumber">Số điện thoại</label>
-                    <input type="text" id="user-phonenumber" value="<?=$PhoneNumber?>">
+                    <input type="text" id="user-phonenumber" value="<?=$PhoneNumber?>"readonly>
                 </div>
                 <div style="grid-column: 2 / 3; grid-row: 2 / 3;">
                     <label for="user-email">Email</label>
-                    <input type="text" id="user-email" value="<?=$Email?>">
+                    <input type="text" id="user-email" value="<?=$Email?>"readonly>
                 </div>
                 <div style="grid-column: 3 / 4; grid-row: 2 / 3;">
                     <label for="user-role">Vai trò</label>
                     <?php if($Role == 1) { ?>
-                        <input type="text" id="user-role" value="Khách hàng">
+                        <input type="text" id="user-role" value="Khách hàng"readonly>
                     <?php } else { ?>   
-                        <input type="text" id="user-role" value="Quản trị">
+                        <input type="text" id="user-role" value="Quản trị"readonly>
                     <?php } ?>   
                 </div>
             </div>

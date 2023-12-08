@@ -302,13 +302,30 @@
             </form>
 
         </div>
-        <form class="address whitediv">
+        <form class="address whitediv" method="post">
+            <?php
+            
+            $sonha = null;
+            $khupho = null;
+            $xa = null;
+            $huyen = null;
+            $tinh = null;
+
+            if($Address) {
+                $array = explode("<!>", $Address);
+                $sonha = $array[0];
+                $khupho = $array[1];
+                $xa = $array[2];
+                $huyen = $array[3];
+                $tinh = $array[4];
+
+            } ?>
             <div class="form">
-                <label>Số nhà / đường<input required type="text" placeholder="Địa chỉ giao hàng" id="sonha" name="sonha"></label>
-                <label>Khu phố<input required type="text" placeholder="Địa chỉ giao hàng" id="khupho" name="khupho"></label>
-                <label>Xã<input required type="text" placeholder="Địa chỉ giao hàng" id="xa" name="xa"></label>
-                <label>Tỉnh<input required type="text" placeholder="Địa chỉ giao hàng" id="tinh" name="tinh"></label>
-                <label>Huyện<input required type="text" placeholder="Địa chỉ giao hàng" id="huyen" name="huyen"></label>
+                <label>Số nhà / đường<input required type="text" placeholder="Địa chỉ giao hàng" id="sonha" name="sonha" value="<?=$sonha ? $sonha : ""?>"></label>
+                <label>Khu phố<input required type="text" placeholder="Địa chỉ giao hàng" id="khupho" name="khupho" value="<?=$khupho ? $khupho : ""?>"></label>
+                <label>Xã<input required type="text" placeholder="Địa chỉ giao hàng" id="xa" name="xa" value="<?=$xa ? $xa : ""?>"></label>
+                <label>Huyện<input required type="text" placeholder="Địa chỉ giao hàng" id="huyen" name="huyen" value="<?=$huyen ? $huyen : ""?>"></label>
+                <label>Tỉnh<input required type="text" placeholder="Địa chỉ giao hàng" id="tinh" name="tinh" value="<?=$tinh ? $tinh : ""?>"></label>
             </div>
             <div class="bando">
                 <iframe
@@ -318,7 +335,7 @@
                 </iframe>
             </div>
             <div class="capnhat">
-                <button>
+                <button name="update_address">
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path  d="M12.7602 2.28284C10.18 -0.201661 6.21114 -0.480165 3.31694 1.42303L3.30884 0.330448C3.30747 0.146554 3.15377 -0.00145398 2.96553 1.07789e-05L2.28429 0.00520378C2.09618 0.00660197 1.94493 0.15674 1.94629 0.340502L1.96509 2.83226C1.96775 3.19832 2.2725 3.49287 2.6464 3.49287C2.64776 3.49287 2.64974 3.49287 2.65172 3.49287L5.20185 3.4745C5.39003 3.47317 5.54142 3.32289 5.53999 3.139L5.53467 2.47313C5.53324 2.2893 5.37961 2.1415 5.19156 2.14283L4.75812 2.14589C7.039 1.0332 9.88871 1.38747 11.8035 3.23081C13.6411 5.00105 14.1433 7.66226 13.099 9.94416C13.0247 10.1066 13.0856 10.2959 13.2478 10.3769L13.8558 10.6805C14.0281 10.7666 14.246 10.6972 14.326 10.5251C15.625 7.72857 15.0162 4.45609 12.7602 2.28284ZM12.3537 11.5072C12.3523 11.5072 12.3503 11.5072 12.3484 11.5072L9.79823 11.5255C9.61005 11.5269 9.45867 11.6771 9.4601 11.861L9.46541 12.5269C9.46684 12.7106 9.62048 12.8584 9.80852 12.8572L10.2416 12.8541C7.96054 13.9665 5.11131 13.6119 3.19656 11.7692C1.35893 9.99895 0.856809 7.33768 1.90105 5.05584C1.97538 4.89339 1.91447 4.7041 1.75232 4.62307L1.14425 4.31947C0.97195 4.23344 0.754068 4.30275 0.674082 4.47486C-0.625036 7.27136 -0.0161509 10.5438 2.23973 12.7172C3.69746 14.1209 5.59906 14.8206 7.49922 14.8206C8.96233 14.8206 10.424 14.4043 11.6829 13.5762L11.691 14.6695C11.6924 14.8534 11.8461 15.0014 12.0344 15L12.7156 14.9948C12.9037 14.9933 13.055 14.8432 13.0536 14.6594L13.0348 12.1677C13.0323 11.8017 12.7277 11.5072 12.3537 11.5072Z" fill="white"/>
                     </svg>
@@ -504,7 +521,10 @@
             border: none;
             text-wrap: nowrap;
         }
-        .order-detail .order-total-price {
+        .product-list .product tr td:nth-child(2) {
+            text-align: left !important;
+        }
+         .order-detail .order-total-price {
             font-weight: 600;
             text-align: right;
             height: 20px;
@@ -652,7 +672,7 @@
             </div>
             <div class="order-detail whitediv">
                 <div class="scroll">
-                <?php $order_detail = get_order_detail_by_order_id($order_id);?>
+                <?php if ($order_id) { $order_detail = get_order_detail_by_order_id($order_id); $this_order = get_order_by_id($order_id);?>
                     <table class="product-list">
                         <?php foreach($order_detail as $product) { extract($product); $detail_product = get_product_by_id($product['ProductId']);?>
                             <tr class="product">
@@ -660,7 +680,12 @@
                                     <img src="<?=$IMAGE_DIR?>/<?=$detail_product['Image']?>" alt="">
                                 </td>
                                 <td>
-                                    <?=$detail_product['Name']?>
+                                    <?php
+                                        if (strlen($detail_product['Name']) >= 20) {
+                                            $detail_product['Name'] = mb_substr($detail_product['Name'], 0, 17, 'UTF-8')."...";
+                                        }
+                                        echo $detail_product['Name'];
+                                    ?>
                                 </td>
                                 <td>
                                     <?=$product['Quantity']?>
@@ -673,13 +698,17 @@
                     </table>
                 </div>
                 <div class="line"></div>
-                <div class="order-total-price">Tổng tiền: 10.000 vnđ vnđ</div>
+                <div class="order-total-price">Tổng tiền: <?=number_format($this_order['TotalPrice'], 0, '.', '.')?> vnđ</div>
                 <div class="buttons">
-                    <div class="confirm">Hủy đơn</div>
+                    <?php if($this_order['Status'] == 1) { ?>
+                    <div class="confirm" onclick="cancel_order('<?=$order_id?>')">Hủy đơn</div>
+                    <?php } ?>
                 </div>
+                <?php }?>
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script>
         
         document.querySelectorAll(".update-info-button").forEach(function(element) {
@@ -735,5 +764,15 @@
             window.location.href = url;
         }
 
+        function cancel_order(id) {
+            $.post("<?=$SITE_URL?>/taikhoan/",
+                {
+                    cancel_order_id: id
+                },
+                function(data, textStatus, jqXHR) {
+                    window.location.href = "<?=$SITE_URL?>/taikhoan";
+                }
+            );
+        }
     </script>
 </main>

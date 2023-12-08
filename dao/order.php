@@ -33,4 +33,9 @@
         $sql = "SELECT * FROM `order` WHERE UserId = $user_id";
         return pdo_query($sql);
     }
+
+    function cancel_order($order_id) {
+        $sql = "UPDATE `order` SET Status = 5 WHERE Id = $order_id";
+        return pdo_execute($sql);
+    }
 ?>

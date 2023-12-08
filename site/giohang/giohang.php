@@ -91,20 +91,17 @@
         height: 100px;
     }
     main .cart table td:nth-child(1) {
-        width: 5%;
-    }
-    main .cart table td:nth-child(2) {
-        width: 12%;
-    }.cart table td:nth-child(3) {
-        width: 30%;
-    }.cart table td:nth-child(4) {
-        width: 20%;
-    }.cart table td:nth-child(5) {
-        width: 20%;
-    }.cart table td:nth-child(6) {
         width: 13%;
+    }.cart table td:nth-child(2) {
+        width: 31%;
+    }.cart table td:nth-child(3) {
+        width: 21%;
+    }.cart table td:nth-child(4) {
+        width: 21%;
+    }.cart table td:nth-child(5) {
+        width: 14%;
     }
-    main .cart table td:nth-child(6) div {
+    main .cart table td:nth-child(5) div {
         background-color: var(--red);
         width: 35px;
         height: 35px;
@@ -468,25 +465,24 @@
                         </svg>
                         <a href="<?=$SITE_URL?>/giohang">Giỏ hàng</a>
                     </li>
-                    <li data-name="khomagiamgia">
+                    <li data-name="khomagiamgia" onclick="alert('tính năng đang phát triễn');">
                     <svg width="25" height="16" viewBox="0 0 25 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M23.7903 0H1.20968C0.540323 0 0 0.540323 0 1.20968V4.25C0 4.91936 0.540323 5.45968 1.20968 5.45968C2.37097 5.45968 3.31452 6.40323 3.31452 7.56452C3.31452 8.72581 2.37097 9.66936 1.20968 9.66936C0.540323 9.66936 0 10.2097 0 10.879V13.9194C0 14.5887 0.540323 15.129 1.20968 15.129H23.7903C24.4597 15.129 25 14.5887 25 13.9194V10.879C25 10.2097 24.4597 9.66936 23.7903 9.66936C22.629 9.66936 21.6855 8.72581 21.6855 7.56452C21.6855 6.40323 22.629 5.45968 23.7903 5.45968C24.4597 5.45968 25 4.91936 25 4.25V1.20968C25 0.540323 24.4597 0 23.7903 0ZM17.7419 10.3871C17.7419 11.0484 17.2016 11.5968 16.5323 11.5968C15.8629 11.5968 15.3226 11.0484 15.3226 10.3871V4.74194C15.3226 4.08065 15.8629 3.53226 16.5323 3.53226C17.2016 3.53226 17.7419 4.08065 17.7419 4.74194V10.3871Z" fill="#4E4E4E"/>
                     </svg>
 
-                        <a href="<?=$SITE_URL?>/khomagiamgia">Kho mã giảm giá</a>
+                        <a href="">Kho mã giảm giá</a>
                     </li>
-                    <li>
+                    <li onclick="alert('tính năng đang phát triễn');">
                         <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M3.57143 0C1.59898 0 0 1.59898 0 3.57143V21.4286C0 23.4011 1.59898 25 3.57143 25H21.4286C23.4011 25 25 23.4011 25 21.4286V3.57143C25 1.59898 23.4011 0 21.4286 0H3.57143ZM8.03571 7.58929C8.03571 8.32895 7.43609 8.92857 6.69643 8.92857C5.95677 8.92857 5.35714 8.32895 5.35714 7.58929C5.35714 6.84963 5.95677 6.25 6.69643 6.25C7.43609 6.25 8.03571 6.84963 8.03571 7.58929ZM6.69643 14.2857C5.95677 14.2857 5.35714 13.6861 5.35714 12.9464C5.35714 12.2068 5.95677 11.6071 6.69643 11.6071C7.43609 11.6071 8.03571 12.2068 8.03571 12.9464C8.03571 13.6861 7.43609 14.2857 6.69643 14.2857ZM8.03571 18.3036C8.03571 19.0432 7.43609 19.6429 6.69643 19.6429C5.95677 19.6429 5.35714 19.0432 5.35714 18.3036C5.35714 17.5639 5.95677 16.9643 6.69643 16.9643C7.43609 16.9643 8.03571 17.5639 8.03571 18.3036ZM11.6071 7.14286H18.75C19.243 7.14286 19.6429 7.54261 19.6429 8.03571C19.6429 8.52882 19.243 8.92857 18.75 8.92857H11.6071C11.114 8.92857 10.7143 8.52882 10.7143 8.03571C10.7143 7.54261 11.114 7.14286 11.6071 7.14286ZM10.7143 13.3929C10.7143 12.8998 11.114 12.5 11.6071 12.5H18.75C19.243 12.5 19.6429 12.8998 19.6429 13.3929C19.6429 13.8859 19.243 14.2857 18.75 14.2857H11.6071C11.114 14.2857 10.7143 13.8859 10.7143 13.3929ZM11.6071 17.8571H18.75C19.243 17.8571 19.6429 18.257 19.6429 18.75C19.6429 19.243 19.243 19.6429 18.75 19.6429H11.6071C11.114 19.6429 10.7143 19.243 10.7143 18.75C10.7143 18.257 11.114 17.8571 11.6071 17.8571Z" fill="#4E4E4E"/>
                         </svg>
-                        <a href="#">Sổ địa chỉ</a>
+                        <a href="">Sổ địa chỉ</a>
                     </li>
                 </ul>
             </div>
             <div class="cart">
                 <table>
                     <tr>
-                        <td><input type="checkbox" name="" id=""></td>
                         <td>Hình ảnh</td>
                         <td>Tên</td>
                         <td>Số lượng</td>
@@ -495,7 +491,6 @@
                     </tr>
                     <?php foreach ($cart as $product_in_cart) { $product = get_product_by_id($product_in_cart['Id']); extract($product); ?>
                         <tr class="product">
-                            <td class="product-checkbox"><input type="checkbox" name="" id=""></td>
                             <td class="product-image"><img src="<?=$IMAGE_DIR?>/<?=$Image?>" alt=""></td>
                             <td class="product-name"><?=$Name?></td>
                             <td class="product-buttons">
@@ -521,7 +516,7 @@
                     <?php } ?>
                 </table>
             </div>
-            <form class="checkout" method="post" data-submitted="false">
+            <form class="checkout" method="post" data-submitted="false" onsubmit="return validateForm();">
                 <p class="checkout-title">Thông tin thanh toán</p>
                 <div class="cart-information">
                     <p>Số sản phẩm</p>
@@ -550,20 +545,20 @@
                 <div class="line"></div>
                 <div class="orderer-information">
                     <label for="orderer-name">Tên người đặt hàng</label>
-                    <input type="text" name="orderer_name" id="orderer-name" required>
+                    <input type="text" name="orderer_name" id="orderer-name" value="<?= $user ? $user['Name']: ""?>" required>
                     <label for="orderer-phone-number">Số điện thoại</label>
-                    <input type="text" name="orderer_phone_number" id="orderer-phone-number" required>
+                    <input type="text" name="orderer_phone_number" value="<?= $user ?  $user['PhoneNumber'] : ""?>" id="orderer-phone-number" required>
                     <label for="orderer-address">Địa chỉ</label>
-                    <input type="text" name="orderer_address" id="orderer-address" required>
+                    <input type="text" name="orderer_address" id="orderer-address" value="<?= $user ? str_replace("<!>",", ",$user['Address']) : ""?>"required>
                 </div>
                 <input type="checkbox" name="other_address" id="otherAddress">
                 <label for="otherAddress">Giao đến địa chỉ khác</label>
                 <div class="line"></div>
                 <div class="recipient-information hidden">
-                    <label for="recipient-name">Tên người đặt hàng</label>
+                    <label for="recipient-name">Tên người nhận hàng</label>
                     <input type="text" name="recipient_name" id="recipient-name">
                     <label for="recipient-phone-number">Số điện thoại</label>
-                    <input type="text" name="recipient_phone-number" id="recipient-phone-number">
+                    <input type="text" name="recipient_phone_number" id="recipient-phone-number">
                     <label for="recipient-address">Địa chỉ</label>
                     <input type="text" name="recipient_address" id="recipient-address">
                 </div>
@@ -769,10 +764,10 @@
                 }
             );
     }
+    
 
-
-
-
+    
+    
     document.addEventListener("DOMContentLoaded", function() {
         var messageElement = document.querySelector(".message");
 
@@ -789,4 +784,27 @@
             element.classList.add("selected");
         }
     });
+    function validateForm() {
+        let isValid = true;
+
+        let ordererPhoneNumber = document.getElementById('orderer-phone-number').value;
+        let recipientPhoneNumber = document.getElementById('recipient-phone-number').value;
+        let checkbox = document.getElementById("otherAddress");
+
+
+        
+        let phoneRegex = /^0\d{9}$/;
+        if (!phoneRegex.test(ordererPhoneNumber) && !checkbox.checked) {
+            alert('Số điện thoại không hợp lệ. Vui lòng nhập 10 chữ số bắt đầu bằng 0.');
+            return false;
+        }
+        
+        if (!phoneRegex.test(recipientPhoneNumber) && checkbox.checked) {
+            alert('Số điện thoại không hợp lệ. Vui lòng nhập 10 chữ số bắt đầu bằng 0.');
+            return false;
+        }
+
+        return true;
+    }
+
 </script>

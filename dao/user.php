@@ -23,7 +23,10 @@
         $sql = "SELECT * FROM user WHERE PhoneNumber = ?";
         return pdo_query_one($sql, $phonenumber);
     }
-
+    function get_user_by_email_admin($email) {
+        $sql = "SELECT * FROM user WHERE Email = ?";
+        return pdo_query_one($sql,$email);
+    }
     function get_user_by_email($email) {
         $sql = "SELECT * FROM user WHERE Email = ?";
         return pdo_query_one($sql,$email);

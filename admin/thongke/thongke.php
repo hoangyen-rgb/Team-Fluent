@@ -474,7 +474,7 @@
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-        ['Tháng', 'Nhập vào', 'Bán ra'],
+        ['Kỳ', 'Nhập vào', 'Bán ra'],
         <?php foreach($revenue_statistic as $row) {extract($row); ?>
         ['T<?=$Period?>',  <?=$TotalCost?>,      <?=$TotalPrice?>],
         <?php } ?>

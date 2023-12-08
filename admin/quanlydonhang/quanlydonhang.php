@@ -16,18 +16,21 @@
         overflow-y: scroll;
     }
     .left .tab {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        display:flex;
+        flex-wrap: wrap;
+            justify-content: space-between;
+        /* display: grid;
+        grid-template-columns: repeat(4, 1fr); */
         background-color: white;
         border-radius: 10px;
         border: 1px solid var(--gray);
         box-shadow: 0px 0px 4px var(--gray);
         overflow: hidden;
+
     }
     .left .tab>* {
         justify-self: center;
-        height: 100%;
-        width: 100%;
+        padding: 2% 4%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -124,7 +127,7 @@
     } 
     .order-detail>.order-info {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: 2fr 1fr 1fr;
     }
     .order-detail>.order-info>* {
         padding: 0px 20px;
@@ -196,6 +199,7 @@
                     <a href="<?=$ADMIN_URL?>/quanlydonhang?tab=new" <?php if ($tab == "new") { ?>class="selected"<?php } ?>>Mới</a>
                     <a href="<?=$ADMIN_URL?>/quanlydonhang?tab=preparing" <?php if ($tab == "preparing") { ?>class="selected"<?php } ?>>Đang chuẩn bị</a>
                     <a href="<?=$ADMIN_URL?>/quanlydonhang?tab=delivering" <?php if ($tab == "delivering") { ?>class="selected"<?php } ?>>Giao hàng</a>
+                    <a href="<?=$ADMIN_URL?>/quanlydonhang?tab=cancelled" <?php if ($tab == "cancelled") { ?>class="selected"<?php } ?>>Hủy</a>
                 </div>
                 <div class="list-orders">
                     <?php 
@@ -225,14 +229,14 @@
                             </span>
                         </p>
                         <p class="price">
-                            <?php if($tab != "delivering") { ?>
-                                <?=number_format($TotalPrice, 0, '.', '.')?> vnđ
+                            <?php if ($tab != "delivering" && $tab != "cancelled") { ?>
+                                <?= number_format($TotalPrice, 0, '.', '.') ?> vnđ
                             <?php } else if ($Status == 3) { ?>
-                                <span class="delivering" style= "background-color: #23AADA;">Đang giao hàng</span>
+                                <span class="delivering" style="background-color: #23AADA;">Đang giao hàng</span>
                             <?php } else if ($Status == 4) { ?>
-                                <span class="delivered" style= "background-color: #56D237;">Đã giao hàng</span>
+                                <span class="delivered" style="background-color: #56D237;">Đã giao hàng</span>
                             <?php } else { ?>
-                                <span class="cancelled" style= "background-color: #C34439;">Đã hủy</span>
+                                <span class="cancelled" style="background-color: #C34439;">Đã hủy</span>
                             <?php } ?>
                         </p>
                     </div>
@@ -241,56 +245,79 @@
             </div>
             <div class="right">
                 <div class="order-detail-box">
-                    <?php if($order_focus) { ?>
-                        <?php extract($order_focus); ?>
-                        <div class="order-detail">
-                            <p class="title">Thông tin đơn hàng</p>
-                            <div class="order-info">
-                                <div class="time">
-                                    <p class="title">Thời gian chuẩn bị</p>
-                                    <p class="detail">00h : 5m : 00s</p>
-                                </div>
-                                <div class="address">
-                                    <p class="title">Địa chỉ</p>
-                                    <p class="detail"><?=$RecipientAddress?></p>
-                                </div>
-                                <div class="phonenumber">
-                                    <p class="title">Số điện thoại</p>
-                                    <p class="detail"><?=$RecipientPhoneNumber?></p>
-                                </div>
+                <?php 
+                if ($order_focus) {
+                    extract($order_focus);
+                    ?>
+                    <div class="order-detail">
+                        <p class="title">Thông tin đơn hàng</p>
+                        <div class="order-info">
+                            <div class="time">
+                                <p class="title">Ghi chú</p>
+                                <p class="detail"><?=$Note?></p>
                             </div>
-                            <?php $order_detail = get_order_detail_by_order_id($Id);?>
-                            <table class="product-list">
-                                <?php foreach($order_detail as $product) { extract($product); $detail_product = get_product_by_id($product['ProductId']);?>
-                                    <tr class="product">
-                                        <td>
-                                            <img src="<?=$IMAGE_DIR?>/<?=$detail_product['Image']?>" alt="">
-                                        </td>
-                                        <td>
-                                            <?=$detail_product['Name']?>
-                                        </td>
-                                        <td>
-                                            <?=$product['Quantity']?>
-                                        </td>
-                                        <td>
-                                            <?=number_format($product['Price'], 0, '.', '.')?> vnđ
-                                        </td>
-                                    </tr>
-                                <?php }?>
-                            </table>
-                            <div class="order-total-price">Tổng tiền: <?=number_format($order_focus['TotalPrice'], 0, '.', '.')?> vnđ</div>
+                            <div class="address">
+                                <p class="title">Địa chỉ</p>
+                                <p class="detail"><?= $RecipientAddress ?></p>
+                            </div>
+                            <div class="phonenumber">
+                                <p class="title">Số điện thoại</p>
+                                <p class="detail"><?= $RecipientPhoneNumber ?></p>
+                            </div>
                         </div>
-                        <?php if($tab == "new") { ?>
-                            <div class="buttons">
-                                <p onclick="set_order(<?=$order_focus['Id']?>, 5)">Hủy đơn</p>
-                                <p onclick="set_order(<?=$order_focus['Id']?>, 2)">Nhận đơn</p>
-                            </div>
-                        <?php } else if($tab == "preparing") {?>
-                            <div class="buttons">
-                                <p onclick="set_order(<?=$order_focus['Id']?>, 3)">Hoàn tất và giao</p>
-                            </div>
-                        <?php }?>
-                    <?php }?>
+                        <?php 
+                        $order_detail = get_order_detail_by_order_id($Id);
+                        ?>
+                        <table class="product-list">
+                            <?php 
+                            foreach ($order_detail as $product) {
+                                extract($product);
+                                $detail_product = get_product_by_id($product['ProductId']);
+                                ?>
+                                <tr class="product">
+                                    <td>
+                                        <img src="<?= $IMAGE_DIR ?>/<?= $detail_product['Image'] ?>" alt="">
+                                    </td>
+                                    <td>
+                                        <?= $detail_product['Name'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $product['Quantity'] ?>
+                                    </td>
+                                    <td>
+                                        <?= number_format($product['Price'], 0, '.', '.') ?> vnđ
+                                    </td>
+                                </tr>
+                                <?php 
+                            }
+                            ?>
+                        </table>
+                        <div class="order-total-price">Tổng tiền: <?= number_format($order_focus['TotalPrice'], 0, '.', '.') ?> vnđ</div>
+                    </div>
+                    <?php 
+                    if ($tab == "new") {
+                        ?>
+                        <div class="buttons">
+                            <p onclick="set_order(<?= $order_focus['Id'] ?>, 5)">Hủy đơn</p>
+                            <p onclick="set_order(<?= $order_focus['Id'] ?>, 2)">Nhận đơn</p>
+                        </div>
+                        <?php 
+                    } else if ($tab == "preparing") {
+                        ?>
+                        <div class="buttons">
+                            <p onclick="set_order(<?= $order_focus['Id'] ?>, 3)">Hoàn tất và giao</p>
+                        </div>
+                        <?php 
+                    } else if ($tab == "delivering" && $Status == 3) {
+                        ?>
+                        <div class="buttons">
+                            <p onclick="set_order(<?= $order_focus['Id'] ?>, 4)">Đã giao hàng</p>
+                            <p onclick="set_order(<?= $order_focus['Id'] ?>, 5)">Khách không nhận hàng</p>
+                        </div>
+                        <?php 
+                    }
+                }
+                ?>
 
                 </div>
             </div>
@@ -330,6 +357,9 @@
         }
 
         function set_order(id, status) {
+            if (status == 4) {
+                add_point(id);
+            }
             $.post("<?=$ADMIN_URL?>/quanlydonhang/xulidonhang.php",
                 {
                     order_id: id,
@@ -339,6 +369,19 @@
                 function(data, textStatus, jqXHR) {
                     
                     window.location.reload();
+                }
+            );
+        }
+
+        function add_point(order_id) {
+
+            $.post("<?=$ADMIN_URL?>/quanlydonhang/xulidonhang.php",
+                {
+                    order_id: order_id,
+                    point: true
+
+                },
+                function(data, textStatus, jqXHR) {
                 }
             );
         }
